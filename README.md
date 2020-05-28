@@ -1,2 +1,4 @@
 # AIM
-scripts
+Compilation of scripts
+
+For dev use
