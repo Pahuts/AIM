@@ -31,7 +31,7 @@ $(document).ready(function() {
         .append('<p>Fill out the Inquiry Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">seell@aim.edu</a>.</p>')
         .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
         .append('<p><i>* - Required fields.</i></p>')
-        .insertBefore('.tab-title');
+        .insertBefore('#WebFormControl_9f55393085a0ea11a812000d3a82bde6_ProgressIndicator');
         
     // FUNCTION DECLARATIONS
 
@@ -901,16 +901,22 @@ $(document).ready(function() {
     // Prepopulate Program fields
     if (params["id"]) 
     {
-        var prepopulatedProgram = programs.find(     // Returns an object
+        var prepopulatedProgram = programs.find(
+                 // Returns an object
             function(program) {
+                $("#ndph_seellopenprograms").val(prepopulatedProgram.ndph_programid);
+                $("#ndph_seellopenprograms_name").val(prepopulatedProgram.ndph_name);
+                $("#ndph_seellopenprograms_entityname").val("ndph_program");
                 // Search in "programs" array for element matching GUID on program lookup
                 return program.ndph_programid == params["id"];
             }
         );
     }
-        $("#ndph_seellopenprograms").val(prepopulatedProgram.ndph_programid);
-        $("#ndph_seellopenprograms_name").val(prepopulatedProgram.ndph_name);
-        $("#ndph_seellopenprograms_entityname").val("ndph_program");
+
+
+
+        // Prepopulate Program fields
+
 
 
 
@@ -929,9 +935,8 @@ $(document).ready(function() {
     $("#ndph_seellopenprograms_label").parent().attr("class", "info required");
 
     // Resize Program fields
-    $("#ndph_program").parent().parent().attr("colspan","2");
-    $("#ndph_program").parent().css("width","100%");
-    $("#ndph_seellopenprograms").parent().parent().attr("colspan","2");
+
+    $("#ndph_seellopenprograms").parent().parent().attr("colspan","3");
     $("#ndph_seellopenprograms").parent().css("width","100%");
 
     // Resize State/City fields
@@ -981,6 +986,8 @@ $(document).ready(function() {
     $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);
     $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
 
-
+    //define variable
+    // Cannot read property 'ndph_programid' of undefined
+    // $("#ndph_programid") == "";
 
 });
