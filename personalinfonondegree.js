@@ -27,11 +27,16 @@ $(document).ready(function() {
     $('<div>')
         .addClass('seellinstruction')
         .attr('id', 'seellinstruction')
-        .append('<p>Our team of expert Business Development officers can help analyze your organization’s training needs and provide you with the best customized program specially designed to address your needs.</p>')
-        .append('<p>Fill out the Inquiry Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">seell@aim.edu</a>.</p>')
+        .append('<p>Fill out the Inquiry Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">SEELL@aim.edu</a>.</p>')
         .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
+        .append('<p><a href = "https://aimdevelopmentportal.powerappsportals.com/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
+
         .append('<p><i>* - Required fields.</i></p>')
-        .insertBefore('#WebFormControl_9f55393085a0ea11a812000d3a82bde6_ProgressIndicator');
+        .insertAfter('.page-header');
+
+    // edit css
+    $("a#enrollmentprocess").css( { "color" : "blue", "text-decoration" : "underline" });
+    $("a#recruitmentEmail").css( { "color" : "purple", "font-weight" : "500" } );
         
     // FUNCTION DECLARATIONS
 
@@ -100,7 +105,7 @@ $(document).ready(function() {
             $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
 
             // Hide Business Address section
-            $(".section[data-name='business_address']").closest("fieldset").hide();
+            $(".section[data-name='seell_business_address']").closest("fieldset").hide();
         }
         else {
             // Clear change event handler for Business Address
@@ -118,30 +123,30 @@ $(document).ready(function() {
             $("#ndph_addressnotshownonlist_city").off("change", mirrorHomeAddress);
 
             // Clear values for Business Address
-            $("#ndph_street1business").val("");                                                     // Street 1
-            $("#ndph_street2business").val("");                                                     // Street 2
-            $("#ndph_street3business").val("");                                                     // Street 3
-            $("#ndph_mequestion11").val("");                                                        // Country GUID
-            $("#ndph_mequestion11_name").val("");                                                   // Country name
-            $("#ndph_mequestion11_entityname").val("");                                             // Country entity
-            $("#ndph_mequestion14").val("");                                                        // ZIP/Postal Code
-            $("#ndph_mequestion12").val("");                                                        // State GUID
-            $("#ndph_mequestion12_name").val("");                                                   // State name
-            $("#ndph_mequestion12_entityname").val("");                                             // State entity
-            $("#ndph_statebusinessothers").val("");                                                 // State (others)
-            $("#ndph_addressnotshownonthelistbusiness").prop("checked", false);                     // State not on list
-            $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
+            // $("#ndph_street1business").val("");                                                     // Street 1
+            // $("#ndph_street2business").val("");                                                     // Street 2
+            // $("#ndph_street3business").val("");                                                     // Street 3
+            // $("#ndph_mequestion11").val("");                                                        // Country GUID
+            // $("#ndph_mequestion11_name").val("");                                                   // Country name
+            // $("#ndph_mequestion11_entityname").val("");                                             // Country entity
+            // $("#ndph_mequestion14").val("");                                                        // ZIP/Postal Code
+            // $("#ndph_mequestion12").val("");                                                        // State GUID
+            // $("#ndph_mequestion12_name").val("");                                                   // State name
+            // $("#ndph_mequestion12_entityname").val("");                                             // State entity
+            // $("#ndph_statebusinessothers").val("");                                                 // State (others)
+            // $("#ndph_addressnotshownonthelistbusiness").prop("checked", false);                     // State not on list
+            // $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
             $("#ndph_mequestion12").parent().parent().show();                                       // Show State
-            $("#ndph_mequestion13").val("");                                                        // City GUID
-            $("#ndph_mequestion13_name").val("");                                                   // City name
-            $("#ndph_mequestion13_entityname").val("");                                             // Country entity
-            $("#ndph_citybusinessothers").val("");                                                  // City (others)
-            $("#ndph_addressnotshownonlist_citybusiness").prop("checked", false);                   // City not on list
-            $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
+            // $("#ndph_mequestion13").val("");                                                        // City GUID
+            // $("#ndph_mequestion13_name").val("");                                                   // City name
+            // $("#ndph_mequestion13_entityname").val("");                                             // Country entity
+            // $("#ndph_citybusinessothers").val("");                                                  // City (others)
+            // $("#ndph_addressnotshownonlist_citybusiness").prop("checked", false);                   // City not on list
+            // $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
             $("#ndph_mequestion13").parent().parent().show();                                       // Show City
 
             // Show Business Address section
-            $(".section[data-name='business_address']").closest("fieldset").show();
+            $(".section[data-name='seell_business_address']").closest("fieldset").show();
 
             // Re-initialize fields: call initialization function
             initializeBusinessAddress();
@@ -746,6 +751,7 @@ $(document).ready(function() {
     }
 
 
+
     // INITIALIZE FORM
     // Validator definition
     if (typeof (Page_Validators) == 'undefined') return;
@@ -770,6 +776,7 @@ $(document).ready(function() {
             return false;
         }
     };
+
     // Program validator: check if either a degree program or an open program is selected
     var programValidator = document.createElement('span');
     programValidator.style.display = "none";
@@ -913,22 +920,8 @@ $(document).ready(function() {
         );
     }
 
-
-
-        // Prepopulate Program fields
-
-
-
-
     // Hide metadata fields
     $(".section[data-name='hidden']").closest("fieldset").hide();
-
-    // Disable School lookup
-    // $('#ndph_school').parent().find('.input-group-btn').hide();
-    // $('#ndph_school').parent().css('display', 'block');
-
-
-
 
     // Mark Program fields as required
     $("#ndph_program_label").parent().attr("class", "info required");
@@ -986,8 +979,5 @@ $(document).ready(function() {
     $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);
     $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
 
-    //define variable
-    // Cannot read property 'ndph_programid' of undefined
-    // $("#ndph_programid") == "";
 
 });

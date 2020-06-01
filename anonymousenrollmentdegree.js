@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    //hide fields
-    $("#ndph_seellprogramtype").parent().parent().parent().hide()
     /*
     dooddddddddddooooodk00000OxxkkkkOOOOOOOOOOkkkxxxddddooollccccc::cxOd:,,''''''cxOd:,ckOOOOxlccccccccccccccccccccccccccc::
     dooddddddddddddddodkO0000kc;;;;:::ccclllllooodddddxOOkkkkOOOOOOkkOOkkxxddoooodkOd:,cxOOOOxlccccccccccccccccccccccccccc::
@@ -68,43 +66,11 @@ $$$$$$\-$$$$$$$--|--------\$$$$--|$$-|--$$-|$$-|$$$$$$$--|------\$$$$$$$-|------
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
     */
-function appendHTML(){
-    var programType = $("#ndph_programtypeapplication").val();
 
-    if(programType == "649840000"){
-
-    $('<div>')
-    .addClass('instruction')
-    .attr('id', 'instruction')
-    .append('<p>Fill out the application form below and one of our Recruitment Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: recruitment@aim.edu" id="recruitmentEmail">recruitment@aim.edu</a>.</p>')
-    .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel.</p>')
-    .append('<p><a href="" id="applicationGuide">Click here to read the step-by-step guide to this online graduate degree application process.</a></p>')
-    .append('<p><i>* - Required fields.</i></p>')
-    .insertBefore('#WebFormControl_9664d896647dea11a811000d3a82bec6_ProgressIndicator');
-
-     $("a#applicationGuide").css( { "color" : "blue", "font-weight" : "400", "text-decoration" : "underline" } );
-     $("a#recruitmentEmail").css( { "color" : "blue", "font-weight" : "400", "text-decoration" : "underline" } );
-
-    }else if(programType == "649840001"){
-    $('<div>')
-    .addClass('seellinstruction')
-    .attr('id', 'seellinstruction')
-    .append('<p>Our team of expert Business Development officers can help analyze your organization’s training needs and provide you with the best customized program specially designed to address your needs.</p>')
-    .append('<p>Fill out the Inquiry Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">seell@aim.edu</a>.</p>')
-    .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
-    .append('<p><i>* - Required fields.</i></p>')
-    .insertBefore('#WebFormControl_9664d896647dea11a811000d3a82bec6_ProgressIndicator');
-
-
-     $("a#recruitmentEmail").css( { "color" : "blue", "font-weight" : "400", "text-decoration" : "underline" } );
-    }else {
-        alert("Ayaw gumana");
-    }
-}
-
-    //Call appendHTML function
-
+    // ################################################################
     // FUNCTION DECLARATIONS
+    // ################################################################
+
     // Toggle visibility for Program fields based on Program Type
     function toggleProgramType() {
         var programType = $("#ndph_programtypeapplication");
@@ -434,8 +400,6 @@ function appendHTML(){
         cityHomeEntity.val("");
         // Clear City (Other)
         cityOtherHome.val("");
-        // Untick "Others" checkbox
-        checkedCityOtherHome.prop("checked", false);
 
         if (stateHome || stateOtherHome) {
             // Enable City
@@ -702,8 +666,6 @@ function appendHTML(){
         cityBusinessEntity.val("");
         // Clear City (Other)
         cityOtherBusiness.val("");
-        // Untick "Others" checkbox
-        checkedCityOtherBusiness.prop("checked", false);
 
         if (stateBusiness || stateOtherBusiness) {
             // Enable City
@@ -885,7 +847,12 @@ function appendHTML(){
     }
 
 
+    // ################################################################
     // INITIALIZE FORM
+    // ################################################################
+
+    // Define validators:
+
     // Validator definition
     if (typeof (Page_Validators) == 'undefined') return;
     // Date of birth validator: disallow future date
@@ -1010,12 +977,24 @@ function appendHTML(){
     $('#ndph_school').parent().find('.input-group-btn').hide();
     $('#ndph_school').parent().css('display', 'block');
 
+    // Hide SEELL Program Type field
+    $("#ndph_seellprogramtype").parent().parent().parent().hide();
+
     // Set School
     updateSchool();
-    // Append HTML
 
     // Set Program fields
     toggleProgramType();
+
+    // Add instructions write-up
+    $('<div>')
+    .addClass('instruction')
+    .attr('id', 'instruction')
+    .append('<p>Fill out the application form below and one of our Recruitment Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: recruitment@aim.edu" id="recruitmentEmail">recruitment@aim.edu</a>.</p>')
+    .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel.</p>')
+    .append('<p><a href="" id="applicationGuide">Click here to read the step-by-step guide to this online graduate degree application process.</a></p>')
+    .append('<p><i>* - Required fields.</i></p>')
+    .insertBefore('#WebFormControl_9664d896647dea11a811000d3a82bec6_ProgressIndicator');
 
     // Mark Program fields as required
     $("#ndph_program_label").parent().attr("class", "info required");
@@ -1052,11 +1031,13 @@ function appendHTML(){
 
     // Hide Dietary Preference (Others) and PWD ID
     $(".section[data-name='dietary_information_section']").closest("fieldset").hide();
-    $(".section[data-name='pwd_section']").closest("fieldset").hide();
-    
 
+
+    // ################################################################
     // FUNCTIONS TO EXECUTE ON FIELD CHANGE:
-    // Update School field);
+    // ################################################################
+
+    // Update School field;
     $("#ndph_program").change(updateSchool);
     $("#ndph_school").change(updateSchool);
     $("#ndph_seellopenprograms").change(updateSchool);
@@ -1077,11 +1058,5 @@ function appendHTML(){
     $("#ndph_statebusinessothers").change(toggleCityBusiness);
     $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);
     $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
-
-    //call appendHTML function
-    appendHTML()
-    $("ndph_programtypeapplication").change(appendHTML)
-
-
 
 });
