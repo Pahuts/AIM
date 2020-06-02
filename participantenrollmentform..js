@@ -260,8 +260,8 @@ $(document).ready(function() {
             cityHomeEntity.val("");
             // Clear City (Other)
             cityOtherHome.val("");
-            // Untick "Others" checkbox
-            checkedCityOtherHome.prop("checked", false);
+            // // Untick "Others" checkbox
+            // checkedCityOtherHome.prop("checked", false);
     
             if (stateHome || stateOtherHome) {
                 // Enable City
@@ -529,7 +529,7 @@ $(document).ready(function() {
             // Clear City (Other)
             cityOtherBusiness.val("");
             // Untick "Others" checkbox
-            checkedCityOtherBusiness.prop("checked", false);
+            // checkedCityOtherBusiness.prop("checked", false);
     
             if (stateBusiness || stateOtherBusiness) {
                 // Enable City
