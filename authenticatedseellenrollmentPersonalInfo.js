@@ -794,7 +794,7 @@ $(document).ready(function() {
        toggleCityBilling();
        toggleCityOtherBilling();
        toggleStateHome();
-       mirrorHomeAddress();
+    //    mirrorHomeAddress();
    
            // INITIALIZE FORM
        // Set default field and section visibility

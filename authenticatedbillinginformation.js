@@ -728,17 +728,12 @@ $(document).ready(function() {
    
            var homeStateOthers = $("#address1_stateorprovince").val();
            var homeStateNotOnList = $("#ndph_addressnotshownonthelist").prop("checked");
-           $("#ndph_addressnotshownonthelist").prop("disabled", false);
-           $("#ndph_addressnotshownonthelist").parent().parent().parent().hide();
            var homeCity = $("#ndph_city").val();
            var homeCityName = $("#ndph_city_name").val();
    
            var homeCityOthers = $("#address1_city").val();
            var homeCityNotOnList = $("#ndph_addressnotshownonlist_city").prop("checked");
-           $("#ndph_addressnotshownonlist_city").prop("disabled", false);
-           $("#ndph_addressnotshownonlist_city").parent().parent().parent().hide();
-           
-           
+   
            $("#ndph_street1business").val(homeStreet1);                                            // Street 1
            $("#ndph_street2business").val(homeStreet2);                                            // Street 2
            $("#ndph_street3business").val(homeStreet3);                                            // Street 3
@@ -755,18 +750,14 @@ $(document).ready(function() {
    
            $("#ndph_statebusinessothers").val(homeStateOthers);                                    // State (others)
            $("#ndph_addressnotshownonthelistbusiness").prop("checked", homeStateNotOnList);        // State not on list
-           $("#ndph_addressnotshownonthelistbusiness").parent().parent().parent().hide();
-           $("#ndph_addressnotshownonthelistbusiness").prop("disabled", false);
-
+   
            $("#ndph_mequestion13").val(homeCity);                                                  // City GUID
            $("#ndph_mequestion13_name").val(homeCityName);                                         // City name
            $("#ndph_mequestion13_entityname").val("ndph_city");                                    // City entity
    
            $("#ndph_citybusinessothers").val(homeCityOthers);                                      // City (others)
            $("#ndph_addressnotshownonlist_citybusiness").prop("checked", homeCityNotOnList);       // City not on list
-           $("#ndph_addressnotshownonlist_citybusiness").parent().parent().parent().hide();
-           $("#ndph_addressnotshownonlist_citybusiness").prop("disabled", false);   
-
+   
            // Update (Other) fields
            if ($("#ndph_addressnotshownonthelistbusiness").prop("checked")) {      // State
                $("#ndph_mequestion12").parent().parent().parent().hide();
@@ -860,11 +851,11 @@ $(document).ready(function() {
        $("#ndph_otherpersoninchargeoftraining").change(updatePersonICOTraining);
        // show hide address sections
        $("#ndph_addresssameas").change(updateAddressSections);
-
    
        // disable fields
        $("#ndph_addressnotshownonthelist").prop("disabled", true);
-       
+   
+   
    
        // update home address fields 
        // $("#ndph_country").change(toggleStateHome);

@@ -1,6 +1,15 @@
 $(document).ready(function() {
-    // Hide school
+    $("#ndph_school").parent().parent().hide();
+    // $("#ndph_seellopenprograms").parent().find('.input-group-btn').hide(); 
+    // $("#ndph_seellopenprograms").prop("disabled", true);
+    // autopopulate school
+        // var school = $("#ndph_school");
+        // var schoolName = $("#ndph_school_name");
+        // var schoolEntity = $("#ndph_school_entityname")
+        
+    //hide school
     $("#ndph_school").parent().parent().parent().hide();
+
 
     function autopopulateSchool() //autopopulates school
     {
@@ -14,7 +23,8 @@ $(document).ready(function() {
         schoolEntity.val("ndph_school");
 
     }
-    // Initiate function 
+
+    //initiate function 
     autopopulateSchool();
 
     // Append program instructions
@@ -23,7 +33,7 @@ $(document).ready(function() {
         .attr('id', 'seellinstruction')
         .append('<p>Fill out the Enrollment Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">SEELL@aim.edu</a>.</p>')
         .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
-        .append('<p><a href = "https://aimdevelopmentportal.powerappsportals.com/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
+        .append('<p><a href = "/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
 
         .append('<p><i>* - Required fields.</i></p>')
         .insertAfter('.page-header');
@@ -32,27 +42,6 @@ $(document).ready(function() {
     $("#enrollmentprocess").attr("onclick", "return !window.open(this.href, undefined, 'width=800,height=600')");
     $("a#enrollmentprocess").css( { "color" : "blue", "text-decoration" : "underline" });
     $("a#recruitmentEmail").css( { "color" : "purple", "font-weight" : "500" } );
-
-    // Append update applicant info instruction
-    $('<div>')
-    .addClass('updateApplicantInfo')
-    .attr('id', 'updateApplicantInfo')
-    .append('<p>To update this section, go to My Profile > Basic Information.</p>')
-    .insertBefore('[data-name="seell_personal_information"]');
-
-    // Append update home address instruction
-    $('<div>')
-    .addClass('updateHomeAddressInstruction')
-    .attr('id', 'updateHomeAddressInstruction')
-    .append('<p>To update this section, go to My Profile > Address.</p>')
-    .insertBefore('[data-name="seell_home_address"]');
-
-     // Append update business address instruction
-     $('<div>')
-     .addClass('updateBusinessAddressInstruction')
-     .attr('id', 'updateBusinessAddressInstruction')
-     .append('<p>To update this section, go to My Profile > Address.</p>')
-     .insertBefore('[data-name="business_address"]');
         
     // FUNCTION DECLARATIONS
 
@@ -85,24 +74,36 @@ function toggleBusinessIsHomeAddress() {
         $("#ndph_addressnotshownonlist_citybusiness").off("change", toggleCityOtherBusiness);
 
         // Enable fields; needed to ensure fields are saved upon advancing form
-        $("#address1_line1").prop("disabled", false);
-        $("#address1_line2").prop("disabled", false);
-        $("#address1_line3").prop("disabled", false);
-        $("#ndph_country").prop("disabled", false);
-        $("#ndph_country_name").prop("disabled", false);
-        $("#ndph_postalzipcode").prop("disabled", false);
-        $("#ndph_state").prop("disabled", false);
-        $("#ndph_state_name").prop("disabled", false);
-        $("#address1_stateorprovince").prop("disabled", false);
-        $("#ndph_addressnotshownonthelist").prop("disabled", false);
-        $("#ndph_city").prop("disabled", false);
-        $("#ndph_city_name").prop("disabled", false);        
-        $("#address1_city").prop("disabled", false);
-        $("#ndph_addressnotshownonlist_city").prop("disabled", false);
+        // $("#address1_line1").prop("disabled", false);
+        // $("#address1_line2").prop("disabled", false);
+        // $("#address1_line3").prop("disabled", false);
+        // $("#ndph_country").prop("disabled", false);
+        // $("#ndph_country_name").prop("disabled", false);
+        // $("#ndph_postalzipcode").prop("disabled", false);
+        // $("#ndph_state").prop("disabled", false);
+        // $("#ndph_state_name").prop("disabled", false);
+        // $("#address1_stateorprovince").prop("disabled", false);
+        // $("#ndph_addressnotshownonthelist").prop("disabled", false);
+        // $("#ndph_city").prop("disabled", false);
+        // $("#ndph_city_name").prop("disabled", false);        
+        // $("#address1_city").prop("disabled", false);
+        // $("#ndph_addressnotshownonlist_city").prop("disabled", false);
+
+        // hide others fields
+        $("#ndph_addressnotshownonthelistbusiness").parent().parent().parent().hide();
+        $("#ndph_addressnotshownonlist_citybusiness").parent().parent().parent().hide();
+        
+        // disable fields
+        $("#ndph_street1business").prop("disabled", true);
+        $("#ndph_mequestion14").prop("disabled", true);
+        $("#ndph_statebusinessothers").prop("disabled", true);
+        $("#ndph_citybusinessothers").prop("disabled", true);
 
         //enable business fields
+        $("#ndph_mequestion11").prop("disabled", false);
         $("#ndph_mequestion12").prop("disabled", false);
         $("#ndph_mequestion13").prop("disabled", false);
+        $("#ndph_mequestion14").prop("disabled", false);
         $("#ndph_statebusinessothers").prop("disabled", false);
         $("#ndph_citybusinessothers").prop("disabled", false);
         $("#ndph_addressnotshownonthelistbusiness").prop("disabled", false);
@@ -124,9 +125,14 @@ function toggleBusinessIsHomeAddress() {
         $("#ndph_city").change(mirrorHomeAddress);
         $("#address1_city").change(mirrorHomeAddress);
         $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
-
+        
+        //show/hide fields
+        // $("#ndph_statebusinessothers").parent().parent().parent().show();                                // Hide State (Other)
+        // $("#ndph_mequestion12").parent().parent().parent().hide();   
+        // $("#ndph_citybusinessothers").parent().parent().parent().show();                                 // Hide City (Other)
+        // $("#ndph_mequestion13").parent().parent().parent().hide();    
         // Hide Business Address section
-        $(".section[data-name='seell_business_address']").closest("fieldset").hide();
+        // $(".section[data-name='seell_business_address']").closest("fieldset").hide();
     }
     else {
         // Clear "Same as home address" change event handlers for Business Address
@@ -157,17 +163,28 @@ function toggleBusinessIsHomeAddress() {
         $("#ndph_statebusinessothers").val("");                                                 // State (others)
         $("#ndph_addressnotshownonthelistbusiness").prop("checked", false);                     // State not on list
         $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
-        $("#ndph_mequestion12").parent().parent().show();                                       // Show State
+        $("#ndph_mequestion12").parent().parent().parent().show();                                       // Show State
         $("#ndph_mequestion13").val("");                                                        // City GUID
         $("#ndph_mequestion13_name").val("");                                                   // City name
         $("#ndph_mequestion13_entityname").val("");                                             // Country entity
         $("#ndph_citybusinessothers").val("");                                                  // City (others)
         $("#ndph_addressnotshownonlist_citybusiness").prop("checked", false);                   // City not on list
         $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
-        $("#ndph_mequestion13").parent().parent().show();                                       // Show City
+        $("#ndph_mequestion13").parent().parent().parent().show();                                       // Show City
+        
 
+        // show others fields
+        $("#ndph_addressnotshownonthelistbusiness").parent().parent().parent().show();
+        $("#ndph_addressnotshownonlist_citybusiness").parent().parent().parent().show();
+
+        // enable fields
+        $("#ndph_street1business").prop("disabled", false);
+        $("#ndph_mequestion14").prop("disabled", false);
+        $("#ndph_statebusinessothers").prop("disabled", false);
+        $("#ndph_citybusinessothers").prop("disabled", false);
+        
         // Show Business Address section
-        $(".section[data-name='seell_business_address']").closest("fieldset").show();
+        // $(".section[data-name='seell_business_address']").closest("fieldset").show();
 
         // Re-initialize fields: call initialization function
         initializeBusinessAddress();
@@ -264,17 +281,17 @@ function toggleStateHome() {
     stateHomeField.show();
 
     // Clear City
-    cityHome.val("");
-    cityHomeName.val("");
-    cityHomeEntity.val("");
+    // cityHome.val("");
+    // cityHomeName.val("");
+    // cityHomeEntity.val("");
     // Clear City (Other)
-    cityOtherHome.val("");
+    // cityOtherHome.val("");
     // Untick "Others" checkbox
-    checkedCityOtherHome.prop("checked", false);
+    // checkedCityOtherHome.prop("checked", false);
 
     if (countryHome) {
         // Enable State
-        stateHome.prop("disabled", false);
+        // stateHome.prop("disabled", false);
         stateHome.parent().find(".input-group-btn").show();
         stateHome.parent().css("display", "table");
         stateHome.parent().css("width", "100%");
@@ -283,7 +300,7 @@ function toggleStateHome() {
         // Enable "Other" checkbox
         checkedStateOtherHome.prop("disabled", false);
     }
-    else {
+    else if (!countryHome) {
         // Disable State
         stateHome.prop("disabled", true);
         stateHome.parent().find(".input-group-btn").hide();
@@ -304,6 +321,7 @@ function toggleStateHome() {
         cityOtherHome.prop("disabled", true);
         // Disable "Others" checkbox
         checkedCityOtherHome.prop("disabled", true);
+        checkedCityOtherHome.parent().parent().parent().hide();
         // Update (Other) visibility 
         cityOtherHomeField.hide();
         cityHomeField.show();
@@ -330,7 +348,7 @@ function toggleCityHome() {
     cityOtherHome.val("");
     // Untick City "Others" checkbox if State "Others" is not ticked
     if (checkedStateOtherHome.prop("checked")) {
-        checkedCityOtherHome.prop("checked", false);
+        checkedCityOtherHome.prop("checked", true);
     }
 
     if (stateHome || stateOtherHome) {
@@ -344,6 +362,7 @@ function toggleCityHome() {
         if (stateHome && !checkedStateOtherHome.prop("checked")) {
             // Enable "Others" checkbox only if State is populated and not locked to "Other"
             checkedCityOtherHome.prop("disabled", false);
+            // checkedCityOtherHome.parent().parent().parent().show();
         }
     }
     else {
@@ -353,8 +372,9 @@ function toggleCityHome() {
         cityHome.parent().css("display", "block");
         // Disable City (Other)
         cityOtherHome.prop("disabled", true);
-        // Disable "Others" checkbox
+        // // Disable "Others" checkbox
         checkedCityOtherHome.prop("disabled", true);
+        checkedCityOtherHome.parent().parent().parent().hide();
         // Update (Other) visibility 
         cityOtherHomeField.hide();
         cityHomeField.show();
@@ -381,12 +401,13 @@ function toggleStateOtherHome() {
         stateHomeField.hide();
         stateOtherHomeField.show();
         // Lock City to Other
-        checkedCityOtherHome.prop("disabled", true);
+        checkedCityOtherHome.prop("disabled", false);
+        // checkedCityOtherHome.parent().parent().parent().hide();
         checkedCityOtherHome.prop("checked", true);
         // Disable City (Other) until State is filled in
-        cityOtherHome.prop("disabled", true);
+        cityOtherHome.prop("disabled", false);
     }
-    else {
+    else if (!checkedStateOtherHome.prop("checked")) {
         stateOtherHome.val("");
         stateOtherHomeField.hide();
         stateHomeField.show();
@@ -394,6 +415,7 @@ function toggleStateOtherHome() {
         checkedCityOtherHome.prop("checked", false);
         // Disable City until State is filled in
         cityHome.prop("disabled", true);
+        checkedCityOtherHome.parent().parent().parent().show();
         cityHome.parent().find(".input-group-btn").hide();
         cityHome.parent().css("display", "block");
     }
@@ -458,6 +480,7 @@ function initializeHomeAddress() {
         // Reset and disable "Other" checkbox for City 
         checkedCityOtherHome.prop("checked", false);
         checkedCityOtherHome.prop("disabled", true);
+        // checkedCityOtherHome.parent().parent().parent().hide();
     }
     else if (checkedStateOtherHome.prop("checked")) {
         // Hide State
@@ -465,11 +488,12 @@ function initializeHomeAddress() {
         // Hide City
         cityHomeField.hide();
         // Reset and disable "Other" checkbox for City 
-        checkedCityOtherHome.prop("checked", false);
-        checkedCityOtherHome.prop("disabled", true);
+        // checkedCityOtherHome.prop("checked", false); // this command removes the check from the checkbox
+        // checkedCityOtherHome.prop("disabled", true);
+        // checkedCityOtherHome.parent().parent().parent().hide();
         if (!stateHome) {
             // Disable City
-            cityHome.prop("disabled", true);
+            // cityHome.prop("disabled", true);
             cityHome.parent().find(".input-group-btn").hide();
             cityHome.parent().css("display", "block");
         }
@@ -478,11 +502,11 @@ function initializeHomeAddress() {
             cityOtherHome.prop("disabled", true);
         }
     }
-    else if (!stateHome) {
+    else if (!stateHome || !stateOtherHome) {
         // Hide State (Other)
         stateOtherHomeField.hide();
         // Disable City
-        cityHome.prop("disabled", true);
+        // cityHome.prop("disabled", true);
         cityHome.parent().find(".input-group-btn").hide();
         cityHome.parent().css("display", "block");
         // Disable and hide City (Other)
@@ -490,7 +514,8 @@ function initializeHomeAddress() {
         cityOtherHomeField.hide();
         // Untick and disable "Others"
         checkedCityOtherHome.prop("checked", false);
-        checkedCityOtherHome.prop("disabled", true);
+        // checkedCityOtherHome.prop("disabled", true);
+        // checkedCityOtherHome.parent().parent().parent().hide();
     }
     else if (checkedCityOtherHome.prop("checked")) {
         // Hide State (Other)
@@ -534,13 +559,13 @@ function toggleStateBusiness() {
     checkedStateOtherBusiness.prop("checked", false);
 
     // Clear City
-    cityBusiness.val("");
-    cityBusinessName.val("");
-    cityBusinessEntity.val("");
+    // cityBusiness.val("");
+    // cityBusinessName.val("");
+    // cityBusinessEntity.val("");
     // Clear City (Other)
-    cityOtherBusiness.val("");
+    // cityOtherBusiness.val("");
     // Untick "Others" checkbox
-    checkedCityOtherBusiness.prop("checked", false);
+    // checkedCityOtherBusiness.prop("checked", false);
 
     if (countryBusiness) {
         // Enable State
@@ -593,24 +618,24 @@ function toggleCityBusiness() {
     var cityOtherBusinessField = cityOtherBusiness.parent().parent();
 
     // Clear City
-    cityBusiness.val("");
-    cityBusinessName.val("");
-    cityBusinessEntity.val("");
-    // Clear City (Other)
-    cityOtherBusiness.val("");
-    // Untick City "Others" checkbox if State "Others" is not ticked
-    if (checkedStateOtherBusiness.prop("checked")) {
-        checkedCityOtherBusiness.prop("checked", false);
-    }
+    // cityBusiness.val("");
+    // cityBusinessName.val("");
+    // cityBusinessEntity.val("");
+    // // Clear City (Other)
+    // // cityOtherBusiness.val("");
+    // // Untick City "Others" checkbox if State "Others" is not ticked
+    // if (checkedStateOtherBusiness.prop("checked")) {
+    //     // checkedCityOtherBusiness.prop("checked", false);
+    // }
 
     if (stateBusiness || stateOtherBusiness) {
         // Enable City
-        cityBusiness.prop("disabled", false);
+        // cityBusiness.prop("disabled", false);
         cityBusiness.parent().find(".input-group-btn").show();
         cityBusiness.parent().css("display", "table");
         cityBusiness.parent().css("width", "100%");
         // Enable City (Other)
-        cityOtherBusiness.prop("disabled", false);
+        // cityOtherBusiness.prop("disabled", false);
         if (stateBusiness && !checkedStateOtherBusiness.prop("checked")) {
             // Enable "Others" checkbox only if State is populated and not locked to "Other"
             checkedCityOtherBusiness.prop("disabled", false);
@@ -638,7 +663,7 @@ function toggleStateOtherBusiness() {
     var stateBusinessEntity = $("#ndph_mequestion12_entityname");
     var stateBusinessField = stateBusiness.parent().parent().parent();
     var stateOtherBusiness = $("#ndph_statebusinessothers");
-    var stateOtherBusinessField = stateOtherBusiness.parent().parent()
+    var stateOtherBusinessField = stateOtherBusiness.parent().parent();
     
     var cityBusiness = $("#ndph_mequestion13");
     var cityOtherBusiness = $("#ndph_citybusinessothers");
@@ -710,9 +735,34 @@ function initializeBusinessAddress() {
     var cityOtherBusiness = $("#ndph_citybusinessothers");
     var cityOtherBusinessField = cityOtherBusiness.parent().parent();
 
+    // checkboxes
+    // checkboxes
+    var toggleStateOther = $("#ndph_addressnotshownonthelistbusiness").prop("checked");
+    var toggleCityOther = $("#ndph_addressnotshownonlist_citybusiness").prop("checked");
+
     if (businessIsHome) {
-        $(".section[data-name='seell_business_address']").closest("fieldset").hide();
+    //     // $(".section[data-name='seell_business_address']").closest("fieldset").hide();
+        if(toggleStateOther) {
+            $("#ndph_statebusinessothers").parent().parent().show();                                // Hide State (Other)
+            $("#ndph_mequestion12").parent().parent().parent().hide();  
+            $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
+            $("#ndph_mequestion13").parent().parent().parent().hide();   
+        } else if (!toggleStateOther) {
+            $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
+            $("#ndph_mequestion12").parent().parent().parent().show();  
+            // $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
+            // $("#ndph_mequestion13").parent().parent().hide();   
+        }
+
+        if(toggleCityOther) {
+            $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
+            $("#ndph_mequestion13").parent().parent().parent().hide(); 
+        } else if(!toggleCityOther) {
+            $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
+            $("#ndph_mequestion13").parent().parent().parent().show(); 
+        }
     }
+
     else if (!countryBusiness) {
         // Disable State
         stateBusiness.prop("disabled", true);
@@ -754,19 +804,19 @@ function initializeBusinessAddress() {
             cityOtherBusiness.prop("disabled", true);
         }
     }
-    else if (!stateBusiness) {
+    else if (!stateBusiness || !stateOtherBusiness) {
         // Hide State (Other)
         stateOtherBusinessField.hide();
         // Disable City
-        cityBusiness.prop("disabled", true);
+        // cityBusiness.prop("disabled", true);
         cityBusiness.parent().find(".input-group-btn").hide();
         cityBusiness.parent().css("display", "block");
         // Disable and hide City (Other)
-        cityOtherBusiness.prop("disabled", true);
+        // cityOtherBusiness.prop("disabled", true);
         cityOtherBusinessField.hide();
         // Untick and disable "Others"
         checkedCityOtherBusiness.prop("checked", false);
-        checkedCityOtherBusiness.prop("disabled", true);
+        // checkedCityOtherBusiness.prop("disabled", true);
     }
     else if (checkedCityOtherBusiness.prop("checked")) {
         // Hide State (Other)
@@ -935,7 +985,7 @@ function initializeBusinessAddress() {
     }
 
     // Prepopulate Program fields
-    if (!$("#ndph_seellopenprograms").val()) {
+    if(!$("#ndph_seellopenprograms").val()){
         if (params["id"]) 
         {
             var prepopulatedProgram = programs.find(
@@ -952,46 +1002,46 @@ function initializeBusinessAddress() {
     }
 
     // Disable fields
-    $("#firstname").prop('disabled', true);
-    $("#middlename").prop('disabled', true);
-    $("#lastname").prop('disabled', true);
-    $("#ndph_suffix").prop('disabled', true);
-    $("#ndph_nickname").prop('disabled', true);
-    $("#ndph_countryofbirth").prop('disabled', true);
-    $("#ndph_sex").prop('disabled', true);
-    $("#ndph_citizenship").prop('disabled', true);
-    $("#mobilephone").prop('disabled', true);
-    $("#emailaddress1").prop('disabled', true);
-    $("#ndph_countrycodemobilenew").parent().find('.input-group-btn').hide();
-    $("#ndph_dateofbirth_datepicker_description").parent().find('.form-control').prop('disabled', true);
-    $("#ndph_dateofbirth").parent().find('.input-group-addon').hide();
-     // Disable home address fields
-    $("#address1_line1").prop('disabled', true);
-    $("#ndph_country").prop('disabled', true);
-    $("#ndph_country_name").parent().find('.input-group-btn').hide();
-    $("#address1_postalcode").prop('disabled', true); 
-    $("#ndph_state").prop('disabled', true);
-    $("#ndph_state_name").parent().find('.input-group-btn').hide(); 
-    $("#address1_stateorprovince").prop('disabled', true); 
-    $("#ndph_addressnotshownonthelist").prop('disabled', true);
-    $("#address1_city").prop('disabled', true);  
-    $("#ndph_city").prop('disabled', true);
-    $("#ndph_city_name").parent().find('.input-group-btn').hide(); 
-    $("#ndph_addressnotshownonlist_city").prop('disabled', true);
-    // Disable business address fields
-    $("#ndph_businessaddressishomeaddress").prop('disabled', true);
-    $("#ndph_street1business").prop('disabled', true);
-    $("#ndph_mequestion11").prop('disabled', true);
-    $("#ndph_mequestion11_name").parent().find('.input-group-btn').hide();  
-    $("#ndph_mequestion12").prop('disabled', true);
-    $("#ndph_mequestion12_name").parent().find('.input-group-btn').hide(); 
-    $("#ndph_mequestion13").prop('disabled', true);
-    $("#ndph_mequestion13_name").parent().find('.input-group-btn').hide();  
-    $("#ndph_mequestion14").prop('disabled', true);
-    $("#ndph_statebusinessothers").prop('disabled', true);
-    $("#ndph_citybusinessothers").prop('disabled', true);
-    $("#ndph_addressnotshownonthelistbusiness").prop('disabled', true);
-    $("#ndph_addressnotshownonlist_citybusiness").prop('disabled', true);
+    // $("#firstname").prop('disabled', true);
+    // $("#middlename").prop('disabled', true);
+    // $("#lastname").prop('disabled', true);
+    // $("#ndph_suffix").prop('disabled', true);
+    // $("#ndph_nickname").prop('disabled', true);
+    // $("#ndph_countryofbirth").prop('disabled', true);
+    // $("#ndph_sex").prop('disabled', true);
+    // $("#ndph_citizenship").prop('disabled', true);
+    // $("#mobilephone").prop('disabled', true);
+    // $("#emailaddress1").prop('disabled', true);
+    // $("#ndph_countrycodemobilenew").parent().find('.input-group-btn').hide();
+    // $("#ndph_dateofbirth_datepicker_description").parent().find('.form-control').prop('disabled', true);
+    // $("#ndph_dateofbirth").parent().find('.input-group-addon').hide();
+    //  // Disable home address fields
+    // $("#address1_line1").prop('disabled', true);
+    // $("#ndph_country").prop('disabled', true);
+    // $("#ndph_country_name").parent().find('.input-group-btn').hide();
+    // $("#address1_postalcode").prop('disabled', true); 
+    // $("#ndph_state").prop('disabled', true);
+    // $("#ndph_state_name").parent().find('.input-group-btn').hide(); 
+    // $("#address1_stateorprovince").prop('disabled', true); 
+    // $("#ndph_addressnotshownonthelist").prop('disabled', true);
+    // $("#address1_city").prop('disabled', true);  
+    // $("#ndph_city").prop('disabled', true);
+    // $("#ndph_city_name").parent().find('.input-group-btn').hide(); 
+    // $("#ndph_addressnotshownonlist_city").prop('disabled', true);
+    // // Disable business address fields
+    // $("#ndph_businessaddressishomeaddress").prop('disabled', true);
+    // $("#ndph_street1business").prop('disabled', true);
+    // $("#ndph_mequestion11").prop('disabled', true);
+    // $("#ndph_mequestion11_name").parent().find('.input-group-btn').hide();  
+    // $("#ndph_mequestion12").prop('disabled', true);
+    // $("#ndph_mequestion12_name").parent().find('.input-group-btn').hide(); 
+    // $("#ndph_mequestion13").prop('disabled', true);
+    // $("#ndph_mequestion13_name").parent().find('.input-group-btn').hide();  
+    // $("#ndph_mequestion14").prop('disabled', true);
+    // $("#ndph_statebusinessothers").prop('disabled', true);
+    // $("#ndph_citybusinessothers").prop('disabled', true);
+    // $("#ndph_addressnotshownonthelistbusiness").prop('disabled', true);
+    // $("#ndph_addressnotshownonlist_citybusiness").prop('disabled', true);
 
 
     // Hide metadata fields

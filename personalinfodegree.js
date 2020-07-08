@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    //hide fields
-    $("#ndph_seellprogramtype").parent().parent().parent().hide()
     /*
     dooddddddddddooooodk00000OxxkkkkOOOOOOOOOOkkkxxxddddooollccccc::cxOd:,,''''''cxOd:,ckOOOOxlccccccccccccccccccccccccccc::
     dooddddddddddddddodkO0000kc;;;;:::ccclllllooodddddxOOkkkkOOOOOOkkOOkkxxddoooodkOd:,cxOOOOxlccccccccccccccccccccccccccc::
@@ -68,124 +66,28 @@ $$$$$$\-$$$$$$$--|--------\$$$$--|$$-|--$$-|$$-|$$$$$$$--|------\$$$$$$$-|------
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
     */
-function appendHTML(){
-    var programType = $("#ndph_programtypeapplication").val();
 
-    if(programType == "649840000"){
-
-    $('<div>')
-    .addClass('instruction')
-    .attr('id', 'instruction')
-    .append('<p>Fill out the application form below and one of our Recruitment Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: recruitment@aim.edu" id="recruitmentEmail">recruitment@aim.edu</a>.</p>')
-    .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel.</p>')
-    .append('<p><a href="" id="applicationGuide">Click here to read the step-by-step guide to this online graduate degree application process.</a></p>')
-    .append('<p><i>* - Required fields.</i></p>')
-    .insertBefore('#WebFormControl_9664d896647dea11a811000d3a82bec6_ProgressIndicator');
-
-     $("a#applicationGuide").css( { "color" : "blue", "font-weight" : "400", "text-decoration" : "underline" } );
-     $("a#recruitmentEmail").css( { "color" : "blue", "font-weight" : "400", "text-decoration" : "underline" } );
-
-    }else if(programType == "649840001"){
-    $('<div>')
-    .addClass('seellinstruction')
-    .attr('id', 'seellinstruction')
-    .append('<p>Our team of expert Business Development officers can help analyze your organization’s training needs and provide you with the best customized program specially designed to address your needs.</p>')
-    .append('<p>Fill out the Inquiry Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">seell@aim.edu</a>.</p>')
-    .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
-    .append('<p><i>* - Required fields.</i></p>')
-    .insertBefore('#WebFormControl_9664d896647dea11a811000d3a82bec6_ProgressIndicator');
-
-
-     $("a#recruitmentEmail").css( { "color" : "blue", "font-weight" : "400", "text-decoration" : "underline" } );
-    }else {
-        alert("Ayaw gumana");
-    }
-}
-
-    //Call appendHTML function
-
+    // ################################################################
     // FUNCTION DECLARATIONS
-    // Toggle visibility for Program fields based on Program Type
-    function toggleProgramType() {
-        var programType = $("#ndph_programtypeapplication");
-        var degreeProgram = $("#ndph_program");
-        var degreeProgramName = $("#ndph_program_name");
-        var degreeProgramEntity = $("#ndph_program_entityname");
-        var degreeProgramField = degreeProgram.parent().parent();
-        var openProgram = $("#ndph_seellopenprograms");
-        var openProgramName = $("#ndph_seellopenprograms_name");
-        var openProgramEntity = $("#ndph_seellopenprograms_entityname");
-        var openProgramField = openProgram.parent().parent();
-        var seellProgramType = $("#ndph_seellprogramtype");
+    // ################################################################
 
-        switch (programType.val()) {
-            case "649840000":
-                openProgram.val("");
-                openProgramName.val("");
-                openProgramEntity.val("");
-                openProgramField.hide();
-                degreeProgramField.show();
-                seellProgramType.val("");
-                break;
-            case "649840001":
-                degreeProgram.val("");
-                degreeProgramName.val("");
-                degreeProgramEntity.val("");
-                degreeProgramField.hide();
-                openProgramField.show();
-                seellProgramType.val("649840000");
-                break;
-            default:
-                degreeProgram.val("");
-                degreeProgramName.val("");
-                degreeProgramEntity.val("");
-                degreeProgramField.hide();
-                openProgram.val("");
-                openProgramName.val("");
-                openProgramEntity.val("");
-                openProgramField.hide();
-                seellProgramType.val("");
-                break;
-        }
-        updateSchool();
-    }
     // Update School based on Program; execute only after OData query returns "programs" variable
     function updateSchool() {
         var school = $("#ndph_school");
         var schoolName = $("#ndph_school_name");
         var schoolEntity = $("#ndph_school_entityname");
-        var programType = $("#ndph_programtypeapplication");
-        var degreeProgram = $("#ndph_program");
-        var seellProgram = $("#ndph_seellopenprograms");
+        var programID = $("#ndph_program");
 
-        var programID;  // Variable to track which program (Degree or SEELL) field should be evaluated based on Program Type
-
-        // Set programID
-        switch (programType.val()) {
-            case "649840000":
-                programID = degreeProgram.val();
-                break;
-            case "649840001":
-                programID = seellProgram.val();
-                break;
-            default:
-                programID = "";
-                break;
-        }
-
-        // Get current program based on programID
+        // Get current program based on degreeProgram
         var currentProgram = {};
-        if (programID) {
+        if (programID.val()) {
+            // Search in "programs" array for corresponding program element
             currentProgram = programs.find(
                 function(program) {
-                    // Search in "programs" array for corresponding program element
-                    return program.ndph_programid == programID;
+                    return program.ndph_programid == programID.val();
                 }
             );
-        }
-
-        // Set School
-        if (currentProgram.ndph_school) {
+            // Set School
             school.val(currentProgram.ndph_school.Id);
             schoolName.val(currentProgram.ndph_school.Name);
             schoolEntity.val("ndph_school");
@@ -197,273 +99,6 @@ function appendHTML(){
         }
     }
 
-    function toggleBusinessIsHomeAddress() {
-        var businessIsHome = $("#ndph_businessaddressishomeaddress").prop("checked");
-        
-        if (businessIsHome) {
-            // Unbind enable/disable functions for Business Address
-            $("#ndph_mequestion11").off("change", toggleStateBusiness);
-            $("#ndph_mequestion12").off("change", toggleCityBusiness);
-            $("#ndph_statebusinessothers").off("change", toggleCityBusiness);
-            $("#ndph_addressnotshownonthelistbusiness").off("change", toggleStateOtherBusiness);
-            $("#ndph_addressnotshownonlist_citybusiness").off("change", toggleCityOtherBusiness);
-            // Enable fields; needed to ensure fields are saved upon advancing form
-            $("#address1_line1").prop("disabled", false);
-            $("#address1_line2").prop("disabled", false);
-            $("#address1_line3").prop("disabled", false);
-            $("#ndph_country").prop("disabled", false);
-            $("#ndph_country_name").prop("disabled", false);
-            $("#ndph_postalzipcode").prop("disabled", false);
-            $("#ndph_state").prop("disabled", false);
-            $("#address1_stateorprovince").prop("disabled", false);
-            $("#ndph_addressnotshownonthelist").prop("disabled", false);
-            $("#ndph_city").prop("disabled", false);
-            $("#address1_city").prop("disabled", false);
-            $("#ndph_addressnotshownonlist_city").prop("disabled", false);
-
-            // Set values for Business Address to Home Address
-            mirrorHomeAddress();
-
-            // Set Business Address to update on Home Address change
-            $("#address1_line1").change(mirrorHomeAddress);
-            $("#address1_line2").change(mirrorHomeAddress);
-            $("#address1_line3").change(mirrorHomeAddress);
-            $("#ndph_country").change(mirrorHomeAddress);
-            $("#ndph_country_name").change(mirrorHomeAddress);
-            $("#ndph_postalzipcode").change(mirrorHomeAddress);
-            $("#ndph_state").change(mirrorHomeAddress);
-            $("#address1_stateorprovince").change(mirrorHomeAddress);
-            $("#ndph_addressnotshownonthelist").change(mirrorHomeAddress);
-            $("#ndph_city").change(mirrorHomeAddress);
-            $("#address1_city").change(mirrorHomeAddress);
-            $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
-
-            // Hide Business Address section
-            $(".section[data-name='business_address']").closest("fieldset").hide();
-        }
-        else {
-            // Clear change event handler for Business Address
-            $("#address1_line1").off("change", mirrorHomeAddress);
-            $("#address1_line2").off("change", mirrorHomeAddress);
-            $("#address1_line3").off("change", mirrorHomeAddress);
-            $("#ndph_country").off("change", mirrorHomeAddress);
-            $("#ndph_country_name").off("change", mirrorHomeAddress);
-            $("#ndph_postalzipcode").off("change", mirrorHomeAddress);
-            $("#ndph_state").off("change", mirrorHomeAddress);
-            $("#address1_stateorprovince").off("change", mirrorHomeAddress);
-            $("#ndph_addressnotshownonthelist").off("change", mirrorHomeAddress);
-            $("#ndph_city").off("change", mirrorHomeAddress);
-            $("#address1_city").off("change", mirrorHomeAddress);
-            $("#ndph_addressnotshownonlist_city").off("change", mirrorHomeAddress);
-
-            // Clear values for Business Address
-            $("#ndph_street1business").val("");                                                     // Street 1
-            $("#ndph_street2business").val("");                                                     // Street 2
-            $("#ndph_street3business").val("");                                                     // Street 3
-            $("#ndph_mequestion11").val("");                                                        // Country GUID
-            $("#ndph_mequestion11_name").val("");                                                   // Country name
-            $("#ndph_mequestion11_entityname").val("");                                             // Country entity
-            $("#ndph_mequestion14").val("");                                                        // ZIP/Postal Code
-            $("#ndph_mequestion12").val("");                                                        // State GUID
-            $("#ndph_mequestion12_name").val("");                                                   // State name
-            $("#ndph_mequestion12_entityname").val("");                                             // State entity
-            $("#ndph_statebusinessothers").val("");                                                 // State (others)
-            $("#ndph_addressnotshownonthelistbusiness").prop("checked", false);                     // State not on list
-            $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
-            $("#ndph_mequestion12").parent().parent().show();                                       // Show State
-            $("#ndph_mequestion13").val("");                                                        // City GUID
-            $("#ndph_mequestion13_name").val("");                                                   // City name
-            $("#ndph_mequestion13_entityname").val("");                                             // Country entity
-            $("#ndph_citybusinessothers").val("");                                                  // City (others)
-            $("#ndph_addressnotshownonlist_citybusiness").prop("checked", false);                   // City not on list
-            $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
-            $("#ndph_mequestion13").parent().parent().show();                                       // Show City
-
-            // Show Business Address section
-            $(".section[data-name='business_address']").closest("fieldset").show();
-
-            // Re-initialize fields: call initialization function
-            initializeBusinessAddress();
-        }
-    }
-    function mirrorHomeAddress() {      // Function to copy Home Address fields to Business Address
-        var homeStreet1 = $("#address1_line1").val();
-        var homeStreet2 = $("#address1_line2").val();
-        var homeStreet3 = $("#address1_line3").val();
-        var homeCountry = $("#ndph_country").val();
-        var homeCountryName = $("#ndph_country_name").val();
-        var homeZIPPostalCode = $("#ndph_postalzipcode").val();
-        var homeState = $("#ndph_state").val();
-        var homeStateName = $("#ndph_state_name").val();
-        var homeStateOthers = $("#address1_stateorprovince").val();
-        var homeStateNotOnList = $("#ndph_addressnotshownonthelist").prop("checked");
-        var homeCity = $("#ndph_city").val();
-        var homeCityName = $("#ndph_city_name").val();
-        var homeCityOthers = $("#address1_city").val();
-        var homeCityNotOnList = $("#ndph_addressnotshownonlist_city").prop("checked");
-
-        $("#ndph_street1business").val(homeStreet1);                                            // Street 1
-        $("#ndph_street2business").val(homeStreet2);                                            // Street 2
-        $("#ndph_street3business").val(homeStreet3);                                            // Street 3
-        $("#ndph_mequestion11").val(homeCountry);                                               // Country GUID
-        $("#ndph_mequestion11_name").val(homeCountryName);                                      // Country name
-        $("#ndph_mequestion11_entityname").val("ndph_country");                                 // Country entity
-        $("#ndph_mequestion14").val(homeZIPPostalCode);                                         // ZIP/Postal Code
-        $("#ndph_mequestion12").val(homeState);                                                 // State GUID
-        $("#ndph_mequestion12_name").val(homeStateName);                                        // State name
-        $("#ndph_mequestion12_entityname").val("ndph_state");                                   // State entity
-        $("#ndph_statebusinessothers").val(homeStateOthers);                                    // State (others)
-        $("#ndph_addressnotshownonthelistbusiness").prop("checked", homeStateNotOnList);        // State not on list
-        $("#ndph_mequestion13").val(homeCity);                                                  // City GUID
-        $("#ndph_mequestion13_name").val(homeCityName);                                         // City name
-        $("#ndph_mequestion13_entityname").val("ndph_city");                                    // City entity
-        $("#ndph_citybusinessothers").val(homeCityOthers);                                      // City (others)
-        $("#ndph_addressnotshownonlist_citybusiness").prop("checked", homeCityNotOnList);       // City not on list
-
-        // Update (Other) fields
-        if ($("#ndph_addressnotshownonthelistbusiness").prop("checked")) {      // State
-            $("#ndph_mequestion12").parent().parent().parent().hide();
-            $("#ndph_statebusinessothers").parent().parent().show();
-        }
-        else {
-            $("#ndph_statebusinessothers").parent().parent().hide();
-            $("#ndph_mequestion12").parent().parent().parent().show();
-        }
-        if ($("#ndph_addressnotshownonlist_citybusiness").prop("checked")) {      // City
-            $("#ndph_mequestion13").parent().parent().parent().hide();
-            $("#ndph_citybusinessothers").parent().parent().show();
-        }
-        else {
-            $("#ndph_citybusinessothers").parent().parent().hide();
-            $("#ndph_mequestion13").parent().parent().parent().show();
-        }
-    }
-
-    // Toggle Home State based on whether Home Country has a value
-    function toggleStateHome() {
-        var countryHome = $("#ndph_country").val();
-        var checkedStateOtherHome = $("#ndph_addressnotshownonthelist");
-        var stateHome = $("#ndph_state");
-        var stateHomeName = $("#ndph_state_name");
-        var stateHomeEntity = $("#ndph_state_entityname");
-        var stateHomeField = $("#ndph_state").parent().parent().parent();
-        var stateOtherHome = $("#address1_stateorprovince");
-        var stateOtherHomeField = $("#address1_stateorprovince").parent().parent();
-        var checkedCityOtherHome = $("#ndph_addressnotshownonlist_city");
-        var cityHome = $("#ndph_city");
-        var cityHomeName = $("#ndph_city_name");
-        var cityHomeEntity = $("#ndph_city_entityname");
-        var cityHomeField = $("#ndph_city").parent().parent().parent();
-        var cityOtherHome = $("#address1_city");
-        var cityOtherHomeField = $("#address1_city").parent().parent();
-
-        // Clear State
-        stateHome.val("");
-        stateHomeName.val("");
-        stateHomeEntity.val("");
-        // Clear State (Other)
-        stateOtherHome.val("");
-        // Untick "Others" checkbox
-        checkedStateOtherHome.prop("checked", false);
-        // Update (Other) visibility 
-        stateOtherHomeField.hide();
-        stateHomeField.show();
-
-        // Clear City
-        cityHome.val("");
-        cityHomeName.val("");
-        cityHomeEntity.val("");
-        // Clear City (Other)
-        cityOtherHome.val("");
-        // Untick "Others" checkbox
-        checkedCityOtherHome.prop("checked", false);
-
-        if (countryHome) {
-            // Enable State
-            stateHome.prop("disabled", false);
-            stateHome.parent().find(".input-group-btn").show();
-            stateHome.parent().css("display", "table");
-            stateHome.parent().css("width", "100%");
-            // Enable State (Other)
-            stateOtherHome.prop("disabled", false);
-            // Enable "Other" checkbox
-            checkedStateOtherHome.prop("disabled", false);
-        }
-        else {
-            // Disable State
-            stateHome.prop("disabled", true);
-            stateHome.parent().find(".input-group-btn").hide();
-            stateHome.parent().css("display", "block");
-            // Disable State (Other)
-            stateOtherHome.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedStateOtherHome.prop("disabled", true);
-            // Update (Other) visibility 
-            stateOtherHomeField.hide();
-            stateHomeField.show();
-            
-            // Disable City
-            cityHome.prop("disabled", true);
-            cityHome.parent().find(".input-group-btn").hide();
-            cityHome.parent().css("display", "block");
-            // Disable City (Other)
-            cityOtherHome.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedCityOtherHome.prop("disabled", true);
-            // Update (Other) visibility 
-            cityOtherHomeField.hide();
-            cityHomeField.show();
-        }
-    }
-    // Toggle Home City based on whether Home State has a value
-    function toggleCityHome() {
-        var stateHome = $("#ndph_state").val();
-        var stateOtherHome = $("#address1_stateorprovince").val();
-        var checkedStateOtherHome = $("#ndph_addressnotshownonlist");
-        var checkedCityOtherHome = $("#ndph_addressnotshownonlist_city");
-        var cityHome = $("#ndph_city");
-        var cityHomeName = $("#ndph_city_name");
-        var cityHomeEntity = $("#ndph_city_entityname");
-        var cityHomeField = $("#ndph_city").parent().parent().parent();
-        var cityOtherHome = $("#address1_city");
-        var cityOtherHomeField = $("#address1_city").parent().parent();
-
-        // Clear City
-        cityHome.val("");
-        cityHomeName.val("");
-        cityHomeEntity.val("");
-        // Clear City (Other)
-        cityOtherHome.val("");
-        // Untick "Others" checkbox
-        checkedCityOtherHome.prop("checked", false);
-
-        if (stateHome || stateOtherHome) {
-            // Enable City
-            cityHome.prop("disabled", false);
-            cityHome.parent().find(".input-group-btn").show();
-            cityHome.parent().css("display", "table");
-            cityHome.parent().css("width", "100%");
-            // Enable City (Other)
-            cityOtherHome.prop("disabled", false);
-            if (stateHome && !checkedStateOtherHome.prop("checked")) {
-                // Enable "Others" checkbox only if State is populated and not locked to "Other"
-                checkedCityOtherHome.prop("disabled", false);
-            }
-        }
-        else {
-            // Disable City
-            cityHome.prop("disabled", true);
-            cityHome.parent().find(".input-group-btn").hide();
-            cityHome.parent().css("display", "block");
-            // Disable City (Other)
-            cityOtherHome.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedCityOtherHome.prop("disabled", true);
-            // Update (Other) visibility 
-            cityOtherHomeField.hide();
-            cityHomeField.show();
-        }
-    }
     // Hide/show Home State (Other) based on "Others" checkbox
     function toggleStateOtherHome() {
         var checkedStateOtherHome = $("#ndph_addressnotshownonthelist");
@@ -474,35 +109,16 @@ function appendHTML(){
         var stateOtherHome = $("#address1_stateorprovince");
         var stateOtherHomeField = stateOtherHome.parent().parent();
 
-        var cityHome = $("#ndph_city");
-        var cityOtherHome = $("#address1_city");
-        var checkedCityOtherHome = $("#ndph_addressnotshownonlist_city");
-
         if (checkedStateOtherHome.prop("checked")) {
-            stateHome.val("");
-            stateHomeName.val("");
-            stateHomeEntity.val("");
             stateHomeField.hide();
             stateOtherHomeField.show();
-            // Lock City to Other
-            checkedCityOtherHome.prop("disabled", true);
-            checkedCityOtherHome.prop("checked", true);
-            // Disable City (Other) until State is filled in
-            cityOtherHome.prop("disabled", true);
         }
         else {
-            stateOtherHome.val("");
             stateOtherHomeField.hide();
             stateHomeField.show();
-            // Reset "Other" checkbox for City
-            checkedCityOtherHome.prop("checked", false);
-            // Disable City until State is filled in
-            cityHome.prop("disabled", true);
-            cityHome.parent().find(".input-group-btn").hide();
-            cityHome.parent().css("display", "block");
         }
-        toggleCityOtherHome();
     }
+
     // Hide/show Home City (Other) based on "Others" checkbox
     function toggleCityOtherHome() {
         var checkedCityOtherHome = $("#ndph_addressnotshownonlist_city");
@@ -514,105 +130,17 @@ function appendHTML(){
         var cityOtherHomeField = cityOtherHome.parent().parent();
 
         if (checkedCityOtherHome.prop("checked")) {
-            cityHome.val("");
-            cityHomeName.val("");
-            cityHomeEntity.val("");
             cityHomeField.hide();
             cityOtherHomeField.show();
         }
         else {
-            cityOtherHome.val("");
             cityOtherHomeField.hide();
             cityHomeField.show();
         }
     }
-    function initializeHomeAddress() {
-        var countryHome = $("#ndph_country").val();
-    
-        var checkedStateOtherHome = $("#ndph_addressnotshownonthelist");
-        var stateHome = $("#ndph_state");
-        var stateHomeField = stateHome.parent().parent().parent();
-        var stateOtherHome = $("#address1_stateorprovince");
-        var stateOtherHomeField = stateOtherHome.parent().parent();
-    
-        var checkedCityOtherHome = $("#ndph_addressnotshownonlist_city");
-        var cityHome = $("#ndph_city");
-        var cityHomeField = cityHome.parent().parent().parent();
-        var cityOtherHome = $("#address1_city");
-        var cityOtherHomeField = cityOtherHome.parent().parent();
-    
-        if (!countryHome) {
-            // Disable State
-            stateHome.prop("disabled", true);
-            stateHome.parent().find(".input-group-btn").hide();
-            stateHome.parent().css("display", "block");
-            // Disable and hide State (Other)
-            stateOtherHome.prop("disabled", true);
-            stateOtherHomeField.hide();
-            // Reset and disable "Other" checkbox for State
-            checkedStateOtherHome.prop("checked", false);
-            checkedStateOtherHome.prop("disabled", true);
-            // Disable City
-            cityHome.prop("disabled", true);
-            cityHome.parent().find(".input-group-btn").hide();
-            cityHome.parent().css("display", "block");
-            // Disable and hide City (Other)
-            cityOtherHome.prop("disabled", true);
-            cityOtherHomeField.hide();
-            // Reset and disable "Other" checkbox for City 
-            checkedCityOtherHome.prop("checked", false);
-            checkedCityOtherHome.prop("disabled", true);
-        }
-        else if (checkedStateOtherHome.prop("checked")) {
-            // Hide State
-            stateHomeField.hide();
-            // Hide City
-            cityHomeField.hide();
-            // Reset and disable "Other" checkbox for City 
-            checkedCityOtherHome.prop("checked", false);
-            checkedCityOtherHome.prop("disabled", true);
-            if (!stateHome) {
-                // Disable City
-                cityHome.prop("disabled", true);
-                cityHome.parent().find(".input-group-btn").hide();
-                cityHome.parent().css("display", "block");
-            }
-            if (!stateOtherHome) {
-                // Disable City (Other)
-                cityOtherHome.prop("disabled", true);
-            }
-        }
-        else if (!stateHome) {
-            // Hide State (Other)
-            stateOtherHomeField.hide();
-            // Disable City
-            cityHome.prop("disabled", true);
-            cityHome.parent().find(".input-group-btn").hide();
-            cityHome.parent().css("display", "block");
-            // Disable and hide City (Other)
-            cityOtherHome.prop("disabled", true);
-            cityOtherHomeField.hide();
-            // Untick and disable "Others"
-            checkedCityOtherHome.prop("checked", false);
-            checkedCityOtherHome.prop("disabled", true);
-        }
-        else if (checkedCityOtherHome.prop("checked")) {
-            // Hide State (Other)
-            stateOtherHomeField.hide();
-            // Hide City
-            cityHomeField.hide();
-        }
-        else {
-            // Hide State (Other)
-            stateOtherHomeField.hide();
-            // Hide City (Other)
-            cityOtherHomeField.hide();
-        }
-    }
-    
-    // Toggle Business State based on whether Business Country has a value
-    function toggleStateBusiness() {
-        var countryBusiness = $("#ndph_mequestion11").val();
+
+     // Toggle Business State based on whether Business Country has a value
+     function toggleStateBusiness() {
         var checkedStateOtherBusiness = $("#ndph_addressnotshownonthelistbusiness");
         var stateBusiness = $("#ndph_mequestion12");
         var stateBusinessName = $("#ndph_mequestion12_name");
@@ -620,159 +148,18 @@ function appendHTML(){
         var stateBusinessField = stateBusiness.parent().parent().parent();
         var stateOtherBusiness = $("#ndph_statebusinessothers");
         var stateOtherBusinessField = stateOtherBusiness.parent().parent();
-        var checkedCityOtherBusiness = $("#ndph_addressnotshownonlist_citybusiness");
-        var cityBusiness = $("#ndph_mequestion13");
-        var cityBusinessName = $("#ndph_mequestion13_name");
-        var cityBusinessEntity = $("#ndph_mequestion13_entityname");
-        var cityBusinessField = cityBusiness.parent().parent().parent();
-        var cityOtherBusiness = $("#ndph_citybusinessothers");
-        var cityOtherBusinessField = cityOtherBusiness.parent().parent();
 
-        // Clear State
-        stateBusiness.val("");
-        stateBusinessName.val("");
-        stateBusinessEntity.val("");
-        // Clear State (Other)
-        stateOtherBusiness.val("");
-        // Untick "Others" checkbox
-        checkedStateOtherBusiness.prop("checked", false);
-
-        // Clear City
-        cityBusiness.val("");
-        cityBusinessName.val("");
-        cityBusinessEntity.val("");
-        // Clear City (Other)
-        cityOtherBusiness.val("");
-        // Untick "Others" checkbox
-        checkedCityOtherBusiness.prop("checked", false);
-
-        if (countryBusiness) {
-            // Enable State
-            stateBusiness.prop("disabled", false);
-            stateBusiness.parent().find(".input-group-btn").show();
-            stateBusiness.parent().css("display", "table");
-            stateBusiness.parent().css("width", "100%");
-            // Enable State (Other)
-            stateOtherBusiness.prop("disabled", false);
-            // Enable "Other" checkbox
-            checkedStateOtherBusiness.prop("disabled", false);
+        if (checkedStateOtherBusiness.prop("checked")) {
+            stateBusinessField.hide();
+            stateOtherBusinessField.show();
         }
         else {
-            // Disable State
-            stateBusiness.prop("disabled", true);
-            stateBusiness.parent().find(".input-group-btn").hide();
-            stateBusiness.parent().css("display", "block");
-            // Disable State (Other)
-            stateOtherBusiness.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedStateOtherBusiness.prop("disabled", true);
-            // Update (Other) visibility 
             stateOtherBusinessField.hide();
-            stateBusinessField.show();
-            
-            // Disable City
-            cityBusiness.prop("disabled", true);
-            cityBusiness.parent().find(".input-group-btn").hide();
-            cityBusiness.parent().css("display", "block");
-            // Disable City (Other)
-            cityOtherBusiness.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedCityOtherBusiness.prop("disabled", true);
-            // Update (Other) visibility 
-            cityOtherBusinessField.hide();
-            cityBusinessField.show();
+            stateBusiness.show();
         }
     }
     // Toggle Business City based on whether Business State has a value
     function toggleCityBusiness() {
-        var stateBusiness = $("#ndph_mequestion12").val();
-        var stateOtherBusiness = $("#ndph_statebusinessothers").val();
-        var checkedStateOtherBusiness = $("#ndph_addressnotshownonlist_statebusiness");
-        var checkedCityOtherBusiness = $("#ndph_addressnotshownonlist_citybusiness");
-        var cityBusiness = $("#ndph_mequestion13");
-        var cityBusinessName = $("#ndph_mequestion13_name");
-        var cityBusinessEntity = $("#ndph_mequestion13_entityname");
-        var cityBusinessField = cityBusiness.parent().parent().parent();
-        var cityOtherBusiness = $("#ndph_citybusinessothers");
-        var cityOtherBusinessField = cityOtherBusiness.parent().parent();
-
-        // Clear City
-        cityBusiness.val("");
-        cityBusinessName.val("");
-        cityBusinessEntity.val("");
-        // Clear City (Other)
-        cityOtherBusiness.val("");
-        // Untick "Others" checkbox
-        checkedCityOtherBusiness.prop("checked", false);
-
-        if (stateBusiness || stateOtherBusiness) {
-            // Enable City
-            cityBusiness.prop("disabled", false);
-            cityBusiness.parent().find(".input-group-btn").show();
-            cityBusiness.parent().css("display", "table");
-            cityBusiness.parent().css("width", "100%");
-            // Enable City (Other)
-            cityOtherBusiness.prop("disabled", false);
-            if (stateBusiness && !checkedStateOtherBusiness.prop("checked")) {
-                // Enable "Others" checkbox only if State is populated and not locked to "Other"
-                checkedCityOtherBusiness.prop("disabled", false);
-            }
-        }
-        else {
-            // Disable City
-            cityBusiness.prop("disabled", true);
-            cityBusiness.parent().find(".input-group-btn").hide();
-            cityBusiness.parent().css("display", "block");
-            // Disable City (Other)
-            cityOtherBusiness.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedCityOtherBusiness.prop("disabled", true);
-            // Update (Other) visibility 
-            cityOtherBusinessField.hide();
-            cityBusinessField.show();
-        }
-    }
-    // Hide/show Business State (Other) based on "Others" checkbox
-    function toggleStateOtherBusiness() {
-        var checkedStateOtherBusiness = $("#ndph_addressnotshownonthelistbusiness");
-        var stateBusiness = $("#ndph_mequestion12");
-        var stateBusinessName = $("#ndph_mequestion12_name");
-        var stateBusinessEntity = $("#ndph_mequestion12_entityname");
-        var stateBusinessField = stateBusiness.parent().parent().parent();
-        var stateOtherBusiness = $("#ndph_statebusinessothers");
-        var stateOtherBusinessField = stateOtherBusiness.parent().parent()
-        
-        var cityBusiness = $("#ndph_mequestion13");
-        var cityOtherBusiness = $("#ndph_citybusinessothers");
-        var checkedCityOtherBusiness = $("#ndph_addressnotshownonlist_citybusiness");
-
-        if (checkedStateOtherBusiness.prop("checked")) {
-            stateBusiness.val("");
-            stateBusinessName.val("");
-            stateBusinessEntity.val("");
-            stateBusinessField.hide();
-            stateOtherBusinessField.show();
-            // Lock City to Other
-            checkedCityOtherBusiness.prop("disabled", true);
-            checkedCityOtherBusiness.prop("checked", true);
-            // Disable City (Other) until State is filled in
-            cityOtherBusiness.prop("disabled", true);
-        }
-        else {
-            stateOtherBusiness.val("");
-            stateOtherBusinessField.hide();
-            stateBusinessField.show();
-            // Reset "Other" checkbox for City
-            checkedCityOtherBusiness.prop("checked", false);
-            // Disable City until State is filled in
-            cityBusiness.prop("disabled", true);
-            cityBusiness.parent().find(".input-group-btn").hide();
-            cityBusiness.parent().css("display", "block");
-        }
-        toggleCityOtherBusiness();
-    }
-    // Hide/show Business State (Other) based on "Others" checkbox
-    function toggleCityOtherBusiness() {
         var checkedCityOtherBusiness = $("#ndph_addressnotshownonlist_citybusiness");
         var cityBusiness = $("#ndph_mequestion13");
         var cityBusinessName = $("#ndph_mequestion13_name");
@@ -782,160 +169,36 @@ function appendHTML(){
         var cityOtherBusinessField = cityOtherBusiness.parent().parent();
 
         if (checkedCityOtherBusiness.prop("checked")) {
-            cityBusiness.val("");
-            cityBusinessName.val("");
-            cityBusinessEntity.val("");
             cityBusinessField.hide();
             cityOtherBusinessField.show();
         }
         else {
-            cityOtherBusiness.val("");
             cityOtherBusinessField.hide();
-            cityBusinessField.show();
+            cityBusiness.show();
         }
     }
-    // Initialize Business Address
-    function initializeBusinessAddress() {
-        var businessIsHome = $("#ndph_businessaddressishomeaddress").prop("checked");
-    
-        var countryBusiness = $("#ndph_mequestion11").val();
-    
-        var checkedStateOtherBusiness = $("#ndph_addressnotshownonthelistbusiness");
-        var stateBusiness = $("#ndph_mequestion12");
-        var stateBusinessField = stateBusiness.parent().parent().parent();
-        var stateOtherBusiness = $("#ndph_statebusinessothers");
-        var stateOtherBusinessField = stateOtherBusiness.parent().parent()
-    
-        var checkedCityOtherBusiness = $("#ndph_addressnotshownonlist_citybusiness");
-        var cityBusiness = $("#ndph_mequestion13");
-        var cityBusinessField = cityBusiness.parent().parent().parent();
-        var cityOtherBusiness = $("#ndph_citybusinessothers");
-        var cityOtherBusinessField = cityOtherBusiness.parent().parent();
-    
-        if (businessIsHome) {
-            $(".section[data-name='business_address']").closest("fieldset").hide();
-        }
-        else if (!countryBusiness) {
-            // Disable State
-            stateBusiness.prop("disabled", true);
-            stateBusiness.parent().find(".input-group-btn").hide();
-            stateBusiness.parent().css("display", "block");
-            // Disable and hide State (Other)
-            stateOtherBusiness.prop("disabled", true);
-            stateOtherBusinessField.hide();
-            // Reset and disable "Other" checkbox for State
-            checkedStateOtherBusiness.prop("checked", false);
-            checkedStateOtherBusiness.prop("disabled", true);
-            // Disable City
-            cityBusiness.prop("disabled", true);
-            cityBusiness.parent().find(".input-group-btn").hide();
-            cityBusiness.parent().css("display", "block");
-            // Disable and hide City (Other)
-            cityOtherBusiness.prop("disabled", true);
-            cityOtherBusinessField.hide();
-            // Reset and disable "Other" checkbox for City 
-            checkedCityOtherBusiness.prop("checked", false);
-            checkedCityOtherBusiness.prop("disabled", true);
-        }
-        else if (checkedStateOtherBusiness.prop("checked")) {
-            // Hide State
-            stateBusinessField.hide();
-            // Hide City
-            cityBusinessField.hide();
-            // Reset and disable "Other" checkbox for City 
-            checkedCityOtherBusiness.prop("checked", false);
-            checkedCityOtherBusiness.prop("disabled", true);
-            if (!stateBusiness) {
-                // Disable City
-                cityBusiness.prop("disabled", true);
-                cityBusiness.parent().find(".input-group-btn").hide();
-                cityBusiness.parent().css("display", "block");
-            }
-            if (!stateOtherBusiness) {
-                // Disable City (Other)
-                cityOtherBusiness.prop("disabled", true);
-            }
-        }
-        else if (!stateBusiness) {
-            // Hide State (Other)
-            stateOtherBusinessField.hide();
-            // Disable City
-            cityBusiness.prop("disabled", true);
-            cityBusiness.parent().find(".input-group-btn").hide();
-            cityBusiness.parent().css("display", "block");
-            // Disable and hide City (Other)
-            cityOtherBusiness.prop("disabled", true);
-            cityOtherBusinessField.hide();
-            // Untick and disable "Others"
-            checkedCityOtherBusiness.prop("checked", false);
-            checkedCityOtherBusiness.prop("disabled", true);
-        }
-        else if (checkedCityOtherBusiness.prop("checked")) {
-            // Hide State (Other)
-            stateOtherBusinessField.hide();
-            // Hide City
-            cityBusinessField.hide();
+
+    function toggleDietaryPreference() {
+        var dietaryPreference = $("#ndph_dietarypreference");
+        var dietaryPreferenceOther = $("#ndph_dietarypreferenceotheroption");
+        var dietaryPreferenceOtherField = dietaryPreferenceOther.parent().parent();
+
+        if (dietaryPreference.val() == "649840004") {
+            dietaryPreferenceOtherField.show();
+            dietaryPreference.prop('disabled', true);
+            dietaryPreferenceOther.prop('disabled', true);
         }
         else {
-            // Hide State (Other)
-            stateOtherBusinessField.hide();
-            // Hide City (Other)
-            cityOtherBusinessField.hide();
+            dietaryPreferenceOtherField.hide();
+            dietaryPreference.prop('disabled', true);
+            dietaryPreferenceOther.prop('disabled', true);
         }
+
     }
 
-
+    // ################################################################
     // INITIALIZE FORM
-    // Validator definition
-    if (typeof (Page_Validators) == 'undefined') return;
-    // Date of birth validator: disallow future date
-    var dateOfBirthValidator = document.createElement('span');
-    dateOfBirthValidator.style.display = "none";
-    dateOfBirthValidator.id = "ndph_dateofbirthValidator";
-    dateOfBirthValidator.controltovalidate = "ndph_dateofbirth";
-    dateOfBirthValidator.errormessage = "<a href='#ndph_dateofbirth'>Date of Birth cannot be set to a future date.</a>";
-    dateOfBirthValidator.validationGroup = "";        // Set this if you have set ValidationGroup on the form
-    dateOfBirthValidator.initialvalue = "";
-    dateOfBirthValidator.evaluationfunction = function () {
-        var currentDate = new Date();
-        var dateOfBirth = $("#ndph_dateofbirth").val();
-        if (dateOfBirth) {
-            dateOfBirth = new Date(dateOfBirth);      // Convert to Date object if filled in
-        }
-        if ((dateOfBirth == "") || (dateOfBirth < currentDate)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-    // Program validator: check if either a degree program or an open program is selected
-    var programValidator = document.createElement('span');
-    programValidator.style.display = "none";
-    programValidator.id = "ndph_programValidator";
-    programValidator.controltovalidate = "ndph_program";
-    programValidator.errormessage = "Please select a program to apply for.";
-    programValidator.validationGroup = "";        // Set this if you have set ValidationGroup on the form
-    programValidator.initialvalue = "";
-    programValidator.evaluationfunction = function () {
-        var degreeProgram = $("#ndph_program");
-        var openProgram = $("#ndph_seellopenprograms");
-        
-        if (degreeProgram.val() || openProgram.val()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-
-    // Add the new validators to the page validators array:
-    Page_Validators.push(dateOfBirthValidator);
-    Page_Validators.push(programValidator);
-
-    // Wire-up the click event handler of the validation summary link
-    $("a[href='#ndph_dateofbirth']").on("click", function () { scrollToAndFocus('ndph_dateofbirth'); });
-    // *End of validator code*
+    // ################################################################
 
     // Get the query string from the URL
     var queryString = window.location.search;
@@ -971,61 +234,113 @@ function appendHTML(){
     }
 
     // Prepopulate Program fields
-    if (params["id"]) {
-        var prepopulatedProgram = programs.find(     // Returns an object
-            function(program) {
-                // Search in "programs" array for element matching GUID on program lookup
-                return program.ndph_programid == params["id"];
-            }
-        );
+    if (!$("#ndph_program").val()) {
+        if (params["id"]) {
+            var prepopulatedProgram = programs.find(     // Returns an object
+                function(program) {
+                    // Search in "programs" array for element matching GUID on program lookup
+                    return program.ndph_programid == params["id"];
+                }
+            );
         
-        switch (prepopulatedProgram.ndph_programtype.Value) {
-            // When option set field values are retrieved from the DOM via jQuery, they are retrieved as strings
-            // But when they're retrieved from a JSON object as the response from an OData feed, they are retrieved as integers
-            case 649840000:
-                if (!$("#ndph_program").val()) {
-                    $("#ndph_programtypeapplication").val("649840000");
-                    toggleProgramType();
-                    $("#ndph_program").val(prepopulatedProgram.ndph_programid);
-                    $("#ndph_program_name").val(prepopulatedProgram.ndph_name);
-                    $("#ndph_program_entityname").val("ndph_program");
-                }
-                break;
-            case 649840001:
-                if (!$("#ndph_seellopenprograms").val()) {
-                    $("#ndph_programtypeapplication").val("649840001");
-                    toggleProgramType();
-                    $("#ndph_seellopenprograms").val(prepopulatedProgram.ndph_programid);
-                    $("#ndph_seellopenprograms_name").val(prepopulatedProgram.ndph_name);
-                    $("#ndph_seellopenprograms_entityname").val("ndph_program");
-                }
-                break;
+            // Populate Program lookup
+            $("#ndph_program").val(prepopulatedProgram.ndph_programid);
+            $("#ndph_program_name").val(prepopulatedProgram.ndph_name);
+            $("#ndph_program_entityname").val("ndph_program");
         }
     }
 
     // Hide metadata fields
     $(".section[data-name='hidden']").closest("fieldset").hide();
 
-    // Disable School lookup
-    $('#ndph_school').parent().find('.input-group-btn').hide();
-    $('#ndph_school').parent().css('display', 'block');
+    // Append program guide
+    $('.page-copy').append("<div id='instructions' class='instructions'></div>");
+    $("#instructions")
+        .addClass('instruction')
+        .attr('id', 'instruction')
+        .append('<p>Fill out the application form below and one of our Recruitment Officers will get in touch with you to guide you throughout the application process. Should you wish to contact us directly, email us at <a href="mailto: recruitment@aim.edu" id="recruitmentEmail">recruitment@aim.edu</a>.</p>')
+        .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel.</p>')
+        .append('<p><a href="/application-guide" id="guide-link" target="_blank">Click here to read the step-by-step guide to this online graduate degree application process.</a></p>')
+        .append('<p><i>* - Required fields.</i></p>');
+    $("#guide-link").attr("onclick", "return !window.open(this.href, undefined, 'width=800,height=600')");
+
+    // Append update applicant info instruction
+    $('<div>')
+    .addClass('updateApplicantInfo')
+    .attr('id', 'updateApplicantInfo')
+    .append('<p>To update this section, go to My Profile > Basic Information.</p>')
+    .insertBefore('[data-name="personal_information_1"]');
+
+    // Append update home address instruction
+    $('<div>')
+    .addClass('updateHomeAddressInstruction')
+    .attr('id', 'updateHomeAddressInstruction')
+    .append('<p>To update this section, go to My Profile > Address.</p>')
+    .insertBefore('[data-name="home_address"]');
+
+     // Append update business address instruction
+     $('<div>')
+     .addClass('updateBusinessAddressInstruction')
+     .attr('id', 'updateBusinessAddressInstruction')
+     .append('<p>To update this section, go to My Profile > Address.</p>')
+     .insertBefore('[data-name="business_address_header"]');
+
+    // Append update dietary info instruction
+    $('<div>')
+    .addClass('updateDietaryInfo')
+    .attr('id', 'updateDietaryInfo')
+    .append('<p>To update this section, go to My Profile > Basic Information.</p>')
+    .insertBefore('[data-name="dietary_information_section"]');
+
+    // Disable applicant info fields
+    $("#firstname").prop('disabled', true);
+    $("#middlename").prop('disabled', true);
+    $("#lastname").prop('disabled', true);
+    $("#ndph_suffix").prop('disabled', true);
+    $("#emailaddress1").prop('disabled', true);
+    $("#ndph_countrycodemobilenew").prop('disabled', true);
+    $("#ndph_countrycodemobilenew_name").parent().find('.input-group-btn').hide();
+    $("#mobilephone").prop('disabled', true);
+    $("#ndph_dateofbirth_datepicker_description").parent().find('.form-control').prop('disabled', true);
+    $("#ndph_dateofbirth").parent().find('.input-group-addon').hide();
+    $("#ndph_sex").prop('disabled', true);
+    $("#ndph_countryofbirth").prop('disabled', true);
+    $("#ndph_citizenship").prop('disabled', true);
+    // Disable home address fields
+    $("#address1_line1").prop('disabled', true);
+    $("#ndph_country").prop('disabled', true);
+    $("#ndph_country_name").parent().find('.input-group-btn').hide();
+    $("#address1_postalcode").prop('disabled', true); 
+    $("#ndph_state").prop('disabled', true);
+    $("#ndph_state_name").parent().find('.input-group-btn').hide(); 
+    $("#address1_stateorprovince").prop('disabled', true); 
+    $("#ndph_addressnotshownonthelist").prop('disabled', true);
+    $("#address1_city").prop('disabled', true);  
+    $("#ndph_city").prop('disabled', true);
+    $("#ndph_city_name").parent().find('.input-group-btn').hide(); 
+    $("#ndph_portalcityother").prop('disabled', true);
+    // Disable business address fields
+    $("#ndph_businessaddressishomeaddress").prop('disabled', true);
+    $("#ndph_street1business").prop('disabled', true);
+    $("#ndph_mequestion11").prop('disabled', true);
+    $("#ndph_mequestion11_name").parent().find('.input-group-btn').hide();  
+    $("#ndph_mequestion12").prop('disabled', true);
+    $("#ndph_mequestion12_name").parent().find('.input-group-btn').hide(); 
+    $("#ndph_mequestion13").prop('disabled', true);
+    $("#ndph_mequestion13_name").parent().find('.input-group-btn').hide();  
+    $("#ndph_mequestion14").prop('disabled', true);
+    $("#ndph_statebusinessothers").prop('disabled', true);
+    $("#ndph_citybusinessothers").prop('disabled', true);
+    $("#ndph_addressnotshownonthelistbusiness").prop('disabled', true);
+    $("#ndph_portalcityotherbusiness").prop('disabled', true);
+    // Disable dietary info fields
+    $("#ndph_foodallergies").prop('disabled', true);
 
     // Set School
     updateSchool();
-    // Append HTML
 
-    // Set Program fields
-    toggleProgramType();
-
-    // Mark Program fields as required
-    $("#ndph_program_label").parent().attr("class", "info required");
-    $("#ndph_seellopenprograms_label").parent().attr("class", "info required");
-
-    // Resize Program fields
-    $("#ndph_program").parent().parent().attr("colspan","2");
-    $("#ndph_program").parent().css("width","100%");
-    $("#ndph_seellopenprograms").parent().parent().attr("colspan","2");
-    $("#ndph_seellopenprograms").parent().css("width","100%");
+    // Add class to adjust top padding on mobile field
+    $("input#mobilephone.text.form-control").closest("td").css("padding-top", "26px");
 
     // Resize State/City fields
     $("#ndph_country").parent().parent().parent().attr("colspan","2");          // Home Address
@@ -1046,42 +361,17 @@ function appendHTML(){
     $("#ndph_mequestion13").parent().css("width","100%");
     $("#ndph_citybusinessothers").parent().parent().attr("colspan","2");
 
-    // Initialize Address fields
-    initializeHomeAddress();
-    initializeBusinessAddress();
+    // Initialize Address (Other) fields
+    toggleStateOtherHome();
+    toggleCityOtherHome();
+    toggleStateBusiness();
+    toggleCityBusiness();
 
-    // Hide Dietary Preference (Others) and PWD ID
-    $(".section[data-name='dietary_information_section']").closest("fieldset").hide();
-    $(".section[data-name='pwd_section']").closest("fieldset").hide();
-    
+    // Initialize Dietary Preference (Others)
+    toggleDietaryPreference();
 
-    // FUNCTIONS TO EXECUTE ON FIELD CHANGE:
-    // Update School field);
+    // Update School field
     $("#ndph_program").change(updateSchool);
     $("#ndph_school").change(updateSchool);
-    $("#ndph_seellopenprograms").change(updateSchool);
-    $("#ndph_programtypeapplication").change(updateSchool);
-    // Update program fields
-    $("#ndph_programtypeapplication").change(toggleProgramType);
-    // Update Business Address section
-    $("#ndph_businessaddressishomeaddress").change(toggleBusinessIsHomeAddress);    // Toggle Business Address
-    // Update Home Address fields
-    $("#ndph_country").change(toggleStateHome);
-    $("#ndph_state").change(toggleCityHome);
-    $("#address1_stateorprovince").change(toggleCityHome);
-    $("#ndph_addressnotshownonthelist").change(toggleStateOtherHome);
-    $("#ndph_addressnotshownonlist_city").change(toggleCityOtherHome);
-    // Update Business Address fields
-    $("#ndph_mequestion11").change(toggleStateBusiness);
-    $("#ndph_mequestion12").change(toggleCityBusiness);
-    $("#ndph_statebusinessothers").change(toggleCityBusiness);
-    $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);
-    $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
-
-    //call appendHTML function
-    appendHTML()
-    $("ndph_programtypeapplication").change(appendHTML)
-
-
 
 });
