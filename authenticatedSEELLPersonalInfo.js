@@ -23,35 +23,34 @@
             .attr('id', 'seellinstruction')
             .append('<p>Fill out the Enrollment Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">SEELL@aim.edu</a>.</p>')
             .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
-            .append('<p><a href = "https://aimdevelopmentportal.powerappsportals.com/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
+            .append('<p><a href = "/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
 
             .append('<p><i>* - Required fields.</i></p>')
             .insertAfter('.page-header');
 
         // edit css
-        $("#enrollmentprocess").attr("onclick", "return !window.open(this.href, undefined, 'width=800,height=600')");
         $("a#enrollmentprocess").css( { "color" : "blue", "text-decoration" : "underline" });
-        $("a#recruitmentEmail").css( { "color" : "purple", "font-weight" : "500" } );
+        $("a#recruitmentEmail").css( { "color" : "blue" } );
 
         // Append update applicant info instruction
         $('<div>')
         .addClass('updateApplicantInfo')
         .attr('id', 'updateApplicantInfo')
-        .append('<p>To update this section, go to My Profile > <a href = "https://aimdevelopmentportal.powerappsportals.com/profile/">My Information</a>.</p>')
+        .append('<p>To update this section, go to My Profile > <a href = "/profile/">My Information</a>.</p>')
         .insertBefore('[data-name="seell_personal_information"]');
 
         // Append update home address instruction
         $('<div>')
         .addClass('updateHomeAddressInstruction')
         .attr('id', 'updateHomeAddressInstruction')
-        .append('<p>To update this section, go to My Profile > <a href = "https://aimdevelopmentportal.powerappsportals.com/profile/address/">Address</a>.</p>')
+        .append('<p>To update this section, go to My Profile > <a href = "/profile/address/">Address</a>.</p>')
         .insertBefore('[data-name="seell_home_address"]');
 
         // Append update business address instruction
         $('<div>')
         .addClass('updateBusinessAddressInstruction')
         .attr('id', 'updateBusinessAddressInstruction')
-        .append('<p>To update this section, go to My Profile > <a href = "https://aimdevelopmentportal.powerappsportals.com/profile/address/">Address</a>.</p>')
+        .append('<p>To update this section, go to My Profile > <a href = "/profile/address/">Address</a>.</p>')
         .insertBefore('[data-name="business_address"]');
             
         // FUNCTION DECLARATIONS
@@ -75,13 +74,6 @@
 
     function toggleBusinessIsHomeAddress() {
         var businessIsHome = $("#ndph_businessaddressishomeaddress").prop("checked");
-        var stateBusiness = $("#ndph_mequestion12");
-        var stateOtherBusiness = $("#ndph_statebusinessothers");
-        var cityBusiness = $("ndph_mequestion13");
-        var cityOtherBusiness = $("#citybusinessothers");
-        var toggleStateOther = $("#ndph_addressnotshownonthelistbusiness").prop("checked");
-        var toggleCityOther = $("#ndph_addressnotshownonlist_citybusiness").prop("checked");
-
         
         if (businessIsHome) {
             // Unbind enable/disable functions for Business Address
@@ -107,9 +99,11 @@
             // $("#address1_city").prop("disabled", false);
             // $("#ndph_addressnotshownonlist_city").prop("disabled", false);
 
-            // //enable business fields
+            //enable business fields
+            // $("#ndph_mequestion11").prop("disabled", false);
             // $("#ndph_mequestion12").prop("disabled", false);
             // $("#ndph_mequestion13").prop("disabled", false);
+            // $("#ndph_mequestion14").prop("disabled", false);
             // $("#ndph_statebusinessothers").prop("disabled", false);
             // $("#ndph_citybusinessothers").prop("disabled", false);
             // $("#ndph_addressnotshownonthelistbusiness").prop("disabled", false);
@@ -131,22 +125,12 @@
             $("#ndph_city").change(mirrorHomeAddress);
             $("#address1_city").change(mirrorHomeAddress);
             $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
-
-            // initializeBusinessAddress()
             
-            // if(toggleStateOther) {
-            //     $("#ndph_statebusinessothers").parent().parent().show();                                // Hide State (Other)
-            //     $("#ndph_mequestion12").parent().parent().hide();  
-            //     $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
-            //     $("#ndph_mequestion13").parent().parent().hide();  
-            // }
-
-            // if(toggleCityOther) {
-            //     $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
-            //     $("#ndph_mequestion13").parent().parent().hide(); 
-            // }
-  
-
+            //show/hide fields
+            $("#ndph_statebusinessothers").parent().parent().parent().show();                                // Hide State (Other)
+            $("#ndph_mequestion12").parent().parent().parent().hide();   
+            $("#ndph_citybusinessothers").parent().parent().parent().show();                                 // Hide City (Other)
+            $("#ndph_mequestion13").parent().parent().parent().hide();    
             // Hide Business Address section
             // $(".section[data-name='seell_business_address']").closest("fieldset").hide();
         }
@@ -301,31 +285,31 @@
             stateHome.parent().css("display", "table");
             stateHome.parent().css("width", "100%");
             // Enable State (Other)
-            // stateOtherHome.prop("disabled", false);
+            stateOtherHome.prop("disabled", false);
             // Enable "Other" checkbox
-            // checkedStateOtherHome.prop("disabled", false);
+            checkedStateOtherHome.prop("disabled", false);
         }
-        else {
+        else if (!countryHome) {
             // Disable State
-            // stateHome.prop("disabled", true);
+            stateHome.prop("disabled", true);
             stateHome.parent().find(".input-group-btn").hide();
             stateHome.parent().css("display", "block");
             // Disable State (Other)
-            // stateOtherHome.prop("disabled", true);
+            stateOtherHome.prop("disabled", true);
             // Disable "Others" checkbox
-            // checkedStateOtherHome.prop("disabled", true);
+            checkedStateOtherHome.prop("disabled", true);
             // Update (Other) visibility 
             stateOtherHomeField.hide();
             stateHomeField.show();
             
             // Disable City
-            // cityHome.prop("disabled", true);
+            cityHome.prop("disabled", true);
             cityHome.parent().find(".input-group-btn").hide();
             cityHome.parent().css("display", "block");
             // Disable City (Other)
-            // cityOtherHome.prop("disabled", true);
+            cityOtherHome.prop("disabled", true);
             // Disable "Others" checkbox
-            // checkedCityOtherHome.prop("disabled", true);
+            checkedCityOtherHome.prop("disabled", true);
             checkedCityOtherHome.parent().parent().parent().hide();
             // Update (Other) visibility 
             cityOtherHomeField.hide();
@@ -346,39 +330,39 @@
         var cityOtherHomeField = $("#address1_city").parent().parent();
 
         // Clear City
-        // cityHome.val("");
-        // cityHomeName.val("");
-        // cityHomeEntity.val("");
+        cityHome.val("");
+        cityHomeName.val("");
+        cityHomeEntity.val("");
         // Clear City (Other)
-        // cityOtherHome.val("");
+        cityOtherHome.val("");
         // Untick City "Others" checkbox if State "Others" is not ticked
         if (checkedStateOtherHome.prop("checked")) {
-            // checkedCityOtherHome.prop("checked", false);
+            checkedCityOtherHome.prop("checked", true);
         }
 
         if (stateHome || stateOtherHome) {
             // Enable City
-            // cityHome.prop("disabled", false);
+            cityHome.prop("disabled", false);
             cityHome.parent().find(".input-group-btn").show();
             cityHome.parent().css("display", "table");
             cityHome.parent().css("width", "100%");
             // Enable City (Other)
-            // cityOtherHome.prop("disabled", false);
+            cityOtherHome.prop("disabled", false);
             if (stateHome && !checkedStateOtherHome.prop("checked")) {
                 // Enable "Others" checkbox only if State is populated and not locked to "Other"
-                // checkedCityOtherHome.prop("disabled", false);
+                checkedCityOtherHome.prop("disabled", false);
                 checkedCityOtherHome.parent().parent().parent().show();
             }
         }
         else {
             // Disable City
-            // cityHome.prop("disabled", true);
+            cityHome.prop("disabled", true);
             cityHome.parent().find(".input-group-btn").hide();
             cityHome.parent().css("display", "block");
             // Disable City (Other)
-            // cityOtherHome.prop("disabled", true);
+            cityOtherHome.prop("disabled", true);
             // // Disable "Others" checkbox
-            // checkedCityOtherHome.prop("disabled", true);
+            checkedCityOtherHome.prop("disabled", true);
             checkedCityOtherHome.parent().parent().parent().hide();
             // Update (Other) visibility 
             cityOtherHomeField.hide();
@@ -406,20 +390,21 @@
             stateHomeField.hide();
             stateOtherHomeField.show();
             // Lock City to Other
-            // checkedCityOtherHome.prop("disabled", true);
+            checkedCityOtherHome.prop("disabled", false);
             checkedCityOtherHome.parent().parent().parent().hide();
             checkedCityOtherHome.prop("checked", true);
             // Disable City (Other) until State is filled in
-            // cityOtherHome.prop("disabled", true);
+            cityOtherHome.prop("disabled", false);
         }
-        else {
+        else if (!checkedStateOtherHome.prop("checked")) {
             stateOtherHome.val("");
             stateOtherHomeField.hide();
             stateHomeField.show();
             // Reset "Other" checkbox for City
-            // checkedCityOtherHome.prop("checked", false);
+            checkedCityOtherHome.prop("checked", false);
             // Disable City until State is filled in
-            // cityHome.prop("disabled", true);
+            cityHome.prop("disabled", true);
+            checkedCityOtherHome.parent().parent().parent().show();
             cityHome.parent().find(".input-group-btn").hide();
             cityHome.parent().css("display", "block");
         }
@@ -436,14 +421,14 @@
         var cityOtherHomeField = cityOtherHome.parent().parent();
 
         if (checkedCityOtherHome.prop("checked")) {
-            // cityHome.val("");
-            // cityHomeName.val("");
-            // cityHomeEntity.val("");
+            cityHome.val("");
+            cityHomeName.val("");
+            cityHomeEntity.val("");
             cityHomeField.hide();
             cityOtherHomeField.show();
         }
         else {
-            // cityOtherHome.val("");
+            cityOtherHome.val("");
             cityOtherHomeField.hide();
             cityHomeField.show();
         }
@@ -465,26 +450,26 @@
 
         if (!countryHome) {
             // Disable State
-            // stateHome.prop("disabled", true);
+            stateHome.prop("disabled", true);
             stateHome.parent().find(".input-group-btn").hide();
             stateHome.parent().css("display", "block");
             // Disable and hide State (Other)
-            // stateOtherHome.prop("disabled", true);
+            stateOtherHome.prop("disabled", true);
             stateOtherHomeField.hide();
             // Reset and disable "Other" checkbox for State
             checkedStateOtherHome.prop("checked", false);
-            // checkedStateOtherHome.prop("disabled", true);
+            checkedStateOtherHome.prop("disabled", true);
             // Disable City
             cityHome.prop("disabled", true);
             cityHome.parent().find(".input-group-btn").hide();
             cityHome.parent().css("display", "block");
             // Disable and hide City (Other)
-            // cityOtherHome.prop("disabled", true);
+            cityOtherHome.prop("disabled", true);
             cityOtherHomeField.hide();
             // Reset and disable "Other" checkbox for City 
             checkedCityOtherHome.prop("checked", false);
-            // checkedCityOtherHome.prop("disabled", true);
-            checkedCityOtherHome.parent().parent().parent().hide();
+            checkedCityOtherHome.prop("disabled", true);
+            // checkedCityOtherHome.parent().parent().parent().hide();
         }
         else if (checkedStateOtherHome.prop("checked")) {
             // Hide State
@@ -492,8 +477,9 @@
             // Hide City
             cityHomeField.hide();
             // Reset and disable "Other" checkbox for City 
-            checkedCityOtherHome.prop("checked", false);
-            // checkedCityOtherHome.prop("disabled", true);
+            checkedCityOtherHome.prop("checked", true);
+            // checkedCityOtherHome.prop("checked", false); // this command removes the check from the checkbox
+            checkedCityOtherHome.prop("disabled", false);
             checkedCityOtherHome.parent().parent().parent().hide();
             if (!stateHome) {
                 // Disable City
@@ -503,7 +489,7 @@
             }
             if (!stateOtherHome) {
                 // Disable City (Other)
-                // cityOtherHome.prop("disabled", true);
+                cityOtherHome.prop("disabled", true);
             }
         }
         else if (!stateHome || !stateOtherHome) {
@@ -514,7 +500,7 @@
             cityHome.parent().find(".input-group-btn").hide();
             cityHome.parent().css("display", "block");
             // Disable and hide City (Other)
-            // cityOtherHome.prop("disabled", true);
+            cityOtherHome.prop("disabled", true);
             cityOtherHomeField.hide();
             // Untick and disable "Others"
             checkedCityOtherHome.prop("checked", false);
@@ -667,7 +653,7 @@
         var stateBusinessEntity = $("#ndph_mequestion12_entityname");
         var stateBusinessField = stateBusiness.parent().parent().parent();
         var stateOtherBusiness = $("#ndph_statebusinessothers");
-        var stateOtherBusinessField = stateOtherBusiness.parent().parent()
+        var stateOtherBusinessField = stateOtherBusiness.parent().parent();
         
         var cityBusiness = $("#ndph_mequestion13");
         var cityOtherBusiness = $("#ndph_citybusinessothers");
@@ -709,14 +695,14 @@
         var cityOtherBusinessField = cityOtherBusiness.parent().parent();
 
         if (checkedCityOtherBusiness.prop("checked")) {
-            // cityBusiness.val("");
-            // cityBusinessName.val("");
-            // cityBusinessEntity.val("");
+            cityBusiness.val("");
+            cityBusinessName.val("");
+            cityBusinessEntity.val("");
             cityBusinessField.hide();
             cityOtherBusinessField.show();
         }
         else {
-            // cityOtherBusiness.val("");
+            cityOtherBusiness.val("");
             cityOtherBusinessField.hide();
             cityBusinessField.show();
         }
@@ -739,33 +725,36 @@
         var cityOtherBusiness = $("#ndph_citybusinessothers");
         var cityOtherBusinessField = cityOtherBusiness.parent().parent();
 
+
         // checkboxes
         var toggleStateOther = $("#ndph_addressnotshownonthelistbusiness").prop("checked");
         var toggleCityOther = $("#ndph_addressnotshownonlist_citybusiness").prop("checked");
 
-        if (businessIsHome) {
-            // $(".section[data-name='seell_business_address']").closest("fieldset").hide();
-            if(toggleStateOther) {
-                $("#ndph_statebusinessothers").parent().parent().show();                                // Hide State (Other)
-                $("#ndph_mequestion12").parent().parent().hide();  
-                $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
-                $("#ndph_mequestion13").parent().parent().hide();   
-            } else if (!toggleStateOther) {
-                $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
-                $("#ndph_mequestion12").parent().parent().show();  
-                // $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
-                // $("#ndph_mequestion13").parent().parent().hide();   
-            }
+        // if (businessIsHome) {
+        //     // alert("nasa if");
+        //     // toggleBusinessIsHomeAddress();
+        //     // $(".section[data-name='seell_business_address']").closest("fieldset").hide();
+        //     if(toggleStateOther) {
+        //         $("#ndph_statebusinessothers").parent().parent().show();                                // Hide State (Other)
+        //         $("#ndph_mequestion12").parent().parent().parent().hide();  
+        //         $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
+        //         $("#ndph_mequestion13").parent().parent().parent().hide();   
+        //     } else if (!toggleStateOther) {
+        //         $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
+        //         $("#ndph_mequestion12").parent().parent().parent().show();  
+        //         // $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
+        //         // $("#ndph_mequestion13").parent().parent().hide();   
+        //     }
 
-            if(toggleCityOther) {
-                $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
-                $("#ndph_mequestion13").parent().parent().parent().hide(); 
-            } else if(!toggleCityOther) {
-                $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
-                $("#ndph_mequestion13").parent().parent().parent().show(); 
-            }
-        }
-        else if (!countryBusiness) {
+        //     if(toggleCityOther) {
+        //         $("#ndph_citybusinessothers").parent().parent().show();                                 // Hide City (Other)
+        //         $("#ndph_mequestion13").parent().parent().parent().hide(); 
+        //     } else if(!toggleCityOther) {
+        //         $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
+        //         $("#ndph_mequestion13").parent().parent().parent().show(); 
+        //     }
+        // }
+        if (!countryBusiness) {
             // Disable State
             stateBusiness.prop("disabled", true);
             stateBusiness.parent().find(".input-group-btn").hide();
@@ -793,11 +782,11 @@
             // Hide City
             cityBusinessField.hide();
             // Reset and disable "Other" checkbox for City 
-            checkedCityOtherBusiness.prop("checked", false);
-            checkedCityOtherBusiness.prop("disabled", true);
+            checkedCityOtherBusiness.prop("checked", true);
+            checkedCityOtherBusiness.prop("disabled", false);
             if (!stateBusiness) {
                 // Disable City
-                cityBusiness.prop("disabled", true);
+                // cityBusiness.prop("disabled", true);
                 cityBusiness.parent().find(".input-group-btn").hide();
                 cityBusiness.parent().css("display", "block");
             }
@@ -1029,7 +1018,8 @@
         $("#address1_city").prop('disabled', true);  
         $("#ndph_city").prop('disabled', true);
         $("#ndph_city_name").parent().find('.input-group-btn').hide(); 
-        $("#ndph_addressnotshownonlist_city").prop('disabled', true);
+        $("#ndph_addressnotshownonlist_city").prop('disabled', false);
+        $("#ndph_addressnotshownonlist_city").parent().parent().parent().hide();
         // Disable business address fields
         $("#ndph_businessaddressishomeaddress").prop('disabled', true);
         $("#ndph_street1business").prop('disabled', true);
@@ -1043,7 +1033,8 @@
         $("#ndph_statebusinessothers").prop('disabled', true);
         $("#ndph_citybusinessothers").prop('disabled', true);
         $("#ndph_addressnotshownonthelistbusiness").prop('disabled', true);
-        $("#ndph_addressnotshownonlist_citybusiness").prop('disabled', true);
+        $("#ndph_addressnotshownonlist_citybusiness").prop('disabled', false);
+        $("#ndph_addressnotshownonlist_citybusiness").parent().parent().parent().hide();
 
 
         // Hide metadata fields
@@ -1086,7 +1077,7 @@
         // Update School field);
         $("#ndph_program").change(updateProgram);
 
-
+ 
         // Update Business Address section
         $("#ndph_businessaddressishomeaddress").change(toggleBusinessIsHomeAddress);    // Toggle Business Address
         // Update Home Address fields
@@ -1101,6 +1092,12 @@
         $("#ndph_statebusinessothers").change(toggleCityBusiness);
         $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);
         $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
-
-
+        
+        // activate checkbox
+        $("#ndph_addressnotshownonthelist").prop("disabled", false);
+        $("#ndph_addressnotshownonthelist").parent().parent().parent().hide();
+        $("#ndph_addressnotshownonlist_city").prop("disabled", false);
+        $("#ndph_addressnotshownonlist_city").parent().parent().parent().hide();
+        $("#ndph_addressnotshownonthelistbusiness").prop("disabled", false);
+        $("#ndph_addressnotshownonlist_citybusiness").parent().parent().parent().hide();
     });

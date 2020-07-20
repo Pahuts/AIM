@@ -1,5 +1,22 @@
 $(document).ready(function() {
-
+    // Show/hide sections on load
+    if($("#ndph_addresssameas").val() == "" || "649840002") {
+           var homeAddress = $(".section[data-name='blling_information_home_address_section']").closest("fieldset");
+           var businessAddress = $(".section[data-name='blling_information_business_address_section']").closest("fieldset");
+           var billingAddress = $(".section[data-name='blling_information_billing_address_section']").closest("fieldset");
+            // only show billing address
+            homeAddress.hide();
+            businessAddress.hide();
+            billingAddress.show();
+    } else if($("#ndph_addresssameas").val() == "649840000") {
+        homeAddress.show();
+        businessAddress.hide();
+        billingAddress.hide();
+    } else if($("#ndph_addresssameas").val() == "649840001") {
+        homeAddress.hide();
+        businessAddress.show();
+        billingAddress.hide();
+    }
 
     function updateAddressSections() { //hide addresses
            var addressType = $("#ndph_addresssameas").val();
@@ -18,83 +35,91 @@ $(document).ready(function() {
    
            switch (addressType) {
                case "649840000":
-
                    homeAddress.show();
                    businessAddress.hide();
                    clearBillingAddress();
                    billingAddress.hide();
                     
-                    $("#ndph_countrybilling").off("change", toggleStateBilling);     // Country
-                    $("#ndph_statebilling").off("change", toggleCityBilling);      // State
-                    $("#ndph_stateotherbilling").off("change", toggleCityBilling);       // State (Others)
-                    $("#ndph_statenotshownlist").off("change", toggleStateOtherBilling);        // State "Others" checkbox
-                    $("#ndph_citynotshownonlist").off("change", toggleCityOtherBilling);       // City "Others" checkbox
+                    // $("#ndph_countrybilling").off("change", toggleStateBilling);     // Country
+                    // $("#ndph_statebilling").off("change", toggleCityBilling);      // State
+                    // $("#ndph_stateotherbilling").off("change", toggleCityBilling);       // State (Others)
+                    // $("#ndph_statenotshownlist").off("change", toggleStateOtherBilling);        // State "Others" checkbox
+                    // $("#ndph_citynotshownonlist").off("change", toggleCityOtherBilling);       // City "Others" checkbox
                         // enable billing address fields
-                        $("#ndph_countrybilling").prop("disabled", false);
-                        $("#ndph_statebilling").prop("disabled", false);
-                        $("#ndph_citybilling").prop("disabled", false);
-                        $("#ndph_statenotshownlist").prop("disabled", false);
-                        $("#ndph_citynotshownonlist").prop("disabled", false);
-                        $("#ndph_stateotherbilling").prop("disabled", false);
-                        $("#ndph_cityotherbilling").prop("disabled", false);
+                    $("#ndph_countrybilling").prop("disabled", false);
+                    $("#ndph_statebilling").prop("disabled", false);
+                    $("#ndph_citybilling").prop("disabled", false);
+                    $("#ndph_statenotshownlist").prop("disabled", false);
+                    $("#ndph_citynotshownonlist").prop("disabled", false);
+                    $("#ndph_stateotherbilling").prop("disabled", false);
+                    $("#ndph_cityotherbilling").prop("disabled", false);
                         // copy home address
-                            $("#ndph_citynotshownonlist").prop("checked", homeCityNotOnList);
-                            $("#ndph_cityotherbilling").val(homeCityOthers);
-                            $("#ndph_citybilling").val(homeCity);
-                            $("#ndph_citybilling_name").val(homeCityName);
-                            $("#ndph_citybilling_entityname").val("ndph_city");   
+                    $("#ndph_citynotshownonlist").prop("checked", homeCityNotOnList);
+                    $("#ndph_cityotherbilling").val(homeCityOthers);
+                    $("#ndph_citybilling").val(homeCity);
+                    $("#ndph_citybilling_name").val(homeCityName);
+                    $("#ndph_citybilling_entityname").val("ndph_city");   
                    break;
 
                case "649840001":
                 clearBillingAddress();        
-                   homeAddress.hide();
-                   businessAddress.show();
-                   $("#ndph_countrybilling").off("change", toggleStateBilling);     // Country
-                   $("#ndph_statebilling").off("change", toggleCityBilling);      // State
-                   $("#ndph_stateotherbilling").off("change", toggleCityBilling);       // State (Others)
-                   $("#ndph_statenotshownlist").off("change", toggleStateOtherBilling);        // State "Others" checkbox
-                   $("#ndph_citynotshownonlist").off("change", toggleCityOtherBilling);       // City "Others" checkbox
-                       // enable billing address fields
-                       $("#ndph_countrybilling").prop("disabled", false);
-                       $("#ndph_statebilling").prop("disabled", false);
-                       $("#ndph_citybilling").prop("disabled", false);
-                       $("#ndph_statenotshownlist").prop("disabled", false);
-                       $("#ndph_citynotshownonlist").prop("disabled", false);
-                       $("#ndph_stateotherbilling").prop("disabled", false);
-                       $("#ndph_cityotherbilling").prop("disabled", false);
+                homeAddress.hide();
+                businessAddress.show();
+                // $("#ndph_countrybilling").off("change", toggleStateBilling);     // Country
+                // $("#ndph_statebilling").off("change", toggleCityBilling);      // State
+                // $("#ndph_stateotherbilling").off("change", toggleCityBilling);       // State (Others)
+                // $("#ndph_statenotshownlist").off("change", toggleStateOtherBilling);        // State "Others" checkbox
+                // $("#ndph_citynotshownonlist").off("change", toggleCityOtherBilling);       // City "Others" checkbox
+                    // enable billing address fields
+                $("#ndph_countrybilling").prop("disabled", false);
+                $("#ndph_statebilling").prop("disabled", false);
+                $("#ndph_citybilling").prop("disabled", false);
+                $("#ndph_statenotshownlist").prop("disabled", false);
+                $("#ndph_citynotshownonlist").prop("disabled", false);
+                $("#ndph_stateotherbilling").prop("disabled", false);
+                $("#ndph_cityotherbilling").prop("disabled", false);
                        // copy business address
-                            $("#ndph_citynotshownonlist").prop("checked", businessCityNotOnList);
-                            $("#ndph_cityotherbilling").val(businessCityOthers);
-                            $("#ndph_citybilling").val(businessCity);
-                            $("#ndph_citybilling_name").val(businessCityName);
-                            $("#ndph_citybilling_entityname").val("ndph_city");                     
-                   billingAddress.hide();
-                   break;
+                $("#ndph_citynotshownonlist").prop("checked", businessCityNotOnList);
+                $("#ndph_cityotherbilling").val(businessCityOthers);
+                $("#ndph_citybilling").val(businessCity);
+                $("#ndph_citybilling_name").val(businessCityName);
+                $("#ndph_citybilling_entityname").val("ndph_city");                     
+                billingAddress.hide();
+                break;
+
                case "649840002":
                 clearBillingAddress();
-                initializeBillingAddress();
-                $("#ndph_countrybilling").change(toggleStateBilling);     // Country
-                $("#ndph_statebilling").change(toggleCityBilling);      // State
-                $("#ndph_stateotherbilling").change(toggleCityBilling);       // State (Others)
-                $("#ndph_statenotshownlist").change(toggleStateOtherBilling);        // State "Others" checkbox
-                $("#ndph_citynotshownonlist").change(toggleCityOtherBilling);       // City "Others" checkbox
-                    homeAddress.hide();
-                    businessAddress.hide();
-                    billingAddress.show();
-                    break;
+                // initializeBillingAddress();
+                //activate fields
+                toggleStateBilling();
+                $("#ndph_citynotshownonlist").prop("disabled", false);
+                // $("#ndph_countrybilling").change(toggleStateBilling);     // Country
+                // $("#ndph_statebilling").change(toggleCityBilling);      // State
+                // $("#ndph_stateotherbilling").change(toggleCityBilling);       // State (Others)
+                // $("#ndph_statenotshownlist").change(toggleStateOtherBilling);        // State "Others" checkbox
+                // $("#ndph_citynotshownonlist").change(toggleCityOtherBilling);       // City "Others" checkbox
+                // hide fields
+                businessAddress.hide();
+                homeAddress.hide();
+                billingAddress.show();
+                break;
+
                default:
                 clearBillingAddress();
-                initializeBillingAddress();
-                $("#ndph_countrybilling").change(toggleStateBilling);     // Country
-                $("#ndph_statebilling").change(toggleCityBilling);      // State
-                $("#ndph_stateotherbilling").change(toggleCityBilling);       // State (Others)
-                $("#ndph_statenotshownlist").change(toggleStateOtherBilling);        // State "Others" checkbox
-                $("#ndph_citynotshownonlist").change(toggleCityOtherBilling);       // City "Others" checkbox
-                    // clear billing address values
-                        homeAddress.hide();
-                        businessAddress.hide();
-                        billingAddress.show();
-                        break;
+                // activate fields
+                // initializeBillingAddress();
+                toggleStateBilling();
+                // $("#ndph_countrybilling").change(toggleStateBilling);     // Country
+                // $("#ndph_statebilling").change(toggleCityBilling);      // State
+                // $("#ndph_stateotherbilling").change(toggleCityBilling);       // State (Others)
+                // $("#ndph_statenotshownlist").change(toggleStateOtherBilling);        // State "Others" checkbox
+                // $("#ndph_citynotshownonlist").change(toggleCityOtherBilling);       // City "Others" checkbox
+                // show and hide address sections
+                homeAddress.hide();
+                businessAddress.hide();
+                billingAddress.show();
+
+                break;
            }
        }
    
@@ -188,7 +213,7 @@ $(document).ready(function() {
                cityOtherBilling.prop("disabled", false);
                if (stateBilling) {
                    // Enable "Others" checkbox
-                   checkedCityOtherBilling.prop("disabled", false);
+                   checkedCityOtherBilling.show();
                }
            }
            else {
@@ -204,7 +229,7 @@ $(document).ready(function() {
                cityOtherBilling.prop("disabled", true);
                // Untick and disable "Others"
                // checkedCityOtherBilling.prop("checked", false);
-               checkedCityOtherBilling.prop("disabled", true);
+               checkedCityOtherBilling.hide();
                // Update (Other) visibility
                toggleCityOtherBilling();
            }
@@ -227,7 +252,7 @@ $(document).ready(function() {
                stateBillingField.hide();
                stateOtherBillingField.show();
                // Lock City to Other
-              $("#ndph_citynotshownonlist").prop("disabled", true);
+              $("#ndph_citynotshownonlist").prop("disabled", false);
               $("#ndph_citynotshownonlist").prop("checked", true);
            }
            else {
@@ -360,7 +385,7 @@ $(document).ready(function() {
                stateHomeField.hide();
                stateOtherHomeField.show();
                // Lock City to Other
-               checkedCityOtherHome.prop("disabled", true);
+               checkedCityOtherHome.prop("disabled", false);
                checkedCityOtherHome.prop("checked", true);
            }
            else {
@@ -492,7 +517,7 @@ $(document).ready(function() {
                stateBusinessField.hide();
                stateOtherBusinessField.show();
                // Lock City to Other
-               checkedCityOtherBusiness.prop("disabled", true);
+               checkedCityOtherBusiness.prop("disabled", false);
                checkedCityOtherBusiness.prop("checked", true);
            }
            else {
@@ -708,7 +733,7 @@ $(document).ready(function() {
            var cityBillingField = cityBilling.parent().parent().parent();
            var cityOtherBilling = $("#ndph_cityotherbilling");
            var cityOtherBillingField = cityOtherBilling.parent().parent();
-   
+        
            if (!countryBilling) {
                // Disable State
                stateBilling.prop("disabled", true);
@@ -729,7 +754,8 @@ $(document).ready(function() {
                cityOtherBillingField.hide();
                // Reset and disable "Other" checkbox for City 
                checkedCityOtherBilling.prop("checked", false);
-               checkedCityOtherBilling.prop("disabled", true);
+               checkedCityOtherBilling.parent().parent().parent().hide();
+               
            }
            else if (checkedStateOtherBilling.prop("checked")) {
                // Hide State
@@ -738,7 +764,7 @@ $(document).ready(function() {
                cityBillingField.hide();
                // Reset and disable "Other" checkbox for City 
                checkedCityOtherBilling.prop("checked", false);
-               checkedCityOtherBilling.prop("disabled", true);
+               checkedCityOtherBilling.hide();
                if (!stateBilling) {
                    // Disable City
                    cityBilling.prop("disabled", true);
@@ -762,7 +788,7 @@ $(document).ready(function() {
                cityOtherBillingField.hide();
                // Untick and disable "Others"
                checkedCityOtherBilling.prop("checked", false);
-               checkedCityOtherBilling.prop("disabled", true);
+               checkedCityOtherBilling.hide();
            }
            else if (checkedCityOtherBilling.prop("checked")) {
                // Hide State (Other)
@@ -862,7 +888,7 @@ $(document).ready(function() {
    
            // INITIALIZE FORM
        // Set default field and section visibility
-       updateAddressSections();
+       // updateAddressSections(); // don't run this onload
        updatePersonICOTraining();
        initializeHomeAddress();
        initializeBusinessAddress();

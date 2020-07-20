@@ -1,232 +1,243 @@
 $(document).ready(function() {
-    $("#ndph_school").parent().parent().hide();
-    // $("#ndph_seellopenprograms").parent().find('.input-group-btn').hide(); 
-    // $("#ndph_seellopenprograms").prop("disabled", true);
-    // autopopulate school
-        // var school = $("#ndph_school");
-        // var schoolName = $("#ndph_school_name");
-        // var schoolEntity = $("#ndph_school_entityname")
-        
-    //hide school
-    $("#ndph_school").parent().parent().parent().hide();
+    /*
+    dooddddddddddooooodk00000OxxkkkkOOOOOOOOOOkkkxxxddddooollccccc::cxOd:,,''''''cxOd:,ckOOOOxlccccccccccccccccccccccccccc::
+    dooddddddddddddddodkO0000kc;;;;:::ccclllllooodddddxOOkkkkOOOOOOkkOOkkxxddoooodkOd:,cxOOOOxlccccccccccccccccccccccccccc::
+    doodxxdddddddddddddkOOOOOkc'''''''',,,,'''',,''',,cxxl;::::cccccllloooodddxxxxkkd:,:xOOOOxlccccccccccccccccccccccccccc::
+    dddxxxdddddddddddddkOOOOOkc,'''''',,,'''''''''''',cxxc,''........''''''',,,;;cdkd:,:xOOOOxlccccccccccccccccccccccccccc::
+    xdodxxdddddddddddddkOOOOOkc,''''',,,''''''....''''cxxc'''..........''''''''',:dxd:,:xOOOOxocccccccccccccccccccccccccccc:
+    xddxxxxxxxdddddddddkOOOOOkc,'''',,,''''......'''''cxxc'''.........'''''''''',:oxdc,:dOOOOkollccccccccccccldoccccccccccc:
+    xddxxxxxxxxxxdddddxkOOOOOkc,'''''''''.......'''''':xxc'''......''''''''''''',:oxd:,:dOOOOxoolcccccccccccok0Oxlcccccccc::
+    xddxxxxxxxxxddddddxkOOOOOkc''''''''........'''''.':xxc''....'''''''''''''''',:oxd:;:dOOOxxOOkdlccccc::cok0000kocccccc:::
+    xxxxxxxxxxxxxxxxddxkOOOOOkc',,''''........''''...':xxc''''''''''''''''''''''':oxdc;:dOOOxk00Okxdlc::::lxOOkO00klccccc:::
+    xxxxxxxxxxxxxxxxxdxkOOOOOkc,,''''................':xxc''''''''''''''''''''''';oxdc;;oOOOxxO0OkOkdoc:::okO0OkO00xlcccccc:
+    xxxxxxxxxxxxxxxxxdxkOOOOOx:''''..................':dxc''''''''''''''''''''''';oxdc;;okOOkdxOOOOOOkdc:cxkkOkO000Odcccccc:
+    xxxxxxxxxxxxxxxxxdxkOxdl:;''.....................';dxc''''''''''''''''''''.'';lxdc;;okOOOxoxO0OOOkxxdokOxxkO0000klcccccc
+    xxxxxxxxxxxxxxxxdolc:,'...........................,dkc,,'''''''''''''''....'',lxdc;;okOOOkdlxO00OkxkOxoxkkkk0000klcccccc
+    xxxxxxxxxxxxxxdl:,'................................,:;'''''''.....'''.......',lxdc;;okOOOkdllokOOOkOOxoloxxdxkkxolcccccc
+    kkkxxxxxxxxxxo:,''.......................................................'''',lxdc;;okOOOkxollloxkkddkOxoxkdolcclllllccc
+    kkkkxxxxxxxxo;'''................,:cccc:;'..........'''..''''''''.......''''',lxxl;;okOOOkxooolllllcdOOOolk0Okdllllllccc
+    kkkkkxxxxxoc,''...............''':dxxxxxxl,,;,.....';;,,::;;;;;;;,,,,,''''',,,lkkl;;okOOOkxooollllllx0OOdclxOOOxllllllll
+    kkkkkkkxdc,''...........','..,:,,lxxxxxxxxl:oc''....,odoxkkkkkkkkxxxxxxdddoooodkkl;:okOOOkxoooolllllldkkdlcloddollllllll
+    kkkkkkko;'''.'''''''...'::'.,cc:lxxxkxxxxxddxlcc;.,:;,:::cccclllllooooodddddddxkkl;:okOOOkxoooollllolllollllllllllllllll
+    kkkkkkd:'''...'''''...':l,';cc;:ccclodxxxxxdoccc;''lo;'''''''''''''''',,,,,,,;lxkl::okOOOkxoooooloolllllllllllllllllllll
+    kkkkkxl,''...........,col::cc:::::;;;lxxxxoc:ccc:,.:dl'''..........'''''''''',cdxl::okOOOkxooooooooooollllllllllllllllll
+    kkkkkx:'''.........,:oxxdc::::::::::;:looc;;::::,',lxl,'''.......'''''''''''';cddl::okOOOOxoooooooooooolllllllllllllllll
+    kkkkkd;'''....''..':odolc,;oddxkxlcoo;,::;;ldl::,',okl,''......''''''''''''',;ldxl:cokOOOkxdoooooooooooollllllllllllllll
+    kkkkkd;'''.':cll:,',;;;;;,;oxk0Kkl:oo;cdxl:dOd::;',okl,''.....'''''''',,,,,,,;cdxl:cokOOOkxdooooooooooooooolllllllllllll
+    Okkkkd;''',cddoodl;:oddxdl;cdxxxxdddc;lxxo::lllc;';dkl,'''.''''''''''',,,,,,,;cdxl:cokOOOkxdoooooooooooooooooooollllllll
+    kkkkkd;'''coodoloolldxxxxxo::ccccccccldxxdccllll:,:dkl,'''''''''''''',,,,,,,,;cdxl:cokOOOkxdoooooooooooooooooooooollllll
+    OOkkOxc,',lddxdddodxxxxxxxxxxxxxxxxxxxxxxddodxxxl;:dkl,'''',,''''',,,,,,,,,,,,cdxo:cokOOOkxdooooooooooooooooooooooolllll
+    OOkkkkxc,,cdddxxdoxxxxxxxxxxxxxxxxxxxxxxoooodxxxo;:dkl,,,,,,,,,,,,,,,,,,,,,,,,cdxoccokOOOkxdooddodoooooooooooooooooooooo
+    OOkkkkkxl;,coooddoodxxxxxxxxxxxxxxxxxxxxxxxxxxxxo;:dko;,,,,,,,,,,,,,,,,,,;;;,,cdxoccokOOOkxddddddddooooooooooooooooooooo
+    OOOkkkkkkd;,:odooodxxxxxxxxxxxxxxxxdoolooooodxxxo;:dko;,,,,,,,,,,,,,,,;:cll:,,cdxoccoxOOOkxdddddddddddoooooooooooooooooo
+    OOOOOkkkkx:'',:cloodxxxxxxxxxxxxxxxo:::ccc:cdxxxl;:dko;,,,,,,,,,,,,:lodddoc;,,cdxoccoxOOOkxddddddddddddddooooooooooooooo
+    OOOOOOOkkocll,''',lxxddxxxxxxxxxxxxxdoooolldxxxd:,;dko;,,,,,,,,,,:oxxxxdl:,,,,cdxolcoxOOOkxdddddddddddddddoooooooooooooo
+    OOOOOkOkkkkkxc',,;dxxxddxxxxxxxxxxxxxxxdooxxxxxl,';dko;,,,,,,,';ldxxxdl;,,,,,,:dxdlcoxOOOkxdddddddddddddddddoooooooooooo
+    kkkkOOkkkkkkkdc:::dxxxxdddxxxxxxxxxxxxxxodxxxxo:;;:dko:;;,,,,,;oxxxxdc,,,,,,,,:dxdlclxOkkkxdooodddddddddddoodddddooooooo
+    kkkkkkkkkkxxdxddc:oxxxxxxxddddxxxxxxxxxxxxxxxdodxxxkOkxddddolldxxxxxocllccccc:codoccloddddddollcldddddddddoodddddddooooo
+    OOkkkkkxdxxkkO00xoxxxxxxxxxxxddddddxxxxxxxxxdc:llloxkxoooooodxxxxxxxdddddddddddddddddxxxxxxdoc::coddddddddddddddddddddoo
+    OOOkkkkocooooooolldddddddddxxxxxddddddddddddl;,,,,:dko;,;:oxxxxxxxxxxxxxxxxxxxxxxxxxddodddoolc:coddddddddddddddddddddddd
+    OOkkkkko:::;;;;;;:codxxxxxxddddxxxxxxdooloxkkxddlccdko;,;oxxxxxxxxxxxxxxxxxxxxxxddoooododdolcclddddddddddddddddddddddddd
+    OOOkkkko:::::::::;;:cldkO00OkxdddxxxxddddxO000000Okkkd:,cdxxxxxxxxxxxxxxxxxxxxxxxddddooloollloddddddddddddddddddddddolcl
+    OOkxkkkdllc::;::;;::;;:cdkOOkdoc:coxxxxxddO0000000000Okooxxxxxxxxxxxxxxxxxxxxxxxxdollooooddddxddddddddddddddddollodl:,,,
+    xxxddddodxxxdol:;::::;:;:lxdc;;;;;cdxxxxddO00000000000Oxdxxxxxxxxxxxxxxxxxxxxxxxxxdllodxkkkxxxdddxxdddddddddlc:,,::,''',
+    xxxxxxxxxdxkkkkdc:;::::;;;::;;;;;;:oxxxxxodxxkO0000000OddxxxxxxxxxxxxxxxxxxxxxxddolcldkkOOkxxxxxxdddddllllddl;,''''''',;
+    kkkkkkkkkkxdxkkkxoc:;;;;;;;;;;;;;;:oxxxxxddxddodkO0000kdxxxxxxxxxxxxxxxxxxxxdolooolllxkkOkkxxxxxxxdolc;'',;:;;,'''''',;;
+    odkkkkkkkkkxdxkkkkxoc;;;;;;;;;;;;;:lxxxxxxxxxdodxxk0Okddxxxxxxxxxxxxxxxxxdoc:;:oxdollxOOOkkxxxxxxxdc,'''''''''''',;;;;;;
+    xooxkkkkkkkkkxdxkkkkxl:;;;;;;;;;;;;lddddddddddxxkxxkxddxxxxxxxxxxxxxxxdlc;,,,,:oxdollxkkOOkxddoooll:;,''''''''''',;;;;;;
+    kkdodkkkkkkkkkxddkkkkkxdl:;;;;;;;;;lkOkkkkkOOkkkOkoodxxxxxxxxxxxxxxxoc;,,,,,,,:oxdlllxkkOkxolc:;,'',,''''''''''''',;;;;;
+    kkkxodkkkkkkkkkkddxkkkkkkxoc:;;;;;;;:ldxkOOkkkkkxddxxxxxxxxxxxxxxxdolc:;,,',,,:oxdlllxkkkkxlcc:;,;,'''''''''''',,,,;;;;,
+    kkkkxoxkkkkkkkkkkxddkkkkkkkxdl:;;;;;;;;:clloxkxdddxxxxxxxxxxxxxxxdoooxxdolcc:;:oxdlllxkkkkxlcccccc:,'''''''''',,,,;;;;,,
+    kkkkkddkkkkkkkkkkkkddkkkkkkkkkxoc:::;;;;;;;;ododxxxxxxxxxxxxxxxxdodkdoxkkkxdoc:lolcclxkkkkxlccccccc;;,''''',,,,,,,,,;;;,
+    xkkkkxoxkkkkkkkkkkkkddkkkkkkkkkkxdl::;;;;;;;cddxxxxxxxxxxxxxxxxxocldxdoxkkl;:ccc:,,,;:looddlccc:::::;,''''''',,,,,,,,;;,
+    dkkkkxooxkkkkkkkkkkkkddkkkkkkkkkkkkdl::;;;:odxxxxxxxxxxxxxxxxxxoc:;:lxooxx:;cloo:,,::;;,,,,,,;;;;:::;,''...''',,,,,,,,,,
+    kkkkkkxddddxkkkkkkkkkkddkkkkkkkkkkkxdolllloddddddddxxxxxxxxxxxdol::lxkxooo;:lool;':dxocclllc::;;,,,,,,,'''''''',,,,,,,,,
+    kkkxxxkkkxxddkkkkkkkkkxoxkkkkkkkkxddxxkkkkkkxxxxdddddddxxxxxxdooc:oxkkkdl:;cool:,,ldo:;:oollolodocccc:;;,,''''',,,,,,,,,
+    xddoodddxkkxddkkkkkkkkkddkkkkkkkdodkkkkkkkkkkkkkkkkkxdodxxxddolc:okkkkdoo:;lool;';od::::l:,::;ldl;:oxxxdolc;''''''',,'''
+$$$$$$\-------------------$$\-----$$\-------$$\--------------------------------------------------------------------------------$$$$\--
+\_$$--_|------------------$$-|----$$-|------\__|------------------------------------------------------------------------------$$--$$\-
+--$$-|---$$$$$$$\-------$$$$$$\---$$$$$$$\--$$\--$$$$$$$\--------$$$$$$\--------$$$$$$\$$$$\---$$$$$$\--$$$$$$\$$$$\---$$$$$$\\__/$$-|
+--$$-|--$$--_____|------\_$$--_|--$$--__$$\-$$-|$$--_____|-------\____$$\-------$$--_$$--_$$\-$$--__$$\-$$--_$$--_$$\-$$--__$$\--$$--|
+--$$-|--\$$$$$$\----------$$-|----$$-|--$$-|$$-|\$$$$$$\---------$$$$$$$-|------$$-/-$$-/-$$-|$$$$$$$$-|$$-/-$$-/-$$-|$$$$$$$$-|$$--/-
+--$$-|---\____$$\---------$$-|$$\-$$-|--$$-|$$-|-\____$$\-------$$--__$$-|------$$-|-$$-|-$$-|$$---____|$$-|-$$-|-$$-|$$---____|\__/--
+$$$$$$\-$$$$$$$--|--------\$$$$--|$$-|--$$-|$$-|$$$$$$$--|------\$$$$$$$-|------$$-|-$$-|-$$-|\$$$$$$$\-$$-|-$$-|-$$-|\$$$$$$$\-$$\---
+\______|\_______/----------\____/-\__|--\__|\__|\_______/--------\_______|------\__|-\__|-\__|-\_______|\__|-\__|-\__|-\_______|\__|--
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+    */
 
+    // ################################################################
+    // FUNCTION DECLARATIONS
+    // ################################################################
 
-    function autopopulateSchool() //autopopulates school
-    {
-        //DON'T FORGET THE HASHTAG!!!
+    // Update School based on Program; execute only after OData query returns "programs" variable
+    function updateSchool() {
         var school = $("#ndph_school");
         var schoolName = $("#ndph_school_name");
         var schoolEntity = $("#ndph_school_entityname");
-        //autopopulate school
-        school.val("f15b7ce7-0f17-ea11-a811-000d3a82bec6");
-        schoolName.val("School of Executive Education and Lifelong Learning");
-        schoolEntity.val("ndph_school");
+        var programID = $("#ndph_program");
 
-    }
-
-    //initiate function 
-    autopopulateSchool();
-
-    // Append program instructions
-    $('<div>')
-        .addClass('seellinstruction')
-        .attr('id', 'seellinstruction')
-        .append('<p>Fill out the Enrollment Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">SEELL@aim.edu</a>.</p>')
-        .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
-        .append('<p><a href = "/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
-
-        .append('<p><i>* - Required fields.</i></p>')
-        .insertAfter('.page-header');
-
-    // edit css
-    $("a#enrollmentprocess").css( { "color" : "blue", "text-decoration" : "underline" });
-    $("a#recruitmentEmail").css( { "color" : "blue" } );
-        
-    // FUNCTION DECLARATIONS
-
-    // Update School based on Program; execute only after OData query returns "programs" variable
-    // Update the program
-    function updateProgram() {
-        var seellProgram = $("#ndph_seellopenprograms");
-        var programID = seellProgram.val();  // Variable to track which program (Degree or SEELL) field should be evaluated based on Program Type
         // Get current program based on programID
         var currentProgram = {};
-        if (programID) {
+        if (programID.val()) {
+            // Search in "programs" array for corresponding program element
             currentProgram = programs.find(
                 function(program) {
-                    // Search in "programs" array for corresponding program element
-                    return program.ndph_programid == programID;
+                    return program.ndph_programid == programID.val();
                 }
             );
+            // Set School
+            school.val(currentProgram.ndph_school.Id);
+            schoolName.val(currentProgram.ndph_school.Name);
+            schoolEntity.val("ndph_school");
+        }
+        else {      // Triggers if a program has no school assigned or if corresponding program field is empty
+            school.val("");
+            schoolName.val("");
+            schoolEntity.val("");
+        }
     }
-}
 
-function toggleBusinessIsHomeAddress() {
-    var businessIsHome = $("#ndph_businessaddressishomeaddress").prop("checked");
-    
-    if (businessIsHome) {
-        // Unbind enable/disable functions for Business Address
-        $("#ndph_mequestion11").off("change", toggleStateBusiness);
-        $("#ndph_mequestion12").off("change", toggleCityBusiness);
-        $("#ndph_statebusinessothers").off("change", toggleCityBusiness);
-        $("#ndph_addressnotshownonthelistbusiness").off("change", toggleStateOtherBusiness);
-        $("#ndph_addressnotshownonlist_citybusiness").off("change", toggleCityOtherBusiness);
-
-        // Enable fields; needed to ensure fields are saved upon advancing form
-        $("#address1_line1").prop("disabled", false);
-        $("#address1_line2").prop("disabled", false);
-        $("#address1_line3").prop("disabled", false);
-        $("#ndph_country").prop("disabled", false);
-        $("#ndph_country_name").prop("disabled", false);
-        $("#ndph_postalzipcode").prop("disabled", false);
-        $("#ndph_state").prop("disabled", false);
-        $("#ndph_state_name").prop("disabled", false);
-        $("#address1_stateorprovince").prop("disabled", false);
-        $("#ndph_addressnotshownonthelist").prop("disabled", false);
-        $("#ndph_city").prop("disabled", false);
-        $("#ndph_city_name").prop("disabled", false);        
-        $("#address1_city").prop("disabled", false);
-        $("#ndph_addressnotshownonlist_city").prop("disabled", false);
-
-        // enable business fields
-        $("#ndph_mequestion11").prop("disabled", false);
-        $("#ndph_mequestion12").prop("disabled", false);
-        $("#ndph_mequestion13").prop("disabled", false);
-        $("#ndph_mequestion14").prop("disabled", false);
-        $("#ndph_statebusinessothers").prop("disabled", false);
-        $("#ndph_citybusinessothers").prop("disabled", false);
-        $("#ndph_addressnotshownonthelistbusiness").prop("disabled", false);
-        $("#ndph_addressnotshownonlist_citybusiness").prop("disabled", false);
-
-        // Set values for Business Address to Home Address
-        mirrorHomeAddress();
-
-        // Set Business Address to update on Home Address change
-        $("#address1_line1").change(mirrorHomeAddress);
-        $("#address1_line2").change(mirrorHomeAddress);
-        $("#address1_line3").change(mirrorHomeAddress);
-        $("#ndph_country").change(mirrorHomeAddress);
-        $("#ndph_country_name").change(mirrorHomeAddress);
-        $("#ndph_postalzipcode").change(mirrorHomeAddress);
-        $("#ndph_state").change(mirrorHomeAddress);
-        $("#address1_stateorprovince").change(mirrorHomeAddress);
-        $("#ndph_addressnotshownonthelist").change(mirrorHomeAddress);
-        $("#ndph_city").change(mirrorHomeAddress);
-        $("#address1_city").change(mirrorHomeAddress);
-        $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
+    function toggleBusinessIsHomeAddress() {
+        var businessIsHome = $("#ndph_businessaddressishomeaddress").prop("checked");
         
-        //show/hide fields
-        $("#ndph_statebusinessothers").parent().parent().parent().show();                                // Hide State (Other)
-        $("#ndph_mequestion12").parent().parent().parent().hide();   
-        $("#ndph_citybusinessothers").parent().parent().parent().show();                                 // Hide City (Other)
-        $("#ndph_mequestion13").parent().parent().parent().hide();    
-        // Hide Business Address section
-        $(".section[data-name='seell_business_address']").closest("fieldset").hide();
-    }
-    else {
-        // Clear "Same as home address" change event handlers for Business Address
-        $("#address1_line1").off("change", mirrorHomeAddress);
-        $("#address1_line2").off("change", mirrorHomeAddress);
-        $("#address1_line3").off("change", mirrorHomeAddress);
-        $("#ndph_country").off("change", mirrorHomeAddress);
-        $("#ndph_country_name").off("change", mirrorHomeAddress);
-        $("#ndph_postalzipcode").off("change", mirrorHomeAddress);
-        $("#ndph_state").off("change", mirrorHomeAddress);
-        $("#address1_stateorprovince").off("change", mirrorHomeAddress);
-        $("#ndph_addressnotshownonthelist").off("change", mirrorHomeAddress);
-        $("#ndph_city").off("change", mirrorHomeAddress);
-        $("#address1_city").off("change", mirrorHomeAddress);
-        $("#ndph_addressnotshownonlist_city").off("change", mirrorHomeAddress);
+        if (businessIsHome) {
+            // Hide Business Address section
+            $(".section[data-name='business_address']").closest("fieldset").hide();
 
-        // Clear values for Business Address
-        $("#ndph_street1business").val("");                                                     // Street 1
-        $("#ndph_street2business").val("");                                                     // Street 2
-        $("#ndph_street3business").val("");                                                     // Street 3
-        $("#ndph_mequestion11").val("");                                                        // Country GUID
-        $("#ndph_mequestion11_name").val("");                                                   // Country name
-        $("#ndph_mequestion11_entityname").val("");                                             // Country entity
-        $("#ndph_mequestion14").val("");                                                        // ZIP/Postal Code
-        $("#ndph_mequestion12").val("");                                                        // State GUID
-        $("#ndph_mequestion12_name").val("");                                                   // State name
-        $("#ndph_mequestion12_entityname").val("");                                             // State entity
-        $("#ndph_statebusinessothers").val("");                                                 // State (others)
-        $("#ndph_addressnotshownonthelistbusiness").prop("checked", false);                     // State not on list
-        $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
-        $("#ndph_mequestion12").parent().parent().parent().show();                                       // Show State
-        $("#ndph_mequestion13").val("");                                                        // City GUID
-        $("#ndph_mequestion13_name").val("");                                                   // City name
-        $("#ndph_mequestion13_entityname").val("");                                             // Country entity
-        $("#ndph_citybusinessothers").val("");                                                  // City (others)
-        $("#ndph_addressnotshownonlist_citybusiness").prop("checked", false);                   // City not on list
-        $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
-        $("#ndph_mequestion13").parent().parent().parent().show();                                       // Show City
+            // Unbind enable/disable functions for Business Address
+            $("#ndph_mequestion11").off("change", toggleStateBusiness);     // Country
+            $("#ndph_mequestion12").off("change", toggleCityBusiness);      // State
+            $("#ndph_statebusinessothers").off("change", toggleCityBusiness);       // State (Others)
+            $("#ndph_addressnotshownonthelistbusiness").off("change", toggleStateOtherBusiness);        // State "Others" checkbox
+            $("#ndph_addressnotshownonlist_citybusiness").off("change", toggleCityOtherBusiness);       // City "Others" checkbox
 
-        // Show Business Address section
-        $(".section[data-name='seell_business_address']").closest("fieldset").show();
+            // Enable fields; needed to ensure fields are saved upon advancing form
+            $("#ndph_mequestion12").prop("disabled", false);                            // State
+            $("#ndph_statebusinessothers").prop("disabled", false);                     // State (Others)
+            $("#ndph_addressnotshownonthelistbusiness").prop("disabled", false);        // State "Others" checkbox
+            $("#ndph_mequestion13").prop("disabled", false);                            // City
+            $("#ndph_citybusinessothers").prop("disabled", false);                      // City (Others)
+            $("#ndph_addressnotshownonlist_citybusiness").prop("disabled", false);      // City "Others" checkbox
 
-        // Re-initialize fields: call initialization function
-        initializeBusinessAddress();
+            // Set values for Business Address to Home Address
+            mirrorHomeAddress();
 
-        // Re-bind enable/disable functions for Business Address
-        $("#ndph_mequestion11").change(toggleStateBusiness);
-        $("#ndph_mequestion12").change(toggleCityBusiness);
-        $("#ndph_statebusinessothers").change(toggleCityBusiness);
-        $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);
-        $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
-    }
-}
-function mirrorHomeAddress() {      // Function to copy Home Address fields to Business Address
-    var homeStreet1 = $("#address1_line1").val();
-    var homeStreet2 = $("#address1_line2").val();
-    var homeStreet3 = $("#address1_line3").val();
-    var homeCountry = $("#ndph_country").val();
-    var homeCountryName = $("#ndph_country_name").val();
-    var homeZIPPostalCode = $("#address1_postalcode").val();
-    var homeState = $("#ndph_state").val();
-    var homeStateName = $("#ndph_state_name").val();
-    var homeStateOthers = $("#address1_stateorprovince").val();
-    var homeStateNotOnList = $("#ndph_addressnotshownonthelist").prop("checked");
-    var homeCity = $("#ndph_city").val();
-    var homeCityName = $("#ndph_city_name").val();
-    var homeCityOthers = $("#address1_city").val();
-    var homeCityNotOnList = $("#ndph_addressnotshownonlist_city").prop("checked");
+            // On Home Address change, update Business Address
+            $("#address1_line1").change(mirrorHomeAddress);
+            $("#ndph_country").change(mirrorHomeAddress);
+            $("#ndph_country_name").change(mirrorHomeAddress);
+            $("#ndph_postalzipcode").change(mirrorHomeAddress);
+            $("#ndph_state").change(mirrorHomeAddress);
+            $("#address1_stateorprovince").change(mirrorHomeAddress);
+            $("#ndph_addressnotshownonthelist").change(mirrorHomeAddress);
+            $("#ndph_city").change(mirrorHomeAddress);
+            $("#address1_city").change(mirrorHomeAddress);
+            $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
+        }
+        else {
+            // Clear "Same as home address" change event handlers for Business Address
+            $("#ndph_street1business").off("change", mirrorHomeAddress);
+            $("#ndph_country").off("change", mirrorHomeAddress);
+            $("#ndph_country_name").off("change", mirrorHomeAddress);
+            $("#ndph_postalzipcode").off("change", mirrorHomeAddress);
+            $("#ndph_state").off("change", mirrorHomeAddress);
+            $("#address1_stateorprovince").off("change", mirrorHomeAddress);
+            $("#ndph_addressnotshownonthelist").off("change", mirrorHomeAddress);
+            $("#ndph_city").off("change", mirrorHomeAddress);
+            $("#address1_city").off("change", mirrorHomeAddress);
+            $("#ndph_addressnotshownonlist_city").off("change", mirrorHomeAddress);
 
-    $("#ndph_street1business").val(homeStreet1);                                            // Street 1
-    $("#ndph_street2business").val(homeStreet2);                                            // Street 2
-    $("#ndph_street3business").val(homeStreet3);                                            // Street 3
-    $("#ndph_mequestion11").val(homeCountry);                                               // Country GUID
-    $("#ndph_mequestion11_name").val(homeCountryName);                                      // Country name
-    $("#ndph_mequestion11_entityname").val("ndph_country");                                 // Country entity
-    $("#ndph_mequestion14").val(homeZIPPostalCode);                                         // ZIP/Postal Code
-    $("#ndph_mequestion12").val(homeState);                                                 // State GUID
-    $("#ndph_mequestion12_name").val(homeStateName);                                        // State name
-    $("#ndph_mequestion12_entityname").val("ndph_state");                                   // State entity
-    $("#ndph_statebusinessothers").val(homeStateOthers);                                    // State (others)
-    $("#ndph_addressnotshownonthelistbusiness").prop("checked", homeStateNotOnList);        // State not on list
-    $("#ndph_mequestion13").val(homeCity);                                                  // City GUID
-    $("#ndph_mequestion13_name").val(homeCityName);                                         // City name
-    $("#ndph_mequestion13_entityname").val("ndph_city");                                    // City entity
-    $("#ndph_citybusinessothers").val(homeCityOthers);                                      // City (others)
-    $("#ndph_addressnotshownonlist_citybusiness").prop("checked", homeCityNotOnList);       // City not on list
+            // Clear values for Business Address
+            $("#ndph_street1business").val("");                                                     // Address
+            $("#ndph_mequestion11").val("");                                                        // Country GUID
+            $("#ndph_mequestion11_name").val("");                                                   // Country name
+            $("#ndph_mequestion11_entityname").val("");                                             // Country entity
+            $("#ndph_mequestion14").val("");                                                        // ZIP/Postal Code
+            $("#ndph_mequestion12").val("");                                                        // State GUID
+            $("#ndph_mequestion12_name").val("");                                                   // State name
+            $("#ndph_mequestion12_entityname").val("");                                             // State entity
+            $("#ndph_statebusinessothers").val("");                                                 // State (others)
+            $("#ndph_addressnotshownonthelistbusiness").prop("checked", false);                     // State not on list
+            $("#ndph_statebusinessothers").parent().parent().hide();                                // Hide State (Other)
+            $("#ndph_mequestion12").parent().parent().show();                                       // Show State
+            $("#ndph_mequestion13").val("");                                                        // City GUID
+            $("#ndph_mequestion13_name").val("");                                                   // City name
+            $("#ndph_mequestion13_entityname").val("");                                             // City entity
+            $("#ndph_citybusinessothers").val("");                                                  // City (others)
+            $("#ndph_addressnotshownonlist_citybusiness").prop("checked", false);            // City not on list
+            $("#ndph_citybusinessothers").parent().parent().hide();                                 // Hide City (Other)
+            $("#ndph_mequestion13").parent().parent().show();                                       // Show City
 
-    // Update (Other) fields
-    if ($("#ndph_addressnotshownonthelistbusiness").prop("checked")) {      // State
-        $("#ndph_mequestion12").parent().parent().parent().hide();
-        $("#ndph_statebusinessothers").parent().parent().show();
+            // Reset field visibility as a primer for initialization function
+            $("#ndph_mequestion12").parent().parent().parent().show();                              // Show State
+            $("#ndph_statebusinessothers").parent().parent().show();                                // Show State (others)
+            $("#ndph_mequestion13").parent().parent().parent().show();                              // Show City
+            $("#ndph_citybusinessothers").parent().parent().show();                                 // Show City (others)
+
+            // Re-initialize fields: call initialization function
+            initializeBusinessAddress();
+
+            // Show Business Address section
+            $(".section[data-name='business_address']").closest("fieldset").show();
+
+            // Re-bind enable/disable functions for Business Address
+            $("#ndph_mequestion11").change(toggleStateBusiness);     // Country
+            $("#ndph_mequestion12").change(toggleCityBusiness);      // State
+            $("#ndph_statebusinessothers").change(toggleCityBusiness);       // State (Others)
+            $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);        // State "Others" checkbox
+            $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);       // City "Others" checkbox
+        }
     }
-    else {
-        $("#ndph_statebusinessothers").parent().parent().hide();
-        $("#ndph_mequestion12").parent().parent().parent().show();
+    function mirrorHomeAddress() {      // Function to copy Home Address fields to Business Address
+        var homeStreet1 = $("#address1_line1").val();
+        var homeCountry = $("#ndph_country").val();
+        var homeCountryName = $("#ndph_country_name").val();
+        var homeZIPPostalCode = $("#address1_postalcode").val();
+        var homeState = $("#ndph_state").val();
+        var homeStateName = $("#ndph_state_name").val();
+        var homeStateOthers = $("#address1_stateorprovince").val();
+        var homeStateNotOnList = $("#ndph_addressnotshownonthelist").prop("checked");
+        var homeCity = $("#ndph_city").val();
+        var homeCityName = $("#ndph_city_name").val();
+        var homeCityOthers = $("#address1_city").val();
+        var homeCityNotOnList = $("#ndph_addressnotshownonlist_city").prop("checked");
+
+        $("#ndph_street1business").val(homeStreet1);                                                // Address
+        $("#ndph_mequestion11").val(homeCountry);                                                   // Country GUID
+        $("#ndph_mequestion11_name").val(homeCountryName);                                          // Country name
+        $("#ndph_mequestion11_entityname").val("ndph_country");                                     // Country entity
+        $("#ndph_mequestion14").val(homeZIPPostalCode);                                             // ZIP/Postal Code
+        $("#ndph_mequestion12").val(homeState);                                                     // State GUID
+        $("#ndph_mequestion12_name").val(homeStateName);                                            // State name
+        $("#ndph_mequestion12_entityname").val("ndph_state");                                       // State entity
+        $("#ndph_statebusinessothers").val(homeStateOthers);                                        // State (others)
+        $("#ndph_addressnotshownonthelistbusiness").prop("checked", homeStateNotOnList);            // State not on list
+        $("#ndph_mequestion13").val(homeCity);                                                      // City GUID
+        $("#ndph_mequestion13_name").val(homeCityName);                                             // City name
+        $("#ndph_mequestion13_entityname").val("ndph_city");                                        // City entity
+        $("#ndph_citybusinessothers").val(homeCityOthers);                                          // City (others)
+        $("#ndph_addressnotshownonlist_citybusiness").prop("checked", homeCityNotOnList);    // City not on list
+
+        // Update (Other) fields
+        if ($("#ndph_addressnotshownonthelistbusiness").prop("checked")) {      // State
+            $("#ndph_mequestion12").parent().parent().parent().hide();
+            $("#ndph_statebusinessothers").parent().parent().show();
+        }
+        else {
+            $("#ndph_statebusinessothers").parent().parent().hide();
+            $("#ndph_mequestion12").parent().parent().parent().show();
+        }
+        if ($("#ndph_addressnotshownonlist_citybusiness").prop("checked")) {      // City
+            $("#ndph_mequestion13").parent().parent().parent().hide();
+            $("#ndph_citybusinessothers").parent().parent().show();
+        }
+        else {
+            $("#ndph_citybusinessothers").parent().parent().hide();
+            $("#ndph_mequestion13").parent().parent().parent().show();
+        }
     }
-    if ($("#ndph_addressnotshownonlist_citybusiness").prop("checked")) {      // City
-        $("#ndph_mequestion13").parent().parent().parent().hide();
-        $("#ndph_citybusinessothers").parent().parent().show();
-    }
-    else {
-        $("#ndph_citybusinessothers").parent().parent().hide();
-        $("#ndph_mequestion13").parent().parent().parent().show();
-    }
-}
 
     // Toggle Home State based on whether Home Country has a value
     function toggleStateHome() {
@@ -788,219 +799,13 @@ function mirrorHomeAddress() {      // Function to copy Home Address fields to B
         }
     }
 
-    // INITIALIZE FORM
-    // Validator definition
-    if (typeof (Page_Validators) == 'undefined') return;
-    // Date of birth validator: disallow future date
-    var dateOfBirthValidator = document.createElement('span');
-    dateOfBirthValidator.style.display = "none";
-    dateOfBirthValidator.id = "ndph_dateofbirthValidator";
-    dateOfBirthValidator.controltovalidate = "ndph_dateofbirth";
-    dateOfBirthValidator.errormessage = "<a href='#ndph_dateofbirth'>Date of Birth cannot be set to a future date.</a>";
-    dateOfBirthValidator.validationGroup = "";        // Set this if you have set ValidationGroup on the form
-    dateOfBirthValidator.initialvalue = "";
-    dateOfBirthValidator.evaluationfunction = function () {
-        var currentDate = new Date();
-        var dateOfBirth = $("#ndph_dateofbirth").val();
-        if (dateOfBirth) {
-            dateOfBirth = new Date(dateOfBirth);      // Convert to Date object if filled in
-        }
-        if ((dateOfBirth == "") || (dateOfBirth < currentDate)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-
-    // Program validator: check if either a degree program or an open program is selected
-    var programValidator = document.createElement('span');
-    programValidator.style.display = "none";
-    programValidator.id = "ndph_programValidator";
-    programValidator.controltovalidate = "ndph_program";
-    programValidator.errormessage = "Please select a program to apply for.";
-    programValidator.validationGroup = "";        // Set this if you have set ValidationGroup on the form
-    programValidator.initialvalue = "";
-    programValidator.evaluationfunction = function () {
-        var degreeProgram = $("#ndph_program");
-        var openProgram = $("#ndph_seellopenprograms");
-        
-        if (degreeProgram.val() || openProgram.val()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-
-    // Add the new validators to the page validators array:
-    Page_Validators.push(dateOfBirthValidator);
-    Page_Validators.push(programValidator);
-
-    // Wire-up the click event handler of the validation summary link
-    $("a[href='#ndph_dateofbirth']").on("click", function () { scrollToAndFocus('ndph_dateofbirth'); });
-    // *End of validator code*
-
-    // Get the query string from the URL
-    var queryString = window.location.search;
-    queryString = queryString.substring(1);
-
-    // Parse the query string and assign parameters to "params" object
-    var queries = queryString.split("&");
-    var params = {};
-    var query;
-    for (var i = 0; i < queries.length; ++i) {
-        query = queries[i].split("=");
-        params[decodeURIComponent(query[0])] = decodeURIComponent(query[1]);
-    }
-
-    // Query program information from OData
-    var programs = [];
-    var currentURL = "/_odata/Programs";
-    while(currentURL) {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            url: currentURL,
-            beforeSend: function(XMLHttpRequest) {
-                XMLHttpRequest.setRequestHeader("Accept", "application/json");
-            },
-            success: function(data, textStatus, XHR) {
-                programs = programs.concat(data.value);
-                currentURL = data["odata.nextLink"];
-            }
-        });
-    }
-
-    // Prepopulate Program fields
-    if (params["id"]) {
-        var prepopulatedProgram = programs.find(     // Returns an object
-            function(program) {
-                // Search in "programs" array for element matching GUID on program lookup
-                return program.ndph_programid == params["id"];
-            }
-        );
-        
-    //     switch (prepopulatedProgram.ndph_programtype.Value) {
-    //         // When option set field values are retrieved from the DOM via jQuery, they are retrieved as strings
-    //         // But when they're retrieved from a JSON object as the response from an OData feed, they are retrieved as integers
-    //         case 649840000:
-    //             if (!$("#ndph_program").val()) {
-    //                 $("#ndph_programtypeapplication").val("649840000");
-                
-    //                 $("#ndph_program").val(prepopulatedProgram.ndph_programid);
-    //                 $("#ndph_program_name").val(prepopulatedProgram.ndph_name);
-    //                 $("#ndph_program_entityname").val("ndph_program");
-    //             }
-    //             break;
-    //         case 649840001:
-    //             if (!$("#ndph_seellopenprograms").val()) {
-    //                 $("#ndph_programtypeapplication").val("649840001");
-
-    //                 $("#ndph_seellopenprograms").val(prepopulatedProgram.ndph_programid);
-    //                 $("#ndph_seellopenprograms_name").val(prepopulatedProgram.ndph_name);
-    //                 $("#ndph_seellopenprograms_entityname").val("ndph_program");
-    //             }
-    //             break;
-    //     }
-    }
-
-
-    // Get the query string from the URL
-    var queryString = window.location.search;
-    queryString = queryString.substring(1);
-
-    // Parse the query string and assign parameters to "params" object
-    var queries = queryString.split("&");
-    var params = {};
-    var query;
-    for (var i = 0; i < queries.length; ++i) {
-        query = queries[i].split("=");
-        params[decodeURIComponent(query[0])] = decodeURIComponent(query[1]);
-    }
-
-    // Query program information from OData
-    var programs = [];
-    var currentURL = "/_odata/Programs";
-    while(currentURL) {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            url: currentURL,
-            beforeSend: function(XMLHttpRequest) {
-                XMLHttpRequest.setRequestHeader("Accept", "application/json");
-            },
-            success: function(data, textStatus, XHR) {
-                programs = programs.concat(data.value);
-                currentURL = data["odata.nextLink"];
-            }
-        });
-    }
-
-    // Prepopulate Program fields
-    if(!$("#ndph_seellopenprograms").val()){
-        if (params["id"]) 
-        {
-            var prepopulatedProgram = programs.find(
-                    // Returns an object
-                function(program) {
-                    $("#ndph_seellopenprograms").val(prepopulatedProgram.ndph_programid);
-                    $("#ndph_seellopenprograms_name").val(prepopulatedProgram.ndph_name);
-                    $("#ndph_seellopenprograms_entityname").val("ndph_program");
-                    // Search in "programs" array for element matching GUID on program lookup
-                    return program.ndph_programid == params["id"];
-                }
-            );
-        }
-    }
-
-    // Hide metadata fields
-    $(".section[data-name='hidden']").closest("fieldset").hide();
-
-    // Mark Program fields as required
-    $("#ndph_program_label").parent().attr("class", "info required");
-    $("#ndph_seellopenprograms_label").parent().attr("class", "info required");
-
-    // Resize Program fields
-
-    $("#ndph_seellopenprograms").parent().parent().attr("colspan","3");
-    $("#ndph_seellopenprograms").parent().css("width","100%");
-
-    // Resize State/City fields
-    $("#ndph_country").parent().parent().parent().attr("colspan","3");          // Home Address
-    $("#ndph_country").parent().css("width","100%");
-    $("#ndph_state").parent().parent().parent().attr("colspan","3");
-    $("#ndph_state").parent().css("width","100%");
-    $("#address1_stateorprovince").parent().parent().attr("colspan","3");
-    $("#ndph_city").parent().parent().parent().attr("colspan","3");
-    $("#ndph_city").parent().css("width","100%");
-    $("#address1_city").parent().parent().attr("colspan","3");
-    
-    $("#ndph_mequestion11").parent().parent().parent().attr("colspan","3");     // Business Address
-    $("#ndph_mequestion11").parent().css("width","100%");
-    $("#ndph_mequestion12").parent().parent().parent().attr("colspan","3");
-    $("#ndph_mequestion12").parent().css("width","100%");
-    $("#ndph_statebusinessothers").parent().parent().attr("colspan","3");
-    $("#ndph_mequestion13").parent().parent().parent().attr("colspan","3");
-    $("#ndph_mequestion13").parent().css("width","100%");
-    $("#ndph_citybusinessothers").parent().parent().attr("colspan","3");
-
-    // Initialize Address fields
-    initializeHomeAddress();
-    initializeBusinessAddress();
-
-    
-
-
+    // ################################################################
     // FUNCTIONS TO EXECUTE ON FIELD CHANGE:
-    // Update School field);
-    $("#ndph_program").change(updateProgram);
+    // ################################################################
 
-
+    // Update School field;
+    $("#ndph_program").change(updateSchool);
+    $("#ndph_school").change(updateSchool);
     // Update Business Address section
     $("#ndph_businessaddressishomeaddress").change(toggleBusinessIsHomeAddress);    // Toggle Business Address
     // Update Home Address fields
@@ -1016,5 +821,139 @@ function mirrorHomeAddress() {      // Function to copy Home Address fields to B
     $("#ndph_addressnotshownonthelistbusiness").change(toggleStateOtherBusiness);
     $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
 
+    // ################################################################
+    // INITIALIZE FORM
+    // ################################################################
+
+    // *** DEFINE VALIDATORS ***
+
+    // Validator definition
+    if (typeof (Page_Validators) == 'undefined') return;
+    // Date of birth validator: disallow future and current date
+    var dateOfBirthValidator = document.createElement('span');
+    dateOfBirthValidator.style.display = "none";
+    dateOfBirthValidator.id = "ndph_dateofbirthValidator";
+    dateOfBirthValidator.controltovalidate = "ndph_dateofbirth";
+    dateOfBirthValidator.errormessage = "<a href='#ndph_dateofbirth'>Date of Birth must be valid.</a>";
+    dateOfBirthValidator.validationGroup = "";        // Set this if you have set ValidationGroup on the form
+    dateOfBirthValidator.initialvalue = "";
+    dateOfBirthValidator.evaluationfunction = function () {
+        var currentDate = new Date();
+        var dateOfBirth = $("#ndph_dateofbirth").val();
+        if (dateOfBirth) {
+            dateOfBirth = new Date(dateOfBirth);      // Convert to Date object if filled in
+        }
+        if (dateOfBirth < currentDate) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+
+    // Add the new validators to the page validators array:
+    Page_Validators.push(dateOfBirthValidator);
+
+    // Wire-up the click event handler of the validation summary link
+    $("a[href='#ndph_dateofbirth']").on("click", function () { scrollToAndFocus('ndph_dateofbirth'); });
+
+    // *** END OF VALIDATOR CODE***
+
+
+    // Get the query string from the URL
+    var queryString = window.location.search;
+    queryString = queryString.substring(1);
+
+    // Parse the query string and assign parameters to "params" object
+    var queries = queryString.split("&");
+    var params = {};
+    var query;
+    for (var i = 0; i < queries.length; ++i) {
+        query = queries[i].split("=");
+        params[decodeURIComponent(query[0])] = decodeURIComponent(query[1]);
+    }
+
+    // Query program information from OData
+    var programs = [];
+    var currentURL = "/_odata/Programs";
+    while(currentURL) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            url: currentURL,
+            beforeSend: function(XMLHttpRequest) {
+                XMLHttpRequest.setRequestHeader("Accept", "application/json");
+            },
+            success: function(data, textStatus, XHR) {
+                programs = programs.concat(data.value);
+                currentURL = data["odata.nextLink"];
+            }
+        });
+    }
+
+    // Prepopulate Program fields
+    if (!$("#ndph_program").val()) {
+        if (params["id"]) {
+            var prepopulatedProgram = programs.find(     // Returns an object
+                function(program) {
+                    // Search in "programs" array for element matching GUID on program lookup
+                    return program.ndph_programid == params["id"];
+                }
+            );
+        
+            // Populate Program lookup
+            $("#ndph_program").val(prepopulatedProgram.ndph_programid);
+            $("#ndph_program_name").val(prepopulatedProgram.ndph_name);
+            $("#ndph_program_entityname").val("ndph_program");
+        }
+    }
+
+    // Set School
+    updateSchool();
+
+    // Hide metadata fields
+    $(".section[data-name='hidden']").closest("fieldset").hide();
+    
+    // Append program guide
+    $('.page-copy').append("<div id='instructions' class='instructions'></div>");
+    $("#instructions")
+        .addClass('instruction')
+        .attr('id', 'instruction')
+        .append('<p>Fill out the application form below and one of our Recruitment Officers will get in touch with you to guide you throughout the application process. Should you wish to contact us directly, email us at <a href="mailto: recruitment@aim.edu" id="recruitmentEmail">recruitment@aim.edu</a>.</p>')
+        .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel.</p>')
+        .append('<p><a href="/application-guide" id="guide-link" target="_blank">Click here to read the step-by-step guide to this online graduate degree application process.</a></p>')
+        .append('<p><i>* - Required fields.</i></p>');
+    // $("#guide-link").attr("onclick", "return !window.open(this.href, undefined, 'width=800,height=600')");
+
+    // Resize State/City fields
+    $("#ndph_country").parent().parent().parent().attr("colspan","2");          // Home Address
+    $("#ndph_country").parent().css("width","100%");
+    $("#ndph_state").parent().parent().parent().attr("colspan","2");
+    $("#ndph_state").parent().css("width","100%");
+    $("#address1_stateorprovince").parent().parent().attr("colspan","2");
+    $("#ndph_city").parent().parent().parent().attr("colspan","2");
+    $("#ndph_city").parent().css("width","100%");
+    $("#address1_city").parent().parent().attr("colspan","2");
+    
+    $("#ndph_mequestion11").parent().parent().parent().attr("colspan","2");     // Business Address
+    $("#ndph_mequestion11").parent().css("width","100%");
+    $("#ndph_mequestion12").parent().parent().parent().attr("colspan","2");
+    $("#ndph_mequestion12").parent().css("width","100%");
+    $("#ndph_statebusinessothers").parent().parent().attr("colspan","2");
+    $("#ndph_mequestion13").parent().parent().parent().attr("colspan","2");
+    $("#ndph_mequestion13").parent().css("width","100%");
+    $("#ndph_citybusinessothers").parent().parent().attr("colspan","2");
+
+    // Add class to adjust top padding on mobile field
+    $("input#mobilephone.text.form-control").closest("td").css("padding-top", "26px");
+
+    // Initialize Address appearance
+    initializeHomeAddress();
+    initializeBusinessAddress();
+
+    // Hide Dietary Preference (Others) and PWD ID
+    $(".section[data-name='dietary_information_section']").closest("fieldset").hide();
 
 });

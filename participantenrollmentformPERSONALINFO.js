@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    // edit unknown error message
+    var errorMessage = "Note: A participant cannot be added more than once.";
+    $('.text-danger').html('<span class="fa fa-exclamation-triangle" aria-hidden="true"></span>&nbsp'+errorMessage);
+        
         // Get the query string from the URL
         var queryString = window.location.search;
         queryString = queryString.substring(1);
@@ -326,8 +330,9 @@ $(document).ready(function() {
                 stateHomeField.hide();
                 stateOtherHomeField.show();
                 // Lock City to Other
-                checkedCityOtherHome.prop("disabled", true);
+                checkedCityOtherHome.prop("disabled", false);
                 checkedCityOtherHome.prop("checked", true);
+                checkedCityOtherHome.parent().parent().parent().hide();
                 // Disable City (Other) until State is filled in
                 cityOtherHome.prop("disabled", true);
             }
@@ -337,6 +342,7 @@ $(document).ready(function() {
                 stateHomeField.show();
                 // Reset "Other" checkbox for City
                 checkedCityOtherHome.prop("checked", false);
+                checkedCityOtherHome.parent().parent().parent().show();
                 // Disable City until State is filled in
                 cityHome.prop("disabled", true);
                 cityHome.parent().find(".input-group-btn").hide();
@@ -412,6 +418,7 @@ $(document).ready(function() {
                 // Reset and disable "Other" checkbox for City 
                 checkedCityOtherHome.prop("checked", false);
                 checkedCityOtherHome.prop("disabled", true);
+                checkedCityOtherHome.parent().parent().parent().hide();
                 if (!stateHome) {
                     // Disable City
                     cityHome.prop("disabled", true);
@@ -594,8 +601,9 @@ $(document).ready(function() {
                 stateBusinessField.hide();
                 stateOtherBusinessField.show();
                 // Lock City to Other
-                checkedCityOtherBusiness.prop("disabled", true);
+                checkedCityOtherBusiness.prop("disabled", false);
                 checkedCityOtherBusiness.prop("checked", true);
+                checkedCityOtherBusiness.parent().parent().parent().hide();
                 // Disable City (Other) until State is filled in
                 cityOtherBusiness.prop("disabled", true);
             }
@@ -605,6 +613,7 @@ $(document).ready(function() {
                 stateBusinessField.show();
                 // Reset "Other" checkbox for City
                 checkedCityOtherBusiness.prop("checked", false);
+                checkedCityOtherBusiness.parent().parent().parent().show();
                 // Disable City until State is filled in
                 cityBusiness.prop("disabled", true);
                 cityBusiness.parent().find(".input-group-btn").hide();
@@ -686,6 +695,7 @@ $(document).ready(function() {
                 // Reset and disable "Other" checkbox for City 
                 checkedCityOtherBusiness.prop("checked", false);
                 checkedCityOtherBusiness.prop("disabled", true);
+                checkedCityOtherBusiness.parent().parent().parent().hide();
                 if (!stateBusiness) {
                     // Disable City
                     cityBusiness.prop("disabled", true);
