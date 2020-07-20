@@ -1,0 +1,68 @@
+{% extends 'Default Page' %}
+
+{% block main %}
+
+    {% fetchxml open_programs %}
+        <fetch version="1.0" mapping="logical">
+            <entity name="ndph_program">
+                <attribute name="ndph_programid" />
+                <attribute name="ndph_name" />
+                <attribute name="ndph_description" />
+                <attribute name="ndph_programtype" />
+                <attribute name="ndph_school" />
+                <order attribute="ndph_name" />
+                <filter type="and">
+                    <condition attribute="ndph_programtype" operator="eq" value="649840001" />
+                </filter>
+            </entity>
+        </fetch>
+    {% endfetchxml %}
+
+    {% assign is_auth = user | has_role: 'Authenticated Users' %}
+    <div style="width: 100%; margin: -30px auto 40px;">
+        <h2 style="font-variant: small-caps; color: #6E3476;">Open Enrollment Programs</h2>
+        <p style="text-align: justify;">The <b>School of Executive Education and Lifelong Learning (SEELL)</b> is the executive development arm of the Asian Institute of Management. It links the Institute to the corporate world by providing world-class programs that respond to the needs of both private and public sectors.</p>
+    </div>
+    <div style="width: 90%; margin: auto;">
+        {% for program in open_programs.results.entities %}
+            <hr />
+            <div style="text-transform: uppercase;">
+                <span style="color: #6E3476; font-weight:bold">{{ program.ndph_name }}</span>
+            </div>
+            <div>
+                {% if program.ndph_description == empty %}
+                    This program does not have a description.
+                {% else %}
+                    {{ program.ndph_description }}
+                {% endif %}
+            </div>
+            <div style="text-align:right;">
+                    {% if is_auth %}
+                        <a class="btn btn-primary" href="{{ adx_primarydomainname }}/applications/new-application/?id={{ program.ndph_programid }}">
+                            Enroll Now
+                        </a>
+                        <a class="btn btn-default" href="{{ adx_primarydomainname }}/inquiries/new-inquiry/?id={{ program.ndph_programid }}">
+                            Inquire
+                        </a>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ adx_primarydomainname }}/open-enroll?id={{ program.ndph_programid }}">
+                            Enroll Now
+                        </a>
+                        <a class="btn btn-default" href="{{ adx_primarydomainname }}/inquire-now/?id={{ program.ndph_programid }}">
+                            Inquire
+                        </a>
+                    {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div style="width: 100%; margin: 40px auto;">
+        <h2 style="font-variant: small-caps; color: #6E3476;">Custom Programs</h3>
+        <p style="text-align: justify;">In line with forging strategic alliances with different companies and creating effective learning experiences for key leaders and managers, we offer customized training programs to companies of any industry and size. Our programs have a proven reputation for expanding knowledge and leadership capacities that meet the unique needs and challenges of both private and public sectors. We work closely with organizations to develop and deliver results-oriented solutions critical to organization growth, strategies, and objectives.</p>
+        <div style="text-align:right">
+            <a class="btn btn-primary" href="{{ adx_primarydomainname }}/inquire-now/?id=custom">
+                Inquire
+            </a>
+        </div>
+    </div>
+    
+{% endblock %}
