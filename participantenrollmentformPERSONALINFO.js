@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // edit unknown error message
-    var errorMessage = "Note: A participant cannot be added more than once.";
-    $('.text-danger').html('<span class="fa fa-exclamation-triangle" aria-hidden="true"></span>&nbsp'+errorMessage);
+    // var errorMessage = "Note: A participant cannot be added more than once.";
+    // $('.text-danger').html('<span class="fa fa-exclamation-triangle" aria-hidden="true"></span>&nbsp'+errorMessage);
         
         // Get the query string from the URL
         var queryString = window.location.search;
@@ -663,7 +663,7 @@ $(document).ready(function() {
             var cityOtherBusinessField = cityOtherBusiness.parent().parent();
         
             if (businessIsHome) {
-                $(".section[data-name='business_address']").closest("fieldset").hide();
+                $(".section[data-name='Business_Address_Participant_2']").closest("fieldset").hide();
             }
             else if (!countryBusiness) {
                 // Disable State
@@ -734,7 +734,35 @@ $(document).ready(function() {
                 cityOtherBusinessField.hide();
             }
         }
+    // birthday validator
+        if (typeof (Page_Validators) == 'undefined') return;
+        // Date of birth validator: disallow future date
+        var dateOfBirthValidator = document.createElement('span');
+        dateOfBirthValidator.style.display = "none";
+        dateOfBirthValidator.id = "ndph_dateofbirthValidator";
+        dateOfBirthValidator.controltovalidate = "ndph_dateofbirth";
+        dateOfBirthValidator.errormessage = "<a href='#ndph_dateofbirth'>Date of Birth cannot be set to a future date.</a>";
+        dateOfBirthValidator.validationGroup = "";        // Set this if you have set ValidationGroup on the form
+        dateOfBirthValidator.initialvalue = "";
+        dateOfBirthValidator.evaluationfunction = function () {
+            var currentDate = new Date();
+            var dateOfBirth = $("#ndph_dateofbirth").val();
+            if (dateOfBirth) {
+                dateOfBirth = new Date(dateOfBirth);      // Convert to Date object if filled in
+            }
+            if ((dateOfBirth == "") || (dateOfBirth < currentDate)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        };
+    // Add the new validators to the page validators array:
+    Page_Validators.push(dateOfBirthValidator);
 
+    // Wire-up the click event handler of the validation summary link
+    $("a[href='#ndph_dateofbirth']").on("click", function () { scrollToAndFocus('ndph_dateofbirth'); });
+    // *End of validator code*
 
     // Resize State/City fields
     $("#ndph_country").parent().parent().parent().attr("colspan","3");          // Home Address

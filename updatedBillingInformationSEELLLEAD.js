@@ -1,22 +1,22 @@
 $(document).ready(function() {
     // Show/hide sections on load
-    if($("#ndph_addresssameas").val() == "" || "649840002") {
-           var homeAddress = $(".section[data-name='blling_information_home_address_section']").closest("fieldset");
-           var businessAddress = $(".section[data-name='blling_information_business_address_section']").closest("fieldset");
-           var billingAddress = $(".section[data-name='blling_information_billing_address_section']").closest("fieldset");
-            // only show billing address
-            homeAddress.hide();
-            businessAddress.hide();
-            billingAddress.show();
-    } else if($("#ndph_addresssameas").val() == "649840000") {
-        homeAddress.show();
-        businessAddress.hide();
-        billingAddress.hide();
-    } else if($("#ndph_addresssameas").val() == "649840001") {
-        homeAddress.hide();
-        businessAddress.show();
-        billingAddress.hide();
-    }
+    // if($("#ndph_addresssameas").val() == "" || "649840002") {
+    //        var homeAddress = $(".section[data-name='blling_information_home_address_section']").closest("fieldset");
+    //        var businessAddress = $(".section[data-name='blling_information_business_address_section']").closest("fieldset");
+    //        var billingAddress = $(".section[data-name='blling_information_billing_address_section']").closest("fieldset");
+    //         // only show billing address
+    //         homeAddress.hide();
+    //         businessAddress.hide();
+    //         billingAddress.hide();
+    // } else if($("#ndph_addresssameas").val() == "649840000") {
+    //     homeAddress.show();
+    //     businessAddress.hide();
+    //     billingAddress.hide();
+    // } else if($("#ndph_addresssameas").val() == "649840001") {
+    //     homeAddress.hide();
+    //     businessAddress.show();
+    //     billingAddress.hide();
+    // }
 
     function updateAddressSections() { //hide addresses
            var addressType = $("#ndph_addresssameas").val();
@@ -40,11 +40,6 @@ $(document).ready(function() {
                    clearBillingAddress();
                    billingAddress.hide();
                     
-                    // $("#ndph_countrybilling").off("change", toggleStateBilling);     // Country
-                    // $("#ndph_statebilling").off("change", toggleCityBilling);      // State
-                    // $("#ndph_stateotherbilling").off("change", toggleCityBilling);       // State (Others)
-                    // $("#ndph_statenotshownlist").off("change", toggleStateOtherBilling);        // State "Others" checkbox
-                    // $("#ndph_citynotshownonlist").off("change", toggleCityOtherBilling);       // City "Others" checkbox
                         // enable billing address fields
                     $("#ndph_countrybilling").prop("disabled", false);
                     $("#ndph_statebilling").prop("disabled", false);
@@ -65,11 +60,7 @@ $(document).ready(function() {
                 clearBillingAddress();        
                 homeAddress.hide();
                 businessAddress.show();
-                // $("#ndph_countrybilling").off("change", toggleStateBilling);     // Country
-                // $("#ndph_statebilling").off("change", toggleCityBilling);      // State
-                // $("#ndph_stateotherbilling").off("change", toggleCityBilling);       // State (Others)
-                // $("#ndph_statenotshownlist").off("change", toggleStateOtherBilling);        // State "Others" checkbox
-                // $("#ndph_citynotshownonlist").off("change", toggleCityOtherBilling);       // City "Others" checkbox
+
                     // enable billing address fields
                 $("#ndph_countrybilling").prop("disabled", false);
                 $("#ndph_statebilling").prop("disabled", false);
@@ -93,11 +84,6 @@ $(document).ready(function() {
                 //activate fields
                 toggleStateBilling();
                 $("#ndph_citynotshownonlist").prop("disabled", false);
-                // $("#ndph_countrybilling").change(toggleStateBilling);     // Country
-                // $("#ndph_statebilling").change(toggleCityBilling);      // State
-                // $("#ndph_stateotherbilling").change(toggleCityBilling);       // State (Others)
-                // $("#ndph_statenotshownlist").change(toggleStateOtherBilling);        // State "Others" checkbox
-                // $("#ndph_citynotshownonlist").change(toggleCityOtherBilling);       // City "Others" checkbox
                 // hide fields
                 businessAddress.hide();
                 homeAddress.hide();
@@ -109,15 +95,10 @@ $(document).ready(function() {
                 // activate fields
                 // initializeBillingAddress();
                 toggleStateBilling();
-                // $("#ndph_countrybilling").change(toggleStateBilling);     // Country
-                // $("#ndph_statebilling").change(toggleCityBilling);      // State
-                // $("#ndph_stateotherbilling").change(toggleCityBilling);       // State (Others)
-                // $("#ndph_statenotshownlist").change(toggleStateOtherBilling);        // State "Others" checkbox
-                // $("#ndph_citynotshownonlist").change(toggleCityOtherBilling);       // City "Others" checkbox
                 // show and hide address sections
                 homeAddress.hide();
                 businessAddress.hide();
-                billingAddress.show();
+                billingAddress.hide();
 
                 break;
            }
@@ -154,7 +135,6 @@ $(document).ready(function() {
                PICOT.hide();
            }
        }
-   
    
        function toggleStateBilling() {
            var countryBilling = $("#ndph_countrybilling").val();
@@ -242,7 +222,8 @@ $(document).ready(function() {
            var stateBillingField = stateBilling.parent().parent().parent();
            var stateOtherBilling = $("#ndph_stateotherbilling");
            var stateOtherBillingField = stateOtherBilling.parent().parent()
-           
+           var CityOTherBilling = $("#ndph_cityotherbilling");
+
            var checkedCityOtherBilling = $("#ndph_citynotshownonlist");
    
            if (checkedStateOtherBilling.prop("checked")) {
@@ -262,6 +243,8 @@ $(document).ready(function() {
                // alert for debugging purposes
                // alert("nandito sa else");
                // Reset "Other" checkbox for City
+               // clear City Other
+               CityOTherBilling.val("");
                checkedCityOtherBilling.prop("checked", false);
            }
            toggleCityBilling();
