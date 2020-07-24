@@ -30,7 +30,7 @@ function HideTabs()
             {
                 if(school1 == "School of Executive Education and Lifelong Learning")
                 {
-                    Xrm.Page.ui.tabs.get('appadtestinterview_opptab').setVisible(false);
+                    Xrm.Page.ui.tabs.get('appad testinterview_opptab').setVisible(false);
                 }
                  else {
                     Xrm.Page.data.process.addOnStageChange(refreshpage);

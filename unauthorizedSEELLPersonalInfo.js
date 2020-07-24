@@ -31,14 +31,15 @@ $(document).ready(function() {
     $('<div>')
         .addClass('seellinstruction')
         .attr('id', 'seellinstruction')
-        .append('<p>Fill out the Enrollment Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">SEELL@aim.edu</a>.</p>')
-        .append('<p>Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
-        .append('<p><a href = "/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
+        .append('<p class = "oep_instruct">Fill out the Enrollment Form and one of our Business Development Officers will get in touch with you shortly. Should you wish to contact us directly, email us at <a href="mailto: seell@aim.edu" id="recruitmentEmail">SEELL@aim.edu</a>.</p>')
+        .append('<p class = "oep_instruct">Please be reminded that all information you submit in this Form will be recorded in AIM’s database and will be accessed only by authorized AIM personnel. </p>')
+        .append('<p class = "oep_instruct"><a href = "/enrollment-guide/" target = "_blank" id = "enrollmentprocess"> Click here to read the step-by-step guide to this online process. </a></p>')
 
-        .append('<p><i>* - Required fields.</i></p>')
+        .append('<p class = "oep_instruct"><i>* - Required fields.</i></p>')
         .insertAfter('.page-header');
 
     // edit css
+    $("p.oep_instruct").css( { "margin-left" : "96px", "margin-right" : "30px" });
     $("a#enrollmentprocess").css( { "color" : "blue", "text-decoration" : "underline" });
     $("a#recruitmentEmail").css( { "color" : "blue" } );
         
@@ -99,21 +100,21 @@ function toggleBusinessIsHomeAddress() {
         $("#ndph_addressnotshownonlist_citybusiness").prop("disabled", false);
 
         // Set values for Business Address to Home Address
-        mirrorHomeAddress();
+        // mirrorHomeAddress();
 
         // Set Business Address to update on Home Address change
-        $("#address1_line1").change(mirrorHomeAddress);
-        $("#address1_line2").change(mirrorHomeAddress);
-        $("#address1_line3").change(mirrorHomeAddress);
-        $("#ndph_country").change(mirrorHomeAddress);
-        $("#ndph_country_name").change(mirrorHomeAddress);
-        $("#ndph_postalzipcode").change(mirrorHomeAddress);
-        $("#ndph_state").change(mirrorHomeAddress);
-        $("#address1_stateorprovince").change(mirrorHomeAddress);
-        $("#ndph_addressnotshownonthelist").change(mirrorHomeAddress);
-        $("#ndph_city").change(mirrorHomeAddress);
-        $("#address1_city").change(mirrorHomeAddress);
-        $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
+        // $("#address1_line1").change(mirrorHomeAddress);
+        // $("#address1_line2").change(mirrorHomeAddress);
+        // $("#address1_line3").change(mirrorHomeAddress);
+        // $("#ndph_country").change(mirrorHomeAddress);
+        // $("#ndph_country_name").change(mirrorHomeAddress);
+        // $("#ndph_postalzipcode").change(mirrorHomeAddress);
+        // $("#ndph_state").change(mirrorHomeAddress);
+        // $("#address1_stateorprovince").change(mirrorHomeAddress);
+        // $("#ndph_addressnotshownonthelist").change(mirrorHomeAddress);
+        // $("#ndph_city").change(mirrorHomeAddress);
+        // $("#address1_city").change(mirrorHomeAddress);
+        // $("#ndph_addressnotshownonlist_city").change(mirrorHomeAddress);
         
         //show/hide fields
         $("#ndph_statebusinessothers").parent().parent().parent().show();                                // Hide State (Other)
@@ -125,18 +126,18 @@ function toggleBusinessIsHomeAddress() {
     }
     else {
         // Clear "Same as home address" change event handlers for Business Address
-        $("#address1_line1").off("change", mirrorHomeAddress);
-        $("#address1_line2").off("change", mirrorHomeAddress);
-        $("#address1_line3").off("change", mirrorHomeAddress);
-        $("#ndph_country").off("change", mirrorHomeAddress);
-        $("#ndph_country_name").off("change", mirrorHomeAddress);
-        $("#ndph_postalzipcode").off("change", mirrorHomeAddress);
-        $("#ndph_state").off("change", mirrorHomeAddress);
-        $("#address1_stateorprovince").off("change", mirrorHomeAddress);
-        $("#ndph_addressnotshownonthelist").off("change", mirrorHomeAddress);
-        $("#ndph_city").off("change", mirrorHomeAddress);
-        $("#address1_city").off("change", mirrorHomeAddress);
-        $("#ndph_addressnotshownonlist_city").off("change", mirrorHomeAddress);
+        // $("#address1_line1").off("change", mirrorHomeAddress);
+        // $("#address1_line2").off("change", mirrorHomeAddress);
+        // $("#address1_line3").off("change", mirrorHomeAddress);
+        // $("#ndph_country").off("change", mirrorHomeAddress);
+        // $("#ndph_country_name").off("change", mirrorHomeAddress);
+        // $("#ndph_postalzipcode").off("change", mirrorHomeAddress);
+        // $("#ndph_state").off("change", mirrorHomeAddress);
+        // $("#address1_stateorprovince").off("change", mirrorHomeAddress);
+        // $("#ndph_addressnotshownonthelist").off("change", mirrorHomeAddress);
+        // $("#ndph_city").off("change", mirrorHomeAddress);
+        // $("#address1_city").off("change", mirrorHomeAddress);
+        // $("#ndph_addressnotshownonlist_city").off("change", mirrorHomeAddress);
 
         // Clear values for Business Address
         $("#ndph_street1business").val("");                                                     // Street 1
@@ -175,58 +176,58 @@ function toggleBusinessIsHomeAddress() {
         $("#ndph_addressnotshownonlist_citybusiness").change(toggleCityOtherBusiness);
     }
 }
-function mirrorHomeAddress() {      // Function to copy Home Address fields to Business Address
-    var homeStreet1 = $("#address1_line1").val();
-    var homeStreet2 = $("#address1_line2").val();
-    var homeStreet3 = $("#address1_line3").val();
-    var homeCountry = $("#ndph_country").val();
-    var homeCountryName = $("#ndph_country_name").val();
-    var homeZIPPostalCode = $("#address1_postalcode").val();
-    var homeState = $("#ndph_state").val();
-    var homeStateName = $("#ndph_state_name").val();
-    var homeStateOthers = $("#address1_stateorprovince").val();
-    var homeStateNotOnList = $("#ndph_addressnotshownonthelist").prop("checked");
-    var homeCity = $("#ndph_city").val();
-    var homeCityName = $("#ndph_city_name").val();
-    var homeCityOthers = $("#address1_city").val();
-    var homeCityNotOnList = $("#ndph_addressnotshownonlist_city").prop("checked");
+// function mirrorHomeAddress() {      // Function to copy Home Address fields to Business Address
+//     var homeStreet1 = $("#address1_line1").val();
+//     var homeStreet2 = $("#address1_line2").val();
+//     var homeStreet3 = $("#address1_line3").val();
+//     var homeCountry = $("#ndph_country").val();
+//     var homeCountryName = $("#ndph_country_name").val();
+//     var homeZIPPostalCode = $("#address1_postalcode").val();
+//     var homeState = $("#ndph_state").val();
+//     var homeStateName = $("#ndph_state_name").val();
+//     var homeStateOthers = $("#address1_stateorprovince").val();
+//     var homeStateNotOnList = $("#ndph_addressnotshownonthelist").prop("checked");
+//     var homeCity = $("#ndph_city").val();
+//     var homeCityName = $("#ndph_city_name").val();
+//     var homeCityOthers = $("#address1_city").val();
+//     var homeCityNotOnList = $("#ndph_addressnotshownonlist_city").prop("checked");
 
-    $("#ndph_street1business").val(homeStreet1);                                            // Street 1
-    $("#ndph_street2business").val(homeStreet2);                                            // Street 2
-    $("#ndph_street3business").val(homeStreet3);                                            // Street 3
-    $("#ndph_mequestion11").val(homeCountry);                                               // Country GUID
-    $("#ndph_mequestion11_name").val(homeCountryName);                                      // Country name
-    $("#ndph_mequestion11_entityname").val("ndph_country");                                 // Country entity
-    $("#ndph_mequestion14").val(homeZIPPostalCode);                                         // ZIP/Postal Code
-    $("#ndph_mequestion12").val(homeState);                                                 // State GUID
-    $("#ndph_mequestion12_name").val(homeStateName);                                        // State name
-    $("#ndph_mequestion12_entityname").val("ndph_state");                                   // State entity
-    $("#ndph_statebusinessothers").val(homeStateOthers);                                    // State (others)
-    $("#ndph_addressnotshownonthelistbusiness").prop("checked", homeStateNotOnList);        // State not on list
-    $("#ndph_mequestion13").val(homeCity);                                                  // City GUID
-    $("#ndph_mequestion13_name").val(homeCityName);                                         // City name
-    $("#ndph_mequestion13_entityname").val("ndph_city");                                    // City entity
-    $("#ndph_citybusinessothers").val(homeCityOthers);                                      // City (others)
-    $("#ndph_addressnotshownonlist_citybusiness").prop("checked", homeCityNotOnList);       // City not on list
+//     $("#ndph_street1business").val(homeStreet1);                                            // Street 1
+//     $("#ndph_street2business").val(homeStreet2);                                            // Street 2
+//     $("#ndph_street3business").val(homeStreet3);                                            // Street 3
+//     $("#ndph_mequestion11").val(homeCountry);                                               // Country GUID
+//     $("#ndph_mequestion11_name").val(homeCountryName);                                      // Country name
+//     $("#ndph_mequestion11_entityname").val("ndph_country");                                 // Country entity
+//     $("#ndph_mequestion14").val(homeZIPPostalCode);                                         // ZIP/Postal Code
+//     $("#ndph_mequestion12").val(homeState);                                                 // State GUID
+//     $("#ndph_mequestion12_name").val(homeStateName);                                        // State name
+//     $("#ndph_mequestion12_entityname").val("ndph_state");                                   // State entity
+//     $("#ndph_statebusinessothers").val(homeStateOthers);                                    // State (others)
+//     $("#ndph_addressnotshownonthelistbusiness").prop("checked", homeStateNotOnList);        // State not on list
+//     $("#ndph_mequestion13").val(homeCity);                                                  // City GUID
+//     $("#ndph_mequestion13_name").val(homeCityName);                                         // City name
+//     $("#ndph_mequestion13_entityname").val("ndph_city");                                    // City entity
+//     $("#ndph_citybusinessothers").val(homeCityOthers);                                      // City (others)
+//     $("#ndph_addressnotshownonlist_citybusiness").prop("checked", homeCityNotOnList);       // City not on list
 
-    // Update (Other) fields
-    if ($("#ndph_addressnotshownonthelistbusiness").prop("checked")) {      // State
-        $("#ndph_mequestion12").parent().parent().parent().hide();
-        $("#ndph_statebusinessothers").parent().parent().show();
-    }
-    else {
-        $("#ndph_statebusinessothers").parent().parent().hide();
-        $("#ndph_mequestion12").parent().parent().parent().show();
-    }
-    if ($("#ndph_addressnotshownonlist_citybusiness").prop("checked")) {      // City
-        $("#ndph_mequestion13").parent().parent().parent().hide();
-        $("#ndph_citybusinessothers").parent().parent().show();
-    }
-    else {
-        $("#ndph_citybusinessothers").parent().parent().hide();
-        $("#ndph_mequestion13").parent().parent().parent().show();
-    }
-}
+//     // Update (Other) fields
+//     if ($("#ndph_addressnotshownonthelistbusiness").prop("checked")) {      // State
+//         $("#ndph_mequestion12").parent().parent().parent().hide();
+//         $("#ndph_statebusinessothers").parent().parent().show();
+//     }
+//     else {
+//         $("#ndph_statebusinessothers").parent().parent().hide();
+//         $("#ndph_mequestion12").parent().parent().parent().show();
+//     }
+//     if ($("#ndph_addressnotshownonlist_citybusiness").prop("checked")) {      // City
+//         $("#ndph_mequestion13").parent().parent().parent().hide();
+//         $("#ndph_citybusinessothers").parent().parent().show();
+//     }
+//     else {
+//         $("#ndph_citybusinessothers").parent().parent().hide();
+//         $("#ndph_mequestion13").parent().parent().parent().show();
+//     }
+// }
 
     // Toggle Home State based on whether Home Country has a value
     function toggleStateHome() {
@@ -717,7 +718,7 @@ function mirrorHomeAddress() {      // Function to copy Home Address fields to B
         var cityOtherBusinessField = cityOtherBusiness.parent().parent();
     
         if (businessIsHome) {
-            $(".section[data-name='business_address']").closest("fieldset").hide();
+            $(".section[data-name='seell_business_address']").closest("fieldset").hide();
         }
         else if (!countryBusiness) {
             // Disable State
