@@ -16,7 +16,7 @@ $(document).ready(function() {
             params[decodeURIComponent(query[0])] = decodeURIComponent(query[1]);
         }
 
-        // autopopulate fields
+        // autopopulate opportunity field "Enrolling In"
         $("#ndph_opportunity").val(params["id"]);
         $("#ndph_opportunity_name").val(params["name"]);
         $("#ndph_opportunity_entityname").val("opportunity");
