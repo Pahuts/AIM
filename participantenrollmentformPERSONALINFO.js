@@ -1,4 +1,26 @@
 $(document).ready(function() {
+    function hideIndustryOther(){
+        if($("#ndph_industry").val() == "20438f98-603f-ea11-a813-000d3a851ff7") {
+        $("#ndph_industryother").parent().parent().show();
+        }else {
+        $("#ndph_industryother").parent().parent().hide();
+        } 
+    }
+    hideIndustryOther();
+    // initialize hide
+    $("#ndph_industry").change(hideIndustryOther);
+
+
+    function hideJobfunctionother(){
+        if($("#ndph_jobfunction").val() == "649840015") {
+        $("#ndph_jobfunctionother").parent().parent().show();
+        }else {
+            $("#ndph_jobfunctionother").parent().parent().hide();
+        } 
+    }
+    hideJobfunctionother();
+    // initialize hide
+    $("#ndph_jobfunction").change(hideJobfunctionother);
     // edit unknown error message
     // var errorMessage = "Note: A participant cannot be added more than once.";
     // $('.text-danger').html('<span class="fa fa-exclamation-triangle" aria-hidden="true"></span>&nbsp'+errorMessage);
@@ -22,6 +44,9 @@ $(document).ready(function() {
         $("#ndph_opportunity_entityname").val("opportunity");
         // disable fields
         $("#ndph_opportunity").parent().find('.input-group-btn').hide();
+        // border radius to round
+        $("#ndph_opportunity_name").css("border-bottom-right-radius","5px");
+        $("#ndph_opportunity_name").css("border-top-right-radius","5px");
         // adjust colspan of fields
         $("#ndph_opportunity").parent().parent().attr("colspan","3");
         $("#ndph_opportunity").parent().css("width","100%");
@@ -229,6 +254,9 @@ $(document).ready(function() {
                 stateHome.parent().find(".input-group-btn").show();
                 stateHome.parent().css("display", "table");
                 stateHome.parent().css("width", "100%");
+                // Border radius
+                $("#ndph_state_name").css("border-bottom-right-radius","0px");
+                $("#ndph_state_name").css("border-top-right-radius","0px");
                 // Enable State (Other)
                 stateOtherHome.prop("disabled", false);
                 // Enable "Other" checkbox
@@ -239,6 +267,9 @@ $(document).ready(function() {
                 stateHome.prop("disabled", true);
                 stateHome.parent().find(".input-group-btn").hide();
                 stateHome.parent().css("display", "block");
+                // Border radius
+                $("#ndph_state_name").css("border-bottom-right-radius","5px");
+                $("#ndph_state_name").css("border-top-right-radius","5px");
                 // Disable State (Other)
                 stateOtherHome.prop("disabled", true);
                 // Disable "Others" checkbox
@@ -251,6 +282,9 @@ $(document).ready(function() {
                 cityHome.prop("disabled", true);
                 cityHome.parent().find(".input-group-btn").hide();
                 cityHome.parent().css("display", "block");
+                //City Border
+                $("#ndph_city_name").css("border-bottom-right-radius","5px");
+                $("#ndph_city_name").css("border-top-right-radius","5px");
                 // Disable City (Other)
                 cityOtherHome.prop("disabled", true);
                 // Disable "Others" checkbox
@@ -288,6 +322,9 @@ $(document).ready(function() {
                 cityHome.parent().find(".input-group-btn").show();
                 cityHome.parent().css("display", "table");
                 cityHome.parent().css("width", "100%");
+                // Border radius
+                $("#ndph_city_name").css("border-bottom-right-radius","0px");
+                $("#ndph_city_name").css("border-top-right-radius","0px");
                 // Enable City (Other)
                 cityOtherHome.prop("disabled", false);
                 if (stateHome && !checkedStateOtherHome.prop("checked")) {
@@ -300,6 +337,9 @@ $(document).ready(function() {
                 cityHome.prop("disabled", true);
                 cityHome.parent().find(".input-group-btn").hide();
                 cityHome.parent().css("display", "block");
+                // Border radius
+                $("#ndph_city_name").css("border-bottom-right-radius","5px");
+                $("#ndph_city_name").css("border-top-right-radius","5px");
                 // Disable City (Other)
                 cityOtherHome.prop("disabled", true);
                 // Disable "Others" checkbox
@@ -347,6 +387,9 @@ $(document).ready(function() {
                 cityHome.prop("disabled", true);
                 cityHome.parent().find(".input-group-btn").hide();
                 cityHome.parent().css("display", "block");
+                //City Border
+                $("#ndph_city_name").css("border-bottom-right-radius","5px");
+                $("#ndph_city_name").css("border-top-right-radius","5px");
             }
             toggleCityOtherHome();
         }
@@ -393,6 +436,9 @@ $(document).ready(function() {
                 stateHome.prop("disabled", true);
                 stateHome.parent().find(".input-group-btn").hide();
                 stateHome.parent().css("display", "block");
+                //State Border
+                $("#ndph_state_name").css("border-bottom-right-radius","5px");
+                $("#ndph_state_name").css("border-top-right-radius","5px");
                 // Disable and hide State (Other)
                 stateOtherHome.prop("disabled", true);
                 stateOtherHomeField.hide();
@@ -403,6 +449,9 @@ $(document).ready(function() {
                 cityHome.prop("disabled", true);
                 cityHome.parent().find(".input-group-btn").hide();
                 cityHome.parent().css("display", "block");
+                //City Border
+                $("#ndph_city_name").css("border-bottom-right-radius","5px");
+                $("#ndph_city_name").css("border-top-right-radius","5px");
                 // Disable and hide City (Other)
                 cityOtherHome.prop("disabled", true);
                 cityOtherHomeField.hide();
@@ -424,6 +473,9 @@ $(document).ready(function() {
                     cityHome.prop("disabled", true);
                     cityHome.parent().find(".input-group-btn").hide();
                     cityHome.parent().css("display", "block");
+                    //City Border
+                    $("#ndph_city_name").css("border-bottom-right-radius","5px");
+                    $("#ndph_city_name").css("border-top-right-radius","5px");
                 }
                 if (!stateOtherHome) {
                     // Disable City (Other)
@@ -437,6 +489,9 @@ $(document).ready(function() {
                 cityHome.prop("disabled", true);
                 cityHome.parent().find(".input-group-btn").hide();
                 cityHome.parent().css("display", "block");
+                //City Border
+                $("#ndph_city_name").css("border-bottom-right-radius","5px");
+                $("#ndph_city_name").css("border-top-right-radius","5px");
                 // Disable and hide City (Other)
                 cityOtherHome.prop("disabled", true);
                 cityOtherHomeField.hide();
@@ -500,6 +555,9 @@ $(document).ready(function() {
                 stateBusiness.parent().find(".input-group-btn").show();
                 stateBusiness.parent().css("display", "table");
                 stateBusiness.parent().css("width", "100%");
+                // Border radius
+                $("#ndph_ndph_mequestion12_name").css("border-bottom-right-radius","0px");
+                $("#ndph_ndph_mequestion12_name").css("border-top-right-radius","0px");
                 // Enable State (Other)
                 stateOtherBusiness.prop("disabled", false);
                 // Enable "Other" checkbox
@@ -510,6 +568,9 @@ $(document).ready(function() {
                 stateBusiness.prop("disabled", true);
                 stateBusiness.parent().find(".input-group-btn").hide();
                 stateBusiness.parent().css("display", "block");
+                // Border radius
+                $("#ndph_ndph_mequestion12_name").css("border-bottom-right-radius","5px");
+                $("#ndph_ndph_mequestion12_name").css("border-top-right-radius","5px");
                 // Disable State (Other)
                 stateOtherBusiness.prop("disabled", true);
                 // Disable "Others" checkbox
@@ -522,6 +583,9 @@ $(document).ready(function() {
                 cityBusiness.prop("disabled", true);
                 cityBusiness.parent().find(".input-group-btn").hide();
                 cityBusiness.parent().css("display", "block");
+                // Border radius
+                $("#ndph_ndph_mequestion13_name").css("border-bottom-right-radius","5px");
+                $("#ndph_ndph_mequestion13_name").css("border-top-right-radius","5px");
                 // Disable City (Other)
                 cityOtherBusiness.prop("disabled", true);
                 // Disable "Others" checkbox
@@ -559,6 +623,9 @@ $(document).ready(function() {
                 cityBusiness.parent().find(".input-group-btn").show();
                 cityBusiness.parent().css("display", "table");
                 cityBusiness.parent().css("width", "100%");
+                // Border radius
+                $("#ndph_ndph_mequestion13_name").css("border-bottom-right-radius","0px");
+                $("#ndph_ndph_mequestion13_name").css("border-top-right-radius","0px");
                 // Enable City (Other)
                 cityOtherBusiness.prop("disabled", false);
                 if (stateBusiness && !checkedStateOtherBusiness.prop("checked")) {
@@ -571,6 +638,9 @@ $(document).ready(function() {
                 cityBusiness.prop("disabled", true);
                 cityBusiness.parent().find(".input-group-btn").hide();
                 cityBusiness.parent().css("display", "block");
+                // Border radius
+                $("#ndph_ndph_mequestion13_name").css("border-bottom-right-radius","5px");
+                $("#ndph_ndph_mequestion13_name").css("border-top-right-radius","5px");
                 // Disable City (Other)
                 cityOtherBusiness.prop("disabled", true);
                 // Disable "Others" checkbox
@@ -618,6 +688,9 @@ $(document).ready(function() {
                 cityBusiness.prop("disabled", true);
                 cityBusiness.parent().find(".input-group-btn").hide();
                 cityBusiness.parent().css("display", "block");
+                // Border radius
+                $("#ndph_ndph_mequestion13_name").css("border-bottom-right-radius","5px");
+                $("#ndph_ndph_mequestion13_name").css("border-top-right-radius","5px");
             }
             toggleCityOtherBusiness();
         }
@@ -670,6 +743,9 @@ $(document).ready(function() {
                 stateBusiness.prop("disabled", true);
                 stateBusiness.parent().find(".input-group-btn").hide();
                 stateBusiness.parent().css("display", "block");
+                // Border radius
+                $("#ndph_ndph_mequestion12_name").css("border-bottom-right-radius","5px");
+                $("#ndph_ndph_mequestion12_name").css("border-top-right-radius","5px");
                 // Disable and hide State (Other)
                 stateOtherBusiness.prop("disabled", true);
                 stateOtherBusinessField.hide();
@@ -680,6 +756,9 @@ $(document).ready(function() {
                 cityBusiness.prop("disabled", true);
                 cityBusiness.parent().find(".input-group-btn").hide();
                 cityBusiness.parent().css("display", "block");
+                // Border radius
+                $("#ndph_ndph_mequestion13_name").css("border-bottom-right-radius","5px");
+                $("#ndph_ndph_mequestion13_name").css("border-top-right-radius","5px");
                 // Disable and hide City (Other)
                 cityOtherBusiness.prop("disabled", true);
                 cityOtherBusinessField.hide();
@@ -701,6 +780,9 @@ $(document).ready(function() {
                     cityBusiness.prop("disabled", true);
                     cityBusiness.parent().find(".input-group-btn").hide();
                     cityBusiness.parent().css("display", "block");
+                    // Border radius
+                    $("#ndph_ndph_mequestion13_name").css("border-bottom-right-radius","5px");
+                    $("#ndph_ndph_mequestion13_name").css("border-top-right-radius","5px");
                 }
                 if (!stateOtherBusiness) {
                     // Disable City (Other)
@@ -714,6 +796,9 @@ $(document).ready(function() {
                 cityBusiness.prop("disabled", true);
                 cityBusiness.parent().find(".input-group-btn").hide();
                 cityBusiness.parent().css("display", "block");
+                // Border radius
+                $("#ndph_ndph_mequestion13_name").css("border-bottom-right-radius","5px");
+                $("#ndph_ndph_mequestion13_name").css("border-top-right-radius","5px");
                 // Disable and hide City (Other)
                 cityOtherBusiness.prop("disabled", true);
                 cityOtherBusinessField.hide();

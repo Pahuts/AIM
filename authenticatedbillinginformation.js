@@ -59,6 +59,13 @@ $(document).ready(function() {
 
         if (checkedPICOT) {
             PICOT.show();
+            $("#ndph_firstnamepersoninchargeoftraining").parent().parent().addClass("required2");
+            $("#ndph_middlenamepersoninchargeoftraining").parent().parent().addClass("required2");
+            $("#ndph_lastnamepersoninchargeoftraining").parent().parent().addClass("required2");
+            $("#ndph_emailpersoninchargeoftraining").parent().parent().addClass("required2");
+            $("#ndph_positiontitlepersoninchargeoftraining").parent().parent().addClass("required2");  
+            $("#ndph_countrycodepersoninchargeoftraining2").parent().parent().parent().addClass("required2");
+            $("#ndph_mobilenumberpersoninchargeoftraining").parent().parent().addClass("required2");  
         }
         else {
             PICOT.hide();
@@ -538,9 +545,174 @@ $(document).ready(function() {
 
       };
 
+      // Person In Charge Of Training Validators
+      // First Name validator
+      var FirstNameValidator = document.createElement('span');
+      FirstNameValidator.style.display = "none";
+      FirstNameValidator.id = "ndph_firstnamepersoninchargeoftraining_validator";
+      FirstNameValidator.controltovalidate = "ndph_firstnamepersoninchargeoftraining";
+      FirstNameValidator.errormessage = "<a href='#ndph_firstnamepersoninchargeoftraining'>First Name is a required field.</a>";
+      FirstNameValidator.validationGroup = ""; // Set this if you have set ValidationGroup on the form
+      FirstNameValidator.initialvalue = "";
+      FirstNameValidator.evaluationfunction = function () {
+          var otherPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
+          if (otherPICOT){
+          var firstname = $("#ndph_firstnamepersoninchargeoftraining").val();
+          if (firstname == null || firstname == "") {
+              return false;
+          } else {
+              return true;
+          }
+          }
+          else 
+          {return true;}
+
+      };
+      // Middle Name Validator
+      var MiddleNameValidator = document.createElement('span');
+      MiddleNameValidator.style.display = "none";
+      MiddleNameValidator.id = "ndph_middlenamepersoninchargeoftraining_validator";
+      MiddleNameValidator.controltovalidate = "ndph_middlenamepersoninchargeoftraining";
+      MiddleNameValidator.errormessage = "<a href='#ndph_middlenamepersoninchargeoftraining'>Middle Name is a required field.</a>";
+      MiddleNameValidator.validationGroup = ""; // Set this if you have set ValidationGroup on the form
+      MiddleNameValidator.initialvalue = "";
+      MiddleNameValidator.evaluationfunction = function () {
+          var otherPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
+          if (otherPICOT){
+          var middlename = $("#ndph_middlenamepersoninchargeoftraining").val();
+          if (middlename == null || middlename == "") {
+              return false;
+          } else {
+              return true;
+          }
+          }
+          else 
+          {return true;}
+
+      };
+      // Last Name Validator
+      var LastNameValidator = document.createElement('span');
+      LastNameValidator.style.display = "none";
+      LastNameValidator.id = "ndph_lastnamepersoninchargeoftraining_validator";
+      LastNameValidator.controltovalidate = "ndph_lastnamepersoninchargeoftraining";
+      LastNameValidator.errormessage = "<a href='#ndph_lastnamepersoninchargeoftraining'>Last Name is a required field.</a>";
+      LastNameValidator.validationGroup = ""; // Set this if you have set ValidationGroup on the form
+      LastNameValidator.initialvalue = "";
+      LastNameValidator.evaluationfunction = function () {
+          var otherPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
+          if (otherPICOT){
+          var lastname = $("#ndph_lastnamepersoninchargeoftraining").val();
+          if (lastname == null || lastname == "") {
+              return false;
+          } else {
+              return true;
+          }
+          }
+          else 
+          {return true;}
+      };
+      // Email Address Validator
+      var EmailAddressValidator = document.createElement('span');
+      EmailAddressValidator.style.display = "none";
+      EmailAddressValidator.id = "ndph_emailpersoninchargeoftraining_validator";
+      EmailAddressValidator.controltovalidate = "ndph_emailpersoninchargeoftraining";
+      EmailAddressValidator.errormessage = "<a href='#ndph_emailpersoninchargeoftraining'>Email Address is a required field. (Person In Charge Of Training)</a>";
+      EmailAddressValidator.validationGroup = ""; // Set this if you have set ValidationGroup on the form
+      EmailAddressValidator.initialvalue = "";
+      EmailAddressValidator.evaluationfunction = function () {
+          var otherPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
+          if (otherPICOT){
+          var email = $("#ndph_emailpersoninchargeoftraining").val();
+          if (email == null || email == "") {
+              return false;
+          } else {
+              return true;
+          }
+          }
+          else 
+          {return true;}
+
+      };
+      // Position Title Address Validator
+      var PositionTitleValidator = document.createElement('span');
+      PositionTitleValidator.style.display = "none";
+      PositionTitleValidator.id = "ndph_positiontitlepersoninchargeoftraining_validator";
+      PositionTitleValidator.controltovalidate = "ndph_positiontitlepersoninchargeoftraining";
+      PositionTitleValidator.errormessage = "<a href='#ndph_positiontitlepersoninchargeoftraining'>Position Title is a required field. (Person In Charge Of Training)</a>";
+      PositionTitleValidator.validationGroup = ""; // Set this if you have set ValidationGroup on the form
+      PositionTitleValidator.initialvalue = "";
+      PositionTitleValidator.evaluationfunction = function () {
+          var otherPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
+          if (otherPICOT){
+          var positionTitle = $("#ndph_positiontitlepersoninchargeoftraining").val();
+          if (positionTitle == null || positionTitle == "") {
+              return false;
+          } else {
+              return true;
+          }
+          }
+          else 
+          {return true;}
+
+      };      
+      // Mobile Number Address Validator
+      var MobileNumberValidator = document.createElement('span');
+      MobileNumberValidator.style.display = "none";
+      MobileNumberValidator.id = "ndph_mobilenumberpersoninchargeoftraining_validator";
+      MobileNumberValidator.controltovalidate = "ndph_mobilenumberpersoninchargeoftraining";
+      MobileNumberValidator.errormessage = "<a href='#ndph_mobilenumberpersoninchargeoftraining'>Mobile Number is a required field. (Person In Charge Of Training)</a>";
+      MobileNumberValidator.validationGroup = ""; // Set this if you have set ValidationGroup on the form
+      MobileNumberValidator.initialvalue = "";
+      MobileNumberValidator.evaluationfunction = function () {
+          var otherPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
+          if (otherPICOT){
+          var mobile = $("#ndph_mobilenumberpersoninchargeoftraining").val();
+          if (mobile == null || mobile == "") {
+              return false;
+          } else {
+              return true;
+          }
+          }
+          else 
+          {return true;}
+
+      };
+      // Country Code Address Validator
+      var CountryCodeValidator = document.createElement('span');
+      CountryCodeValidator.style.display = "none";
+      CountryCodeValidator.id = "ndph_countrycodepersoninchargeoftraining2_validator";
+      CountryCodeValidator.controltovalidate = "ndph_countrycodepersoninchargeoftraining2";
+      CountryCodeValidator.errormessage = "<a href='#ndph_countrycodepersoninchargeoftraining2_name'>Country Code is a required field. (Person In Charge Of Training)</a>";
+      CountryCodeValidator.validationGroup = ""; // Set this if you have set ValidationGroup on the form
+      CountryCodeValidator.initialvalue = "";
+      CountryCodeValidator.evaluationfunction = function () {
+          var otherPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
+          if (otherPICOT){
+          var countryCode = $("#ndph_countrycodepersoninchargeoftraining2").val();
+          if (countryCode == null || countryCode == "") {
+              return false;
+          } else {
+              return true;
+          }
+          }
+          else 
+          {return true;}
+
+      };
+
+      // End of Person In Charge of Training Validator Code
+
     // Add the new validator to the page validators array:
     Page_Validators.push(AddressValidator);
     Page_Validators.push(CountryValidator);
+    Page_Validators.push(FirstNameValidator);
+    Page_Validators.push(MiddleNameValidator);
+    Page_Validators.push(LastNameValidator);
+    Page_Validators.push(EmailAddressValidator);
+    Page_Validators.push(PositionTitleValidator);
+    Page_Validators.push(CountryCodeValidator);
+    Page_Validators.push(MobileNumberValidator);
 
-    
+
+     
 });

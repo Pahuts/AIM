@@ -1,0 +1,76 @@
+.page-copy .appguide-title {
+    color: #6e3476;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.page-copy .appguide-title span {
+    border-bottom: 1px solid;
+}
+/*
+.page-copy .appguide-main,
+.page-copy .appguide-step {
+    margin: 10px;
+}
+
+.page-copy .appguide-main h4,
+.page-copy .appguide-step h5 {
+    color: #6e3476;
+}
+*/
+
+.page-header {
+  text-transform: none;
+}
+
+p span{
+  text-transform: none;
+}
+
+
+ol {
+  list-style-type: none;
+  counter-reset: elementcounter;
+  padding-left: 0;
+}
+
+li .steps:before {
+  content: "Step " counter(elementcounter) ": ";
+  counter-increment: elementcounter;
+  font-weight: bold;
+  color: #6e3476;
+
+}
+
+/* .steps {
+  word-break : break-word;
+
+  word-wrap: break-word;
+  margin-left: 80px;
+} */
+
+/* 
+div > ol > li {
+  padding-left: 30px;
+} */
+
+.spanstep {
+  display: block;
+  margin-top: -22px;
+  padding-left: 125px;
+  /* padding-left: 50px; */
+  word-break : break-word;
+}
+
+/* @media only screen and (max-width: 990px) {
+    .steps {
+    margin-top: 0px;
+    margin-left: 0px;
+    display: inline-block;
+    }
+} */
+
+/* @media only screen and (min-width: 1200px) {
+
+} */
+

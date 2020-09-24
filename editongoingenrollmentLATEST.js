@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    // disable additional fields
+    $("#parentaccountid").parent().find('.input-group-btn').hide(); 
+    $("#ndph_industry").prop("disabled", true);
+    $("#ndph_joblevel").prop("disabled", true);
+    $("#ndph_applicantpositiontitle").prop("disabled", true);
+
     // hide PICOT Section
     var checkedPICOT = $("#ndph_otherpersoninchargeoftraining").prop("checked");
     var PICOT = $(".section[data-name='person_in_charge_of_training_section']").closest("fieldset");

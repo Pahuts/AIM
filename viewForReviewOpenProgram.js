@@ -1,4 +1,23 @@
 $(document).ready(function() {
+
+    if($("#ndph_addresssameas").val() == "" || "649840002") {
+        var homeAddress = $(".section[data-name='blling_information_home_address_section']").closest("fieldset");
+        var businessAddress = $(".section[data-name='blling_information_business_address_section']").closest("fieldset");
+        var billingAddress = $(".section[data-name='blling_information_billing_address_section']").closest("fieldset");
+        // only show billing address
+        homeAddress.hide();
+        businessAddress.hide();
+        billingAddress.show();
+    } else if($("#ndph_addresssameas").val() == "649840000") {
+        homeAddress.show();
+        businessAddress.hide();
+        billingAddress.hide();
+    } else if($("#ndph_addresssameas").val() == "649840001") {
+        homeAddress.hide();
+        businessAddress.show();
+        billingAddress.hide();
+    }
+
     // hide dev sections
     $(".section[data-name='hidden_dev']").closest("fieldset").hide();
     if($("#ndph_otherpersoninchargeoftraining").prop("checked")){
@@ -1018,5 +1037,10 @@ $(document).ready(function() {
     $("#ndph_addressnotshownonlist_citybusiness").prop("disabled", false);
     $("#ndph_addressnotshownonlist_citybusiness").parent().parent().parent().hide();
 
+    // hide and activate fields
+    $("#ndph_statenotshownlist").prop("disabled", false);
+    $("#ndph_statenotshownlist").parent().parent().parent().hide();
+    $("#ndph_citynotshownonlist").prop("disabled", false);
+    $("#ndph_citynotshownonlist").parent().parent().parent().hide();
 
 });

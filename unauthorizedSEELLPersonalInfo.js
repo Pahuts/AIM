@@ -233,6 +233,7 @@ function toggleBusinessIsHomeAddress() {
     function toggleStateHome() {
         var countryHome = $("#ndph_country").val();
         var checkedStateOtherHome = $("#ndph_addressnotshownonthelist");
+        var checkedStateOtherHomeField = checkedStateOtherHome.closest("td");
         var stateHome = $("#ndph_state");
         var stateHomeName = $("#ndph_state_name");
         var stateHomeEntity = $("#ndph_state_entityname");
@@ -268,6 +269,18 @@ function toggleBusinessIsHomeAddress() {
         cityOtherHome.val("");
         // Untick "Others" checkbox
         checkedCityOtherHome.prop("checked", false);
+        // Update (Other) visibility
+        cityOtherHomeField.hide();
+        cityHomeField.show();
+            
+        // Disable City
+        cityHome.prop("disabled", true);
+        cityHome.parent().find(".input-group-btn").hide();
+        cityHome.parent().css("display", "block");
+        // Disable City (Other)
+        cityOtherHome.prop("disabled", true);
+        // Hide "Others" checkbox
+        checkedCityOtherHomeField.hide();
 
         if (countryHome) {
             // Enable State
@@ -278,7 +291,7 @@ function toggleBusinessIsHomeAddress() {
             // Enable State (Other)
             stateOtherHome.prop("disabled", false);
             // Enable "Other" checkbox
-            checkedStateOtherHome.prop("disabled", false);
+            checkedStateOtherHomeField.show();
         }
         else {
             // Disable State
@@ -287,23 +300,11 @@ function toggleBusinessIsHomeAddress() {
             stateHome.parent().css("display", "block");
             // Disable State (Other)
             stateOtherHome.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedStateOtherHome.prop("disabled", true);
+            // Hide "Others" checkbox
+            checkedStateOtherHomeField.hide();
             // Update (Other) visibility 
             stateOtherHomeField.hide();
             stateHomeField.show();
-            
-            // Disable City
-            cityHome.prop("disabled", true);
-            cityHome.parent().find(".input-group-btn").hide();
-            cityHome.parent().css("display", "block");
-            // Disable City (Other)
-            cityOtherHome.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedCityOtherHomeField.hide();
-            // Update (Other) visibility 
-            cityOtherHomeField.hide();
-            cityHomeField.show();
         }
     }
     // Toggle Home City based on whether Home State has a value
@@ -329,6 +330,9 @@ function toggleBusinessIsHomeAddress() {
         // Untick City "Others" checkbox if State "Others" is not ticked
         if (!checkedStateOtherHome.prop("checked")) {
             checkedCityOtherHome.prop("checked", false);
+            // Update (Other) visibility 
+            cityOtherHomeField.hide();
+            cityHomeField.show();
         }
 
         if (stateHome || stateOtherHome) {
@@ -351,11 +355,18 @@ function toggleBusinessIsHomeAddress() {
             cityHome.parent().css("display", "block");
             // Disable City (Other)
             cityOtherHome.prop("disabled", true);
-            // Disable "Others" checkbox
+            // Hide "Others" checkbox
             checkedCityOtherHomeField.hide();
-            // Update (Other) visibility 
-            cityOtherHomeField.hide();
-            cityHomeField.show();
+            if (!checkedStateOtherHome.prop("checked")) {
+                // Update (Other) visibility 
+                cityOtherHomeField.hide();
+                cityHomeField.show();
+            }
+            else {
+                // Update (Other) visibility 
+                cityOtherHomeField.show();
+                cityHomeField.hide();
+            }
         }
     }
     // Hide/show Home State (Other) based on "Others" checkbox
@@ -425,6 +436,7 @@ function toggleBusinessIsHomeAddress() {
         var countryHome = $("#ndph_country").val();
     
         var checkedStateOtherHome = $("#ndph_addressnotshownonthelist");
+        var checkedStateOtherHomeField = checkedStateOtherHome.closest("td");
         var stateHome = $("#ndph_state");
         var stateHomeField = stateHome.parent().parent().parent();
         var stateOtherHome = $("#address1_stateorprovince");
@@ -447,7 +459,7 @@ function toggleBusinessIsHomeAddress() {
             stateOtherHomeField.hide();
             // Reset and disable "Other" checkbox for State
             checkedStateOtherHome.prop("checked", false);
-            checkedStateOtherHome.prop("disabled", true);
+            checkedStateOtherHomeField.hide();
             // Disable City
             cityHome.prop("disabled", true);
             cityHome.parent().find(".input-group-btn").hide();
@@ -465,7 +477,7 @@ function toggleBusinessIsHomeAddress() {
             // Hide City
             cityHomeField.hide();
             // Reset and disable "Other" checkbox for City 
-            checkedCityOtherHome.prop("checked", false);
+            checkedCityOtherHome.prop("checked", true);
             checkedCityOtherHomeField.hide();
             if (!stateHome) {
                 // Disable City
@@ -510,6 +522,7 @@ function toggleBusinessIsHomeAddress() {
     function toggleStateBusiness() {
         var countryBusiness = $("#ndph_mequestion11").val();
         var checkedStateOtherBusiness = $("#ndph_addressnotshownonthelistbusiness");
+        var checkedStateOtherBusinessField = checkedStateOtherBusiness.closest("td");
         var stateBusiness = $("#ndph_mequestion12");
         var stateBusinessName = $("#ndph_mequestion12_name");
         var stateBusinessEntity = $("#ndph_mequestion12_entityname");
@@ -545,6 +558,18 @@ function toggleBusinessIsHomeAddress() {
         cityOtherBusiness.val("");
         // Untick "Others" checkbox
         checkedCityOtherBusiness.prop("checked", false);
+        // Update (Other) visibility
+        cityOtherBusinessField.hide();
+        cityBusinessField.show();
+        
+        // Disable City
+        cityBusiness.prop("disabled", true);
+        cityBusiness.parent().find(".input-group-btn").hide();
+        cityBusiness.parent().css("display", "block");
+        // Disable City (Other)
+        cityOtherBusiness.prop("disabled", true);
+        // Hide "Others" checkbox
+        checkedCityOtherBusinessField.hide();
 
         if (countryBusiness) {
             // Enable State
@@ -555,7 +580,7 @@ function toggleBusinessIsHomeAddress() {
             // Enable State (Other)
             stateOtherBusiness.prop("disabled", false);
             // Enable "Other" checkbox
-            checkedStateOtherBusiness.prop("disabled", false);
+            checkedStateOtherBusinessField.show();
         }
         else {
             // Disable State
@@ -564,23 +589,11 @@ function toggleBusinessIsHomeAddress() {
             stateBusiness.parent().css("display", "block");
             // Disable State (Other)
             stateOtherBusiness.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedStateOtherBusiness.prop("disabled", true);
+            // Hide "Others" checkbox
+            checkedStateOtherBusinessField.hide();
             // Update (Other) visibility 
             stateOtherBusinessField.hide();
             stateBusinessField.show();
-            
-            // Disable City
-            cityBusiness.prop("disabled", true);
-            cityBusiness.parent().find(".input-group-btn").hide();
-            cityBusiness.parent().css("display", "block");
-            // Disable City (Other)
-            cityOtherBusiness.prop("disabled", true);
-            // Disable "Others" checkbox
-            checkedCityOtherBusinessField.hide();
-            // Update (Other) visibility 
-            cityOtherBusinessField.hide();
-            cityBusinessField.show();
         }
     }
     // Toggle Business City based on whether Business State has a value
@@ -606,6 +619,9 @@ function toggleBusinessIsHomeAddress() {
         // Untick City "Others" checkbox if State "Others" is not ticked
         if (!checkedStateOtherBusiness.prop("checked")) {
             checkedCityOtherBusiness.prop("checked", false);
+            // Update (Other) visibility 
+            cityOtherBusinessField.hide();
+            cityBusinessField.show();
         }
 
         if (stateBusiness || stateOtherBusiness) {
@@ -628,11 +644,18 @@ function toggleBusinessIsHomeAddress() {
             cityBusiness.parent().css("display", "block");
             // Disable City (Other)
             cityOtherBusiness.prop("disabled", true);
-            // Disable "Others" checkbox
+            // Hide "Others" checkbox
             checkedCityOtherBusinessField.hide();
-            // Update (Other) visibility 
-            cityOtherBusinessField.hide();
-            cityBusinessField.show();
+            if (!checkedStateOtherBusiness.prop("checked")) {
+                // Update (Other) visibility 
+                cityOtherBusinessField.hide();
+                cityBusinessField.show();
+            }
+            else {
+                // Update (Other) visibility 
+                cityOtherBusinessField.show();
+                cityBusinessField.hide();
+            }
         }
     }
     // Hide/show Business State (Other) based on "Others" checkbox
@@ -705,6 +728,7 @@ function toggleBusinessIsHomeAddress() {
         var countryBusiness = $("#ndph_mequestion11").val();
     
         var checkedStateOtherBusiness = $("#ndph_addressnotshownonthelistbusiness");
+        var checkedStateOtherBusinessField = checkedStateOtherBusiness.closest("td");
         var stateBusiness = $("#ndph_mequestion12");
         var stateBusinessField = stateBusiness.parent().parent().parent();
         var stateOtherBusiness = $("#ndph_statebusinessothers");
@@ -730,7 +754,7 @@ function toggleBusinessIsHomeAddress() {
             stateOtherBusinessField.hide();
             // Reset and disable "Other" checkbox for State
             checkedStateOtherBusiness.prop("checked", false);
-            checkedStateOtherBusiness.prop("disabled", true);
+            checkedStateOtherBusinessField.hide();
             // Disable City
             cityBusiness.prop("disabled", true);
             cityBusiness.parent().find(".input-group-btn").hide();
@@ -748,7 +772,7 @@ function toggleBusinessIsHomeAddress() {
             // Hide City
             cityBusinessField.hide();
             // Reset and disable "Other" checkbox for City 
-            checkedCityOtherBusiness.prop("checked", false);
+            checkedCityOtherBusiness.prop("checked", true);
             checkedCityOtherBusinessField.hide();
             if (!stateBusiness) {
                 // Disable City
